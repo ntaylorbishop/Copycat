@@ -1,0 +1,773 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugInline|Win32">
+      <Configuration>DebugInline</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugInline|x64">
+      <Configuration>DebugInline</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Tools Debug|Win32">
+      <Configuration>Tools Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Tools Debug|x64">
+      <Configuration>Tools Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Tools Release|Win32">
+      <Configuration>Tools Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Tools Release|x64">
+      <Configuration>Tools Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ThirdParty\FastDelegateDemo.cpp" />
+    <ClCompile Include="..\ThirdParty\MikkT\mikktspace.c" />
+    <ClCompile Include="..\ThirdParty\Parsers\xmlParser.cpp" />
+    <ClCompile Include="..\ThirdParty\stb_image.c" />
+    <ClCompile Include="Console\Command.cpp" />
+    <ClCompile Include="Console\Console.cpp" />
+    <ClCompile Include="Console\Cursor.cpp" />
+    <ClCompile Include="EventSystem\GlobalEventSystem.cpp" />
+    <ClCompile Include="Framebuffer_OGL.cpp" />
+    <ClCompile Include="General\Core\BeirusEngine.cpp" />
+    <ClCompile Include="General\Core\EngineCommon.cpp" />
+    <ClCompile Include="General\Core\Memory\Callstack.cpp" />
+    <ClCompile Include="General\Core\Memory\DebugHUD.cpp" />
+    <ClCompile Include="General\Core\TheMemoryManager.cpp" />
+    <ClCompile Include="General\Core\Window.cpp" />
+    <ClCompile Include="General\Core\WindowHandler.cpp" />
+    <ClCompile Include="General\JobSystem\JobConsumer.cpp" />
+    <ClCompile Include="General\JobSystem\Job.cpp" />
+    <ClCompile Include="General\JobSystem\JobSystem.cpp" />
+    <ClCompile Include="General\Logger\TheLogger.cpp" />
+    <ClCompile Include="General\Profiler\Profiler.cpp" />
+    <ClCompile Include="General\Time\Clock.cpp" />
+    <ClCompile Include="General\Time\Time.cpp" />
+    <ClCompile Include="General\Time\Timer.cpp" />
+    <ClCompile Include="GPUPerformanceTimer_OGL.cpp" />
+    <ClCompile Include="Input\InputSystem.cpp" />
+    <ClCompile Include="Input\XboxController.cpp" />
+    <ClCompile Include="Math\EulerAngles.cpp" />
+    <ClCompile Include="Math\MatrixStack44.cpp" />
+    <ClCompile Include="Math\Objects\GeomObject.cpp" />
+    <ClCompile Include="Math\Objects\Sphere.cpp" />
+    <ClCompile Include="Math\Range.cpp" />
+    <ClCompile Include="Math\RangeFloat.cpp" />
+    <ClCompile Include="Math\RangeInt.cpp" />
+    <ClCompile Include="Math\RangeVector2.cpp" />
+    <ClCompile Include="Math\Ray.cpp" />
+    <ClCompile Include="Math\Transform\Transform.cpp" />
+    <ClCompile Include="Particles\Particle.cpp" />
+    <ClCompile Include="Particles\ParticleDefinition.cpp" />
+    <ClCompile Include="Particles\ParticleEmitter.cpp" />
+    <ClCompile Include="Particles\ParticleEmitterDefinition.cpp" />
+    <ClCompile Include="Particles\ParticleSystem.cpp" />
+    <ClCompile Include="Particles\ParticleSystemDefinition.cpp" />
+    <ClCompile Include="Particles\ParticleSystemManager.cpp" />
+    <ClCompile Include="Renderer\Animation\Animator.cpp" />
+    <ClCompile Include="Renderer\Animation\Motion.cpp" />
+    <ClCompile Include="Renderer\Animation\Skeleton.cpp" />
+    <ClCompile Include="Renderer\Cameras\Camera2D.cpp" />
+    <ClCompile Include="Renderer\Cameras\Camera3D.cpp" />
+    <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp" />
+    <ClCompile Include="Renderer\DeviceWindow.cpp" />
+    <ClCompile Include="Renderer\Effects\DepthAndNormalsPass.cpp" />
+    <ClCompile Include="Renderer\Effects\Tonemapping.cpp" />
+    <ClCompile Include="Renderer\Effects\OIT\OIT.cpp" />
+    <ClCompile Include="Renderer\Effects\SSAO.cpp" />
+    <ClCompile Include="Renderer\Fonts\BitmapFont.cpp" />
+    <ClCompile Include="Renderer\Fonts\Font.cpp" />
+    <ClCompile Include="Renderer\Fonts\Glyph.cpp" />
+    <ClCompile Include="Renderer\General\RGBA.cpp" />
+    <ClCompile Include="Renderer\General\TextureBuffer_OGL.cpp" />
+    <ClCompile Include="Renderer\General\TextureCubemap.cpp" />
+    <ClCompile Include="Renderer\General\Texture_OGL.cpp" />
+    <ClCompile Include="Renderer\Lights\LightSystem.cpp" />
+    <ClCompile Include="Renderer\Lights\ShadowCastingLight3D.cpp" />
+    <ClCompile Include="Renderer\Material\MaterialBank.cpp" />
+    <ClCompile Include="Renderer\Material\Material_OGL.cpp" />
+    <ClCompile Include="Renderer\Material\RenderState.cpp" />
+    <ClCompile Include="Renderer\Mesh\LineMesh.cpp" />
+    <ClCompile Include="Renderer\Mesh\MeshBuilder.cpp" />
+    <ClCompile Include="Renderer\Mesh\MeshRenderer_OGL.cpp" />
+    <ClCompile Include="Renderer\Mesh\Mesh_OGL.cpp" />
+    <ClCompile Include="Renderer\Mesh\Model.cpp" />
+    <ClCompile Include="Renderer\Mesh\PrimitiveMesh.cpp" />
+    <ClCompile Include="Renderer\Mesh\StaticMesh2D.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLEnums.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLErrorReporter.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLExtensions.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLUtils.cpp" />
+    <ClCompile Include="Renderer\ReflectionProbes\DynamicReflectionProbe.cpp" />
+    <ClCompile Include="Renderer\ReflectionProbes\DynamicReflectionProbeManager.cpp" />
+    <ClCompile Include="Renderer\ReflectionProbes\StaticReflectionProbe.cpp" />
+    <ClCompile Include="Renderer\ReflectionProbes\StaticReflectionProbeManager.cpp" />
+    <ClCompile Include="Renderer\Renderer\GlobalStateManager.cpp" />
+    <ClCompile Include="Renderer\Renderer\BeirusRenderer.cpp" />
+    <ClCompile Include="Renderer\Shaders\ComputeShaderProgram_OGL.cpp" />
+    <ClCompile Include="Renderer\Shaders\ComputeShader_OGL.cpp" />
+    <ClCompile Include="Renderer\Shaders\Sampler2D_OGL.cpp" />
+    <ClCompile Include="Renderer\Shaders\ShaderProgramParser.cpp" />
+    <ClCompile Include="Renderer\Shaders\ShaderProgram_OGL.cpp" />
+    <ClCompile Include="Renderer\Shaders\ShaderUtils_OGL.cpp" />
+    <ClCompile Include="Renderer\Shaders\Shader_OGL.cpp" />
+    <ClCompile Include="Renderer\Shaders\Uniform.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\AnimatedSprite.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\Particle2D.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitter2D.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitterDefinition2D.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystem2D.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystemDefinition2D.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\Sprite.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\SpriteDatabase.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\SpriteLayer.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\TheSpriteRenderer.cpp" />
+    <ClCompile Include="Renderer\SpriteRenderer\SpriteResource.cpp" />
+    <ClCompile Include="Renderer\Sprites\SpriteAnim.cpp" />
+    <ClCompile Include="Renderer\Sprites\Spritesheet.cpp" />
+    <ClCompile Include="Renderer\Structures\BeirusMeshCollection.cpp" />
+    <ClCompile Include="Renderer\Structures\SSBO.cpp" />
+    <ClCompile Include="Renderer\Vertex\Vertex.cpp" />
+    <ClCompile Include="Renderer\Vertex\VertexDefinition.cpp" />
+    <ClCompile Include="Math\IntVector2.cpp" />
+    <ClCompile Include="Math\IntVector3.cpp" />
+    <ClCompile Include="Math\IntVector4.cpp" />
+    <ClCompile Include="Math\MathUtils.cpp" />
+    <ClCompile Include="Math\Matrix4.cpp" />
+    <ClCompile Include="Math\PerlinNoise.cpp" />
+    <ClCompile Include="Math\PolarCoords.cpp" />
+    <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="Math\Vector3.cpp" />
+    <ClCompile Include="Math\Vector4.cpp" />
+    <ClCompile Include="Math\VectorUtils.cpp" />
+    <ClCompile Include="Scene\ClickableObject.cpp" />
+    <ClCompile Include="Scene\PickRay.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Structures\BeirusCompactArray.cpp" />
+    <ClCompile Include="Structures\BeirusHashTable.cpp" />
+    <ClCompile Include="Structures\CompactBuffer.cpp" />
+    <ClCompile Include="Structures\LinearBuffer.cpp" />
+    <ClCompile Include="Structures\Stack.cpp" />
+    <ClCompile Include="Structures\ThreadSafe\MutexLock.cpp" />
+    <ClCompile Include="Structures\ThreadSafe\SharedPointer.cpp" />
+    <ClCompile Include="Structures\ThreadSafe\Thread.cpp" />
+    <ClCompile Include="Tools\FBX.cpp" />
+    <ClCompile Include="Tools\FBX\SceneImport.cpp" />
+    <ClCompile Include="UI\ButtonWidget.cpp" />
+    <ClCompile Include="UI\LabelWidget.cpp" />
+    <ClCompile Include="UI\RadioWidget.cpp" />
+    <ClCompile Include="UI\UISystemEnums.cpp" />
+    <ClCompile Include="UI\WidgetGroup.cpp" />
+    <ClCompile Include="UI\WidgetSkin.cpp" />
+    <ClCompile Include="UI\UISystem.cpp" />
+    <ClCompile Include="UI\WidgetBase.cpp" />
+    <ClCompile Include="UI\Widgets\WidgetRegistrationHelper.cpp" />
+    <ClCompile Include="Utils\ErrorWarningAssert.cpp" />
+    <ClCompile Include="Utils\FileUtils\FileBinaryReader.cpp" />
+    <ClCompile Include="Utils\FileUtils\FileBinaryWriter.cpp" />
+    <ClCompile Include="Utils\FileUtils\FileUtils.cpp" />
+    <ClCompile Include="Utils\FileUtils\IBinaryReader.cpp" />
+    <ClCompile Include="Utils\FileUtils\IBinaryWriter.cpp" />
+    <ClCompile Include="Utils\GeneralUtils\BitUtils.cpp" />
+    <ClCompile Include="Utils\GeneralUtils\Endianness.cpp" />
+    <ClCompile Include="Utils\GeneralUtils\XMLUtils.cpp" />
+    <ClCompile Include="Utils\HardwareUtils.cpp" />
+    <ClCompile Include="Utils\StringUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\ThirdParty\FastDelegate.h" />
+    <ClInclude Include="..\ThirdParty\FastDelegateBlind.h" />
+    <ClInclude Include="..\ThirdParty\glext.h" />
+    <ClInclude Include="..\ThirdParty\MikkT\mikktspace.h" />
+    <ClInclude Include="..\ThirdParty\Parsers\xmlParser.h" />
+    <ClInclude Include="..\ThirdParty\stb_image_write.h" />
+    <ClInclude Include="..\ThirdParty\wglext.h" />
+    <ClInclude Include="Config\BuildConfig.hpp" />
+    <ClInclude Include="Config\RenderingConfig.hpp" />
+    <ClInclude Include="Console\Command.hpp" />
+    <ClInclude Include="Console\Console.hpp" />
+    <ClInclude Include="Console\Cursor.hpp" />
+    <ClInclude Include="EventSystem\Event.hpp" />
+    <ClInclude Include="EventSystem\GlobalEventSystem.hpp" />
+    <ClInclude Include="EventSystem\NamedProperties.hpp" />
+    <ClInclude Include="General.hpp" />
+    <ClInclude Include="General\Core\Allocators\ObjectPool.hpp" />
+    <ClInclude Include="General\Core\BeirusEngine.hpp" />
+    <ClInclude Include="General\Core\EngineCommon.hpp" />
+    <ClInclude Include="General\Core\Memory\Callstack.hpp" />
+    <ClInclude Include="General\Core\Memory\DebugHUD.hpp" />
+    <ClInclude Include="General\Core\Memory\UntrackedAllocator.hpp" />
+    <ClInclude Include="General\Core\TheMemoryManager.hpp" />
+    <ClInclude Include="General\Core\Window.hpp" />
+    <ClInclude Include="General\Core\WindowHandler.hpp" />
+    <ClInclude Include="General\JobSystem\JobConsumer.hpp" />
+    <ClInclude Include="General\JobSystem\Job.hpp" />
+    <ClInclude Include="General\JobSystem\JobSystem.hpp" />
+    <ClInclude Include="General\Logger\TheLogger.hpp" />
+    <ClInclude Include="General\Profiler\Profiler.hpp" />
+    <ClInclude Include="General\Time\Clock.hpp" />
+    <ClInclude Include="General\Time\Time.hpp" />
+    <ClInclude Include="General\Time\Timer.hpp" />
+    <ClInclude Include="GPUPerformanceTimer.hpp" />
+    <ClInclude Include="Input\InputSystem.hpp" />
+    <ClInclude Include="Input\XboxController.hpp" />
+    <ClInclude Include="Math\EulerAngles.hpp" />
+    <ClInclude Include="Math\MatrixStack44.hpp" />
+    <ClInclude Include="Math\Objects\AABB3.hpp" />
+    <ClInclude Include="Math\Objects\GeomObject.hpp" />
+    <ClInclude Include="Math\Objects\Sphere.hpp" />
+    <ClInclude Include="Math\Plane.hpp" />
+    <ClInclude Include="Math\Range.hpp" />
+    <ClInclude Include="Math\RangeFloat.hpp" />
+    <ClInclude Include="Math\RangeInt.hpp" />
+    <ClInclude Include="Math\RangeVector2.hpp" />
+    <ClInclude Include="Math\Ray.hpp" />
+    <ClInclude Include="Math\Transform\Transform.hpp" />
+    <ClInclude Include="Particles\Particle.hpp" />
+    <ClInclude Include="Particles\ParticleDefinition.hpp" />
+    <ClInclude Include="Particles\ParticleEmitter.hpp" />
+    <ClInclude Include="Particles\ParticleEmitterDefinition.hpp" />
+    <ClInclude Include="Particles\ParticleSystem.hpp" />
+    <ClInclude Include="Particles\ParticleSystemDefinition.hpp" />
+    <ClInclude Include="Particles\ParticleSystemManager.hpp" />
+    <ClInclude Include="Renderer\Animation\Animator.hpp" />
+    <ClInclude Include="Renderer\Animation\Motion.hpp" />
+    <ClInclude Include="Renderer\Animation\Skeleton.hpp" />
+    <ClInclude Include="Renderer\Cameras\Camera2D.hpp" />
+    <ClInclude Include="Renderer\Cameras\Camera3D.hpp" />
+    <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp" />
+    <ClInclude Include="Renderer\DeviceWindow.hpp" />
+    <ClInclude Include="Renderer\Effects\DepthAndNormalsPass.hpp" />
+    <ClInclude Include="Renderer\Effects\Tonemapping.hpp" />
+    <ClInclude Include="Renderer\Effects\OIT\OIT.hpp" />
+    <ClInclude Include="Renderer\Effects\OIT\Pixel.hpp" />
+    <ClInclude Include="Renderer\Effects\SSAO.hpp" />
+    <ClInclude Include="Renderer\Fonts\BitmapFont.hpp" />
+    <ClInclude Include="Renderer\Fonts\Font.hpp" />
+    <ClInclude Include="Renderer\Fonts\Glyph.hpp" />
+    <ClInclude Include="Renderer\Framebuffer.hpp" />
+    <ClInclude Include="Renderer\General\RenderCommon.hpp" />
+    <ClInclude Include="Renderer\General\RenderingEnums.hpp" />
+    <ClInclude Include="Renderer\General\RGBA.hpp" />
+    <ClInclude Include="Renderer\General\Texture.hpp" />
+    <ClInclude Include="Renderer\General\TextureBuffer.hpp" />
+    <ClInclude Include="Renderer\General\TextureCubemap.hpp" />
+    <ClInclude Include="Renderer\Lights\Light3D.hpp" />
+    <ClInclude Include="Renderer\Lights\LightSystem.hpp" />
+    <ClInclude Include="Renderer\Lights\ShadowCastingLight3D.hpp" />
+    <ClInclude Include="Renderer\Material\Material.hpp" />
+    <ClInclude Include="Renderer\Material\MaterialBank.hpp" />
+    <ClInclude Include="Renderer\Material\RenderState.hpp" />
+    <ClInclude Include="Renderer\Mesh\LineMesh.hpp" />
+    <ClInclude Include="Renderer\Mesh\Mesh.hpp" />
+    <ClInclude Include="Renderer\Mesh\MeshBuilder.hpp" />
+    <ClInclude Include="Renderer\Mesh\MeshRenderer.hpp" />
+    <ClInclude Include="Renderer\Mesh\Model.hpp" />
+    <ClInclude Include="Renderer\Mesh\PrimitiveMesh.hpp" />
+    <ClInclude Include="Renderer\Mesh\StaticMesh2D.hpp" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLEnums.hpp" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLErrorReporter.hpp" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLExtensions.hpp" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLUtils.hpp" />
+    <ClInclude Include="Renderer\ReflectionProbes\DynamicReflectionProbe.hpp" />
+    <ClInclude Include="Renderer\ReflectionProbes\DynamicReflectionProbeManager.hpp" />
+    <ClInclude Include="Renderer\ReflectionProbes\StaticReflectionProbe.hpp" />
+    <ClInclude Include="Renderer\ReflectionProbes\StaticReflectionProbeManager.hpp" />
+    <ClInclude Include="Renderer\Renderer\GlobalStateManager.hpp" />
+    <ClInclude Include="Renderer\Renderer\BeirusRenderer.hpp" />
+    <ClInclude Include="Renderer\Renderer\RendererCommon.hpp" />
+    <ClInclude Include="Renderer\Shaders\ComputeShader.hpp" />
+    <ClInclude Include="Renderer\Shaders\ComputeShaderProgram.hpp" />
+    <ClInclude Include="Renderer\Shaders\Sampler2D.hpp" />
+    <ClInclude Include="Renderer\Shaders\Shader.hpp" />
+    <ClInclude Include="Renderer\Shaders\ShaderProgram.hpp" />
+    <ClInclude Include="Renderer\Shaders\ShaderProgramParser.hpp" />
+    <ClInclude Include="Renderer\Shaders\ShaderUtils.hpp" />
+    <ClInclude Include="Renderer\Shaders\Uniform.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\AnimatedSprite.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\Particle2D.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitter2D.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitterDefinition2D.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystem2D.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystemDefinition2D.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\Sprite.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\SpriteDatabase.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\SpriteLayer.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\TheSpriteRenderer.hpp" />
+    <ClInclude Include="Renderer\SpriteRenderer\SpriteResource.hpp" />
+    <ClInclude Include="Renderer\Sprites\SpriteAnim.hpp" />
+    <ClInclude Include="Renderer\Sprites\Spritesheet.hpp" />
+    <ClInclude Include="Renderer\Structures\BeirusMeshCollection.hpp" />
+    <ClInclude Include="Renderer\Structures\SSBO.hpp" />
+    <ClInclude Include="Renderer\Vertex\Vertex.hpp" />
+    <ClInclude Include="Renderer\Vertex\VertexDefinition.hpp" />
+    <ClInclude Include="Math.hpp" />
+    <ClInclude Include="Math\AABB2.hpp" />
+    <ClInclude Include="Math\IntVector2.hpp" />
+    <ClInclude Include="Math\IntVector3.hpp" />
+    <ClInclude Include="Math\IntVector4.hpp" />
+    <ClInclude Include="Math\MathUtils.hpp" />
+    <ClInclude Include="Math\Matrix4.hpp" />
+    <ClInclude Include="Math\PerlinNoise.hpp" />
+    <ClInclude Include="Math\PolarCoords.hpp" />
+    <ClInclude Include="Math\Vector2.hpp" />
+    <ClInclude Include="Math\Vector3.hpp" />
+    <ClInclude Include="Math\Vector4.hpp" />
+    <ClInclude Include="Math\VectorUtils.hpp" />
+    <ClInclude Include="Renderer.hpp" />
+    <ClInclude Include="Scene\ClickableObject.hpp" />
+    <ClInclude Include="Scene\PickRay.hpp" />
+    <ClInclude Include="Scene\Scene.hpp" />
+    <ClInclude Include="Structures\BeirusCompactArray.hpp" />
+    <ClInclude Include="Structures\BeirusHashTable.hpp" />
+    <ClInclude Include="Structures\CompactBuffer.hpp" />
+    <ClInclude Include="Structures\LinearBuffer.hpp" />
+    <ClInclude Include="Structures\LocklessQueue.hpp" />
+    <ClInclude Include="Structures\Stack.hpp" />
+    <ClInclude Include="Structures\ThreadSafe\LocklessQueue.hpp" />
+    <ClInclude Include="Structures\ThreadSafe\MutexLock.hpp" />
+    <ClInclude Include="Structures\ThreadSafe\Semaphore.hpp" />
+    <ClInclude Include="Structures\ThreadSafe\SharedPointer.hpp" />
+    <ClInclude Include="Structures\ThreadSafe\Thread.hpp" />
+    <ClInclude Include="Structures\ThreadSafe\TSQueue.hpp" />
+    <ClInclude Include="Tools\FBX.hpp" />
+    <ClInclude Include="Tools\FBX\SceneImport.hpp" />
+    <ClInclude Include="UI\ButtonWidget.hpp" />
+    <ClInclude Include="UI\WidgetPropertyAnim.hpp" />
+    <ClInclude Include="UI\LabelWidget.hpp" />
+    <ClInclude Include="UI\RadioWidget.hpp" />
+    <ClInclude Include="UI\UISystemCommon.hpp" />
+    <ClInclude Include="UI\Utils\UISystemEnums.hpp" />
+    <ClInclude Include="UI\Utils\WidgetProperty.hpp" />
+    <ClInclude Include="UI\WidgetGroup.hpp" />
+    <ClInclude Include="UI\WidgetProperties.hpp" />
+    <ClInclude Include="UI\WidgetSkin.hpp" />
+    <ClInclude Include="UI\UISystem.hpp" />
+    <ClInclude Include="UI\WidgetBase.hpp" />
+    <ClInclude Include="UI\Widgets\WidgetRegistrationHelper.hpp" />
+    <ClInclude Include="Utils\ErrorWarningAssert.hpp" />
+    <ClInclude Include="Utils\FileUtils\FileBinaryReader.hpp" />
+    <ClInclude Include="Utils\FileUtils\FileBinaryWriter.hpp" />
+    <ClInclude Include="Utils\FileUtils\FileUtils.hpp" />
+    <ClInclude Include="Utils\FileUtils\IBinaryReader.hpp" />
+    <ClInclude Include="Utils\FileUtils\IBinaryWriter.hpp" />
+    <ClInclude Include="Utils\GeneralUtils.hpp" />
+    <ClInclude Include="Utils\GeneralUtils\BitUtils.hpp" />
+    <ClInclude Include="Utils\GeneralUtils\Endianness.hpp" />
+    <ClInclude Include="Utils\GeneralUtils\XMLUtils.hpp" />
+    <ClInclude Include="Utils\HardwareUtils.hpp" />
+    <ClInclude Include="Utils\StringUtils.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{17A3B9C3-1421-4704-A343-94C81129577A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Beirus</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|Win32'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|x64'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|Win32'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|x64'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;TOOLS_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;TOOLS_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <TreatWarningAsError>false</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <TreatWarningAsError>false</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_LIB;TOOLS_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_LIB;TOOLS_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
