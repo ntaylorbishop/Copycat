@@ -480,6 +480,55 @@ STATIC void BeirusRenderer::DrawTexturedAABB2(Texture* tex, const AABB2& texCoor
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//2D DRAWING
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC void BeirusRenderer::DrawCircle(const Camera2D& cam, const RGBA& color, const Vector3& position, const float radius) {
+
+	LineMesh newLine;
+	std::vector<TexturedVertex_TBNBN> verts;
+	std::vector<uint16_t> inds;
+
+	TexturedVertex_TBNBN v1(position, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
+	TexturedVertex_TBNBN v2(position + Vector3(radius), color, Vector2(1.f, 1.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
+
+
+	uint numPoints = 100;
+	float degDiff = 360.f / (float)numPoints;
+	float deg = 0.f;
+	for (uint i = 0; i < numPoints; i++) {
+		Vector3 p1 = Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
+		TexturedVertex_TBNBN v1(p1, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
+		verts.push_back(v1);
+
+		deg += degDiff;
+
+		Vector3 p2 = Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
+		TexturedVertex_TBNBN v2(p2, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
+		verts.push_back(v2);
+
+		deg += degDiff;
+
+		inds.push_back(i);
+		inds.push_back(i + 1);
+	}
+
+	newLine.m_verts = verts;
+	newLine.m_meshIndices = inds;
+
+	Matrix4 viewMat = cam.GetViewMatrix();
+	newLine.m_material->CreateUniform("gView", UNIFORM_MAT4, 1, &viewMat);
+	newLine.m_material->CreateUniform("gProj", UNIFORM_MAT4, 1, &cam.m_proj);
+
+
+	Mesh* mesh = BeirusMeshCollection::Get()->GetMesh(s_scratchLineMesh);
+	mesh->UpdateMesh(newLine.m_verts, newLine.m_meshIndices);
+	s_theBeirusRenderer->m_meshRenderer->RenderMeshWithMaterial(s_scratchLineMesh, newLine.m_material, Matrix4::IDENTITY, true);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //LINE DRAWING
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

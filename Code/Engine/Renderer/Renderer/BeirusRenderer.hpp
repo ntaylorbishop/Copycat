@@ -166,6 +166,10 @@ public:
 	static void DrawTexturedAABB2(Texture* tex, const RGBA& tint, const AABB2& quad);
 	static void DrawTexturedAABB2(Texture* tex, const AABB2& texCoords, const RGBA& tint, const AABB2& quad);
 
+
+
+	static void DrawCircle(const Camera2D& cam, const RGBA& color, const Vector3& position, const float radius);
+
 	//LINE DRAWING
 	static void DrawLine(const Vector3& start, const Vector3& end, const RGBA& tint);
 	static void DrawBoxLineMesh(const AABB3& box, const RGBA& tint);
