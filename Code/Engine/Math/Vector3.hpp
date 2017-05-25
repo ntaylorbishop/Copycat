@@ -18,6 +18,9 @@ public:
 	float Length() const;
 	void Normalize();
 	Vector3 GetNormal();
+	Vector2 xy() { return Vector2(x, y); }
+	Vector2 xz() { return Vector2(x, z); }
+	Vector2 yz() { return Vector2(y, z); }
 
 	//OPERATOR OVERLOADS
 	Vector3 operator-();

@@ -498,13 +498,13 @@ STATIC void BeirusRenderer::DrawCircle(const Camera2D& cam, const RGBA& color, c
 	float degDiff = 360.f / (float)numPoints;
 	float deg = 0.f;
 	for (uint i = 0; i < numPoints; i++) {
-		Vector3 p1 = Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
+		Vector3 p1 = position + Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
 		TexturedVertex_TBNBN v1(p1, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
 		verts.push_back(v1);
 
 		deg += degDiff;
 
-		Vector3 p2 = Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
+		Vector3 p2 = position + Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
 		TexturedVertex_TBNBN v2(p2, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
 		verts.push_back(v2);
 
