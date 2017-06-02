@@ -108,7 +108,7 @@ DeviceWindow::DeviceWindow(HINSTANCE applicationInstanceHandle)
 	#if IS_WINDOWED
 	glViewport(0, 0, 1600, 900);
 	#else
-	glViewport(0, 0, 1920, 1080);
+	glViewport(0, 0, 3840, 2160);
 	#endif
 
 }
