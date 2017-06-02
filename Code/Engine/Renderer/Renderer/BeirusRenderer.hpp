@@ -97,8 +97,8 @@ extern Matrix4 g_defaultUIMatrix;
 const Vector2		SCREEN_SIZE		= Vector2(1600.f, 900.f);
 const IntVector2	SCREEN_SIZE_INT	= IntVector2(1600, 900);
 #else
-const Vector2		SCREEN_SIZE		= Vector2(1920.f, 1080.f);
-const IntVector2	SCREEN_SIZE_INT	= IntVector2(1920, 1080);
+const Vector2		SCREEN_SIZE		= Vector2(3840.f, 2160.f);
+const IntVector2	SCREEN_SIZE_INT	= IntVector2(3840, 2160);
 #endif
 
 

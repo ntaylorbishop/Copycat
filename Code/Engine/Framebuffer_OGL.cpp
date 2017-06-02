@@ -64,7 +64,7 @@ void Framebuffer::Bind() {
 	#if IS_WINDOWED
 	GL_CHECK(glViewport(0, 0, (GLsizei)1600.f, (GLsizei)900.f));
 	#else
-	GL_CHECK(glViewport(0, 0, (GLsizei)1920.f, (GLsizei)1080.f));
+	GL_CHECK(glViewport(0, 0, (GLsizei)3840.f, (GLsizei)2160.f));
 	#endif
 
 	GLenum renderTargets[32];
@@ -84,7 +84,7 @@ void Framebuffer::BindBackBuffer() {
 	#if IS_WINDOWED
 	GL_CHECK(glViewport(0, 0, 1600, 900));
 	#else
-	GL_CHECK(glViewport(0, 0, 1920, 1080));
+	GL_CHECK(glViewport(0, 0, 3840, 2160));
 	#endif
 }
 
@@ -101,10 +101,10 @@ void Framebuffer::CopyToBack() {
 	uint drawWidth	= 1600;
 	uint drawHeight = 900;
 	#else
-	int readWidth	= 1920;
-	int readHeight	= 1080;
-	int drawWidth	= 1920;
-	int drawHeight	= 1080;
+	int readWidth	= 3840;
+	int readHeight	= 2160;
+	int drawWidth	= 3840;
+	int drawHeight	= 2160;
 	#endif
 	GL_CHECK(glBlitFramebuffer(0, 0, readWidth, readHeight, 0, 0, drawWidth, drawHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR));
 }

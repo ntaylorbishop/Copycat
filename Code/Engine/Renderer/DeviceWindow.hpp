@@ -21,9 +21,9 @@ const int WINDOW_PHYSICAL_HEIGHT		= 900;
 const double VIEW_RIGHT					= 1600.0;
 #else
 const int OFFSET_FROM_WINDOWS_DESKTOP = 0;
-const int WINDOW_PHYSICAL_WIDTH = 1920;
-const int WINDOW_PHYSICAL_HEIGHT = 1080;
-const double VIEW_RIGHT = 1920.0;
+const int WINDOW_PHYSICAL_WIDTH = 3840;
+const int WINDOW_PHYSICAL_HEIGHT = 2160;
+const double VIEW_RIGHT = 3840.f;
 #endif
 
 const double VIEW_LEFT = 0.0;

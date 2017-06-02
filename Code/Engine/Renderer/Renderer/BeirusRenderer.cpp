@@ -64,7 +64,7 @@ STATIC void BeirusRenderer::Initialize(const RGBA& clearColor) {
 	#if IS_WINDOWED
 	s_theBeirusRenderer->m_screenSize = Vector2(1600.f, 900.f);
 	#else
-	s_theBeirusRenderer->m_screenSize = Vector2(1920.f, 1080.f);
+	s_theBeirusRenderer->m_screenSize = Vector2(3840.f, 2160.f);
 	#endif
 
 	GL_CHECK(glFrontFace(GL_CW));
@@ -603,7 +603,7 @@ BeirusRenderer::BeirusRenderer(const RGBA& clearColor)
 	#if IS_WINDOWED
 	GL_CHECK(glViewport(0, 0, (GLsizei)1600.f, (GLsizei)900.f));
 	#else
-	GL_CHECK(glViewport(0, 0, (GLsizei)1920.f, (GLsizei)1080.f));
+	GL_CHECK(glViewport(0, 0, (GLsizei)3840.f, (GLsizei)2160.f));
 	#endif
 
 	m_gpuTimer	= new GPUPerformanceTimer();
