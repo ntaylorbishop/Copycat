@@ -63,6 +63,8 @@ public:
 	template <typename T>
 	ePropertySetResult SetProperty(const String& name, const T& dataToSet);
 
+	size_t GetByteSizeOfAllProperties();
+
 private:
 	std::map<String, NamedBaseProperty*> m_properties;
 };
