@@ -11,11 +11,8 @@
 void ShaderUtils::PrintShaderCompileErrorToOutput(const String& error, const String& fileNameOfShader) {
 
 	//TODO: FIX ABS PATH
-	String solDir = "d:\\guildhall\\p4\\c25\\students\\nbishop\\projects\\thesis\\artifact\\run_x64\\" + fileNameOfShader;
+	String solDir = "d:\\GitHub\\D3D Renderer\\D3D Renderer\\run_x64\\" + fileNameOfShader;
 	std::transform(solDir.begin(), solDir.end(), solDir.begin(), ::tolower);
-
-	String glVersion = BeirusRenderer::GetCurrentVersionOfGLSL();
-	String glslVersion = BeirusRenderer::GetCurrentVersionOfOpenGL();
 
 	String err = error;
 
@@ -45,15 +42,9 @@ void ShaderUtils::PrintShaderCompileErrorToOutput(const String& error, const Str
 	}
 
 	SystemDialogue_Okay("COMPILE SHADER ERROR",
-		"OpenGL Version: " + glVersion + "\n" +
-		"GLSL Version: " + glslVersion + "\n\n" +
 		"ERROR AT LINE NUMBER (" + lineNumber + ")" + " IN FILE (" + fileNameOfShader + firstError + "\n\n" +
 		err, SEVERITY_FATAL);
 
-	DebuggerPrintf(glVersion.c_str());
-	DebuggerPrintf("\n");
-	DebuggerPrintf(glslVersion.c_str());
-	DebuggerPrintf("\n");
 	DebuggerPrintf(err.c_str());
 	InputSystem::Quitting(true);
 }

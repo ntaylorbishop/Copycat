@@ -8,6 +8,7 @@
 #include "Engine/Utils/ErrorWarningAssert.hpp"
 #include "Engine/Math/Vector2.hpp"
 
+
 typedef unsigned char byte;
 typedef Vector2 TexCoords;
 typedef unsigned int uint;
@@ -17,6 +18,8 @@ typedef unsigned char uchar;
 typedef unsigned short ushort;
 
 typedef byte KEYCODE;
+
+typedef std::wstring WideString;
 
 
 #define GLOBAL

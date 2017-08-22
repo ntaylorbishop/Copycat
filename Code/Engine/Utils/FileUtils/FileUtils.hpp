@@ -39,6 +39,8 @@ namespace FileUtils {
 	bool DoesFileMatchPattern(const String& filename, const String& filePattern);
 	String GetAbsolutePathOfFile(const String& filename);
 
+	String GetWorkingDirectoryPath();
+
 /*
 	String GetPathOfExecutable();
 	/*

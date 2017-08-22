@@ -1,7 +1,6 @@
 /*
  * Based on code by Christopher Forseth
- */
-
+ 
 #include "Engine/Renderer/DeviceWindow.hpp"
 #include "Engine/General/Core/BeirusEngine.hpp"
 #include "ENgine/General/Core/WindowHandler.hpp"
@@ -228,23 +227,20 @@ GLRenderContextHandle DeviceWindow::CreateTemporaryContext(DeviceContextHandle c
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-/* https://www.opengl.org/archives/resources/features/OGLextensions/ */
-static int IsOGLExtensionSupported(const char* extension, DeviceContextHandle deviceContext) {
+ https://www.opengl.org/archives/resources/features/OGLextensions/ static int IsOGLExtensionSupported(const char* extension, DeviceContextHandle deviceContext) {
 
 	const char* extensions = NULL;
 	const char* start;
 	const char* where;
 	const char* terminator;
 
-	/* Extension names should not have spaces. */
-	where = strchr(extension, ' ');
+	 Extension names should not have spaces. 	where = strchr(extension, ' ');
 	if (where || *extension == '\0')
 		return FALSE;
 	extensions = wglGetExtensionsStringARB(deviceContext);
-	/* It takes a bit of care to be fool-proof about parsing the
+	 It takes a bit of care to be fool-proof about parsing the
 	OpenGL extensions string. Don't be fooled by sub-strings,
-	etc. */
-	start = extensions;
+	etc. 	start = extensions;
 	for (;;) {
 		where = strstr((const char *)start, extension);
 		if (!where)
@@ -356,4 +352,4 @@ void DeviceWindow::DestroyRenderingContext(GLRenderContextHandle contextHandle) 
 	if (contextHandle != NULL) {	
 		wglDeleteContext(contextHandle);
 	}
-}
+}*/

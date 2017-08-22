@@ -34,6 +34,8 @@ public:
 	static void Initialize(unsigned char keybind);
 	static void Shutdown();
 
+	static bool IsValid() { return s_theBeirusConsole != nullptr; }
+
 	//UPDATE RENDER
 	static void Update(float deltaSeconds);
 	static void Render();

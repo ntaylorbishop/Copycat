@@ -25,12 +25,12 @@ void BeirusEngine::Initialize() {
 	ASSERT_OR_DIE(s_theBeirusEngine == nullptr, "ERROR: BeirusEngine already initialized.");
 	s_theBeirusEngine = new BeirusEngine();
 
-	BeirusRenderer::InitDefaultProjectionMats();
+	//BeirusRenderer::InitDefaultProjectionMats();
 	InputSystem::Initialize();
-	BeirusRenderer::Initialize(RGBA(0.1f, 0.1f, 0.1f, 1.f));
-	Console::Initialize(CONSOLE_KEYBIND);
+	//BeirusRenderer::Initialize(RGBA(0.1f, 0.1f, 0.1f, 1.f));
+	//Console::Initialize(CONSOLE_KEYBIND);
 	EventSystem::Initialize();
-	UISystem::Initialize();
+	//UISystem::Initialize();
 
 	#if MEMORY_TRACKING == 1
 	RegisterCommandToConsole("memory_debug", "Toggles the memory debugger window", ShowMemoryDebugWindow);
@@ -50,11 +50,11 @@ STATIC void BeirusEngine::Shutdown() {
 		s_theBeirusEngine->m_shutdownCallbacks[sdIdx]();
 	}
 
-	Console::Shutdown();
+	//Console::Shutdown();
 	InputSystem::Shutdown();
-	BeirusRenderer::Shutdown();
+	//BeirusRenderer::Shutdown();
 	EventSystem::Shutdown();
-	UISystem::Shutdown();
+	//UISystem::Shutdown();
 
 	delete s_theBeirusEngine;
 	s_theBeirusEngine = nullptr;
@@ -73,8 +73,8 @@ STATIC void BeirusEngine::Update(float deltaSeconds) {
 	s_theBeirusEngine->UpdateFrameNumber();
 
 	s_theBeirusEngine->m_engineClock->Update(deltaSeconds);
-	Console::Update(deltaSeconds);
-	UISystem::Update(deltaSeconds);
+	//Console::Update(deltaSeconds);
+	//UISystem::Update(deltaSeconds);
 
 	#if MEMORY_TRACKING != 0
 	g_theMemoryManager->Update(deltaSeconds);
@@ -91,12 +91,12 @@ STATIC void BeirusEngine::Update(float deltaSeconds) {
 //---------------------------------------------------------------------------------------------------------------------------
 void BeirusEngine::Render() {
 
-	#if MEMORY_TRACKING != 0
-	g_theMemoryManager->Render();
-	#endif
-
-	Console::Render();
-	UISystem::Render();
+	//#if MEMORY_TRACKING != 0
+	//g_theMemoryManager->Render();
+	//#endif
+	//
+	//Console::Render();
+	//UISystem::Render();
 	//BeirusRenderer::Render();
 }
 

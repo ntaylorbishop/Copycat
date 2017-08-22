@@ -170,3 +170,14 @@ void StringUtils::Trim(String* str, char delimiter) {
 		str->erase(str->begin() + str->length());
 	}
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+WideString StringUtils::ConvertStringToWideString(const char* cstr) {
+
+	const size_t cSize = strlen(cstr) + 1;
+	std::wstring wideStr(cSize, L'#');
+	mbstowcs(&wideStr[0], cstr, cSize);
+
+	return wideStr;
+}

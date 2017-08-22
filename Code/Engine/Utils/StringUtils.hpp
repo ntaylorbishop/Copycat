@@ -29,4 +29,6 @@ namespace StringUtils {
 	void ReplaceAll(std::string& str, const std::string& from, const std::string& to);
 
 	void Trim(String* str, char delimiter);
+
+	WideString ConvertStringToWideString(const char* wideStr);
 }

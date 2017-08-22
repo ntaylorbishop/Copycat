@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include "Engine/Input/InputSystem.hpp"
@@ -75,4 +76,4 @@ private:
 	bool m_windowInFocus;
 
 	static DeviceWindow* s_theDeviceWindow;
-};
+};*/

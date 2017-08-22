@@ -348,3 +348,20 @@ String FileUtils::GetAbsolutePathOfFile(const String& filename) {
 
 	return path;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+String FileUtils::GetWorkingDirectoryPath() {
+
+	const int len = 512;
+	char wBuffer[len];
+	int err = GetModuleFileNameA(NULL, wBuffer, len);
+
+	//char sBuffer[512];
+	//size_t* numCharsConverted = nullptr;
+	//wcstombs_s(numCharsConverted, sBuffer, 512, wBuffer, 512);
+
+	//ASSERT_OR_DIE(err == 0, "ERROR: Cannot get current working directory.");
+	
+	return String(wBuffer);
+}

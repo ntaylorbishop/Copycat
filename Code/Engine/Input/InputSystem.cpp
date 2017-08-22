@@ -330,15 +330,16 @@ LRESULT CALLBACK WindowsMessageHandlingProcedure(HWND windowHandle, UINT wmMessa
 		InputSystem::SetKeyDownStatus(asKey, true);
 
 		if (asKey == VK_ESCAPE) {
-			if (!Console::IsConsoleOpen()) {
+			//if (Console::IsValid() && Console::IsConsoleOpen()) {
 				InputSystem::Quitting(true);
 				return 0;
-			}
+			//}
 		}
 		break;
 
 	case WM_CHAR:
-		Console::ConsumeCharacterInput(asKey);
+		if(Console::IsValid())
+			Console::ConsumeCharacterInput(asKey);
 		break;
 
 	case WM_KEYUP:
@@ -346,11 +347,11 @@ LRESULT CALLBACK WindowsMessageHandlingProcedure(HWND windowHandle, UINT wmMessa
 		break;
 
 	case WM_SETFOCUS:
-		DeviceWindow::OnGainedFocus();
+		//DeviceWindow::OnGainedFocus();
 		break;
 
 	case WM_KILLFOCUS:
-		DeviceWindow::OnLostFocus();
+		//DeviceWindow::OnLostFocus();
 		break;
 
 	case WM_LBUTTONDOWN:
