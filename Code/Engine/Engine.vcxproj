@@ -51,6 +51,7 @@
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Console\Cursor.cpp" />
     <ClCompile Include="EventSystem\GlobalEventSystem.cpp" />
+    <ClCompile Include="EventSystem\NamedProperties.cpp" />
     <ClCompile Include="Framebuffer_OGL.cpp" />
     <ClCompile Include="General\Core\BeirusEngine.cpp" />
     <ClCompile Include="General\Core\EngineCommon.cpp" />
