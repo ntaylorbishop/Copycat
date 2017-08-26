@@ -308,6 +308,7 @@
     <ClInclude Include="Renderer\Shaders\ShaderProgramParser.hpp" />
     <ClInclude Include="Renderer\Shaders\ShaderUtils.hpp" />
     <ClInclude Include="Renderer\Shaders\Uniform.hpp" />
+    <ClInclude Include="Renderer\Shaders\UniformConstants.hpp" />
     <ClInclude Include="Renderer\SpriteRenderer\AnimatedSprite.hpp" />
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\Particle2D.hpp" />
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitter2D.hpp" />
