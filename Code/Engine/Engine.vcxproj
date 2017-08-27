@@ -92,7 +92,6 @@
     <ClCompile Include="Renderer\Animation\Motion.cpp" />
     <ClCompile Include="Renderer\Animation\Skeleton.cpp" />
     <ClCompile Include="Renderer\Cameras\Camera2D.cpp" />
-    <ClCompile Include="Renderer\Cameras\Camera3D.cpp" />
     <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp" />
     <ClCompile Include="Renderer\DeviceWindow.cpp" />
     <ClCompile Include="Renderer\Effects\DepthAndNormalsPass.cpp" />
@@ -258,7 +257,6 @@
     <ClInclude Include="Renderer\Animation\Motion.hpp" />
     <ClInclude Include="Renderer\Animation\Skeleton.hpp" />
     <ClInclude Include="Renderer\Cameras\Camera2D.hpp" />
-    <ClInclude Include="Renderer\Cameras\Camera3D.hpp" />
     <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp" />
     <ClInclude Include="Renderer\DeviceWindow.hpp" />
     <ClInclude Include="Renderer\Effects\DepthAndNormalsPass.hpp" />

@@ -353,9 +353,6 @@
     <ClCompile Include="Math\Range.cpp">
       <Filter>Math\Range</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Cameras\Camera3D.cpp">
-      <Filter>Rendering\Cameras</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Material\MaterialBank.cpp">
       <Filter>Rendering\Material</Filter>
     </ClCompile>
@@ -847,9 +844,6 @@
     </ClInclude>
     <ClInclude Include="Config\BuildConfig.hpp">
       <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Cameras\Camera3D.hpp">
-      <Filter>Rendering\Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Material\MaterialBank.hpp">
       <Filter>Rendering\Material</Filter>
