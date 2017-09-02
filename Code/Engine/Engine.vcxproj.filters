@@ -648,6 +648,9 @@
       <Filter>Rendering\ReflectionProbes</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem\NamedProperties.cpp" />
+    <ClCompile Include="Renderer\Lights\Light3D.cpp">
+      <Filter>Rendering\Lights</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">

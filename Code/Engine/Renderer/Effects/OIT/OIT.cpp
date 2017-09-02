@@ -23,6 +23,9 @@ STATIC OIT* OIT::s_oitPass = nullptr;
 //---------------------------------------------------------------------------------------------------------------------------
 void OIT::RenderTransparentElements_Debug(Scene* sceneToRender, TextureCubemap* colorTarget, uint whichSide) {
 
+	UNREFERENCED_PARAMETER(whichSide);
+	UNREFERENCED_PARAMETER(colorTarget);
+
 	BeirusRenderer::DisableDepthWriting();
 	BeirusRenderer::SetDepthTestingMode(GL_LESS);
 	BeirusRenderer::EnableDepthTesting();

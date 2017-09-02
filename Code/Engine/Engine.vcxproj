@@ -105,6 +105,7 @@
     <ClCompile Include="Renderer\General\TextureBuffer_OGL.cpp" />
     <ClCompile Include="Renderer\General\TextureCubemap.cpp" />
     <ClCompile Include="Renderer\General\Texture_OGL.cpp" />
+    <ClCompile Include="Renderer\Lights\Light3D.cpp" />
     <ClCompile Include="Renderer\Lights\LightSystem.cpp" />
     <ClCompile Include="Renderer\Lights\ShadowCastingLight3D.cpp" />
     <ClCompile Include="Renderer\Material\MaterialBank.cpp" />
