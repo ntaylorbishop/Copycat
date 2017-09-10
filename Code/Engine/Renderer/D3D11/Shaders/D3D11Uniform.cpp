@@ -7,6 +7,10 @@
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Uniform::BindTextureToShader(int locInShader, void* data, uint currBindPoint) {
 
+	UNREFERENCED_PARAMETER(locInShader);
+	UNREFERENCED_PARAMETER(data);
+	UNREFERENCED_PARAMETER(currBindPoint);
+
 	if (data == nullptr) {
 		return;
 	}
@@ -16,6 +20,10 @@ void D3D11Uniform::BindTextureToShader(int locInShader, void* data, uint currBin
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Uniform::BindTextureBufferToShader(int locInShader, void* data, uint currBindPoint) {
 
+	UNREFERENCED_PARAMETER(locInShader);
+	UNREFERENCED_PARAMETER(data);
+	UNREFERENCED_PARAMETER(currBindPoint);
+
 	if (data == nullptr) {
 		return;
 	}
@@ -24,6 +32,10 @@ void D3D11Uniform::BindTextureBufferToShader(int locInShader, void* data, uint c
 
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Uniform::BindTextureCubemapToShader(int locInShader, void* data, uint currBindPoint) {
+
+	UNREFERENCED_PARAMETER(locInShader);
+	UNREFERENCED_PARAMETER(data);
+	UNREFERENCED_PARAMETER(currBindPoint);
 
 	if (data == nullptr) {
 		return;

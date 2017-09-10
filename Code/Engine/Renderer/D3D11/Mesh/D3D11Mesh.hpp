@@ -15,7 +15,7 @@ public:
 	void CreateIndexBufferOnDevice();
 	void BindVertBufferToDeviceWindow();
 	void BindIndBufferToDeviceWindow();
-	void SetIndexBuffer(uint32_t* indBuffer, size_t bufferSize, size_t numInds);
+	void SetIndexBuffer(uint32_t* indBuffer, size_t bufferSize, uint numInds);
 
 	D3D11_BUFFER_DESC		m_bufferDesc;
 	D3D11_SUBRESOURCE_DATA	m_initData;
@@ -25,11 +25,10 @@ private:
 	byte*			m_pVertData		= nullptr;
 	uint32_t*		m_pIndData		= nullptr;
 	eVertexType		m_vertType		= VERTEX_TYPE_NUM_TYPES;
-	size_t			m_numVerts		= 0;
+	uint			m_numVerts		= 0;
 	uint16_t		m_vertByteSize	= 0;
 	size_t			m_bufferSize	= 0;
 	ID3D11Buffer*   m_pVertBuffer	= nullptr;
 	ID3D11Buffer*   m_pIndBuffer	= nullptr;
-	size_t			m_numInds		= 0;
-
+	uint			m_numInds		= 0;
 };

@@ -2,7 +2,7 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-D3D11ConstantBuffer::D3D11ConstantBuffer(size_t byteSizeOfBuffer) 
+D3D11ConstantBuffer::D3D11ConstantBuffer(uint byteSizeOfBuffer)
 	: m_bufferSize(byteSizeOfBuffer)
 {
 	m_pByteBuffer = new byte[byteSizeOfBuffer];

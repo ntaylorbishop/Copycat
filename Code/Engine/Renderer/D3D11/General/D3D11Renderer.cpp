@@ -2,6 +2,10 @@
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
 #include <d3d11_1.h>
 
+
+STATIC D3D11Renderer* s_d3d11Renderer;
+
+
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Renderer::SetViewport(const Vector2& viewportSize) {
 
@@ -15,3 +19,22 @@ void D3D11Renderer::SetViewport(const Vector2& viewportSize) {
 	viewport.TopLeftY	= 0;
 	RHIDeviceWindow::Get()->GetD3DContext()->RSSetViewports(1, &viewport);
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Renderer::DrawSquare2D() {
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+D3D11Renderer::D3D11Renderer() {
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+D3D11Renderer::~D3D11Renderer() {
+
+}
+

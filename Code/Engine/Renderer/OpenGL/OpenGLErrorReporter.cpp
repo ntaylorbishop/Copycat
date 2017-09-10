@@ -94,13 +94,19 @@ STATIC void APIENTRY OpenGLErrorReporter::DebugCallback(GLenum source, GLenum ty
 														const GLchar* message, GLvoid* userParam)
 {
 
-	return;
+	UNREFERENCED_PARAMETER(source);
+	UNREFERENCED_PARAMETER(type);
+	UNREFERENCED_PARAMETER(id);
+	UNREFERENCED_PARAMETER(severity);
+	UNREFERENCED_PARAMETER(length);
+	UNREFERENCED_PARAMETER(message);
+	UNREFERENCED_PARAMETER(userParam);
 
-	(void)source; (void)type; (void)id;
-	(void)severity; (void)length; (void)userParam;
-	DebuggerPrintf("%s\n", message);
-
-	if (severity == GL_DEBUG_SEVERITY_HIGH) {
-		ERROR_AND_DIE("High severity OpenGL error encountered! Aborting.");
-	}
+	//(void)source; (void)type; (void)id;
+	//(void)severity; (void)length; (void)userParam;
+	//DebuggerPrintf("%s\n", message);
+	//
+	//if (severity == GL_DEBUG_SEVERITY_HIGH) {
+	//	ERROR_AND_DIE("High severity OpenGL error encountered! Aborting.");
+	//}
 }

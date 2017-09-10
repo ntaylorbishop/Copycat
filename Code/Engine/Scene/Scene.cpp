@@ -217,7 +217,6 @@ void Scene::Render(bool isRenderingTransparent, MeshRenderer* customMeshRenderer
 		std::vector<Model*> tModels;
 
 		Model* curr = m_translucentMeshesHead;
-		int idx = 0;
 		while (curr != nullptr) {
 			if (curr->IsActive()) {
 				tModels.push_back(curr);

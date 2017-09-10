@@ -4,8 +4,8 @@
 STATIC RHIDeviceWindow* RHIDeviceWindow::s_deviceWindow = nullptr;
 
 
-UINT SCREENSIZE_X = 3840;
-UINT SCREENSIZE_Y = 2160;
+LONG SCREENSIZE_X = 3840;
+LONG SCREENSIZE_Y = 2160;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

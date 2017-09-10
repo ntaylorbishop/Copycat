@@ -39,7 +39,7 @@ size_t StaticReflectionProbeManager::LoadProbesInDirectory(const String& dir, Sc
 		m_sProbes.push_back(newProbe);
 	}
 
-	m_numProbes = m_sProbes.size();
+	m_numProbes = (uint)m_sProbes.size();
 	return m_numProbes;
 }
 

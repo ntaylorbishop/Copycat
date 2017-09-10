@@ -50,9 +50,9 @@ STATIC StaticReflectionProbe* StaticReflectionProbe::Load(const String& probeFil
 	String zPositive;
 	String zNegative;
 
-	for (size_t i = 0; i < root.nChildNode(); i++) {
+	for (int i = 0; i < root.nChildNode(); i++) {
 
-		XMLNode& child = root.getChildNode(i);
+		XMLNode child = root.getChildNode(i);
 
 		if (strcmp(child.getName(), "Texture") != 0) {
 			ERROR_AND_DIE("ERROR: Cannot parse static reflection probe XML.");
@@ -107,6 +107,8 @@ STATIC StaticReflectionProbe* StaticReflectionProbe::Load(const String& probeFil
 
 //---------------------------------------------------------------------------------------------------------------------------
 void StaticReflectionProbe::Update(float deltaSeconds) {
+
+	UNREFERENCED_PARAMETER(deltaSeconds);
 
 	m_model->m_model.ChangePosition(m_position);
 	ClickableObject::m_model.ChangePosition(m_position);

@@ -10,7 +10,7 @@
 class D3D11ConstantBuffer {
 public:
 	D3D11ConstantBuffer() { }
-	D3D11ConstantBuffer(size_t byteSizeOfBuffer);
+	D3D11ConstantBuffer(uint byteSizeOfBuffer);
 	~D3D11ConstantBuffer();
 
 	void CreateBufferOnDevice();
@@ -25,8 +25,8 @@ public:
 private:
 	std::vector<D3D11Uniform*>	m_uniforms;
 	byte*						m_pByteBuffer		= nullptr;
-	size_t						m_currSizeOfBuffer	= 0;
-	size_t						m_bufferSize		= 0;
+	uint						m_currSizeOfBuffer	= 0;
+	uint						m_bufferSize		= 0;
 	ID3D11Buffer*				m_pDeviceBuffer		= nullptr;
 };
 

@@ -59,7 +59,6 @@
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Console\Cursor.cpp" />
     <ClCompile Include="EventSystem\GlobalEventSystem.cpp" />
-    <ClCompile Include="EventSystem\NamedProperties.cpp" />
     <ClCompile Include="Framebuffer_OGL.cpp" />
     <ClCompile Include="General\Core\BeirusEngine.cpp" />
     <ClCompile Include="General\Core\EngineCommon.cpp" />
@@ -101,10 +100,12 @@
     <ClCompile Include="Renderer\Animation\Motion.cpp" />
     <ClCompile Include="Renderer\Animation\Skeleton.cpp" />
     <ClCompile Include="Renderer\Cameras\Camera2D.cpp" />
+    <ClCompile Include="Renderer\Cameras\Camera3D.cpp" />
     <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp" />
     <ClCompile Include="Renderer\D3D11\General\D3D11Renderer.cpp" />
     <ClCompile Include="Renderer\D3D11\General\RHI.cpp" />
     <ClCompile Include="Renderer\D3D11\General\RHIDeviceWindow.cpp" />
+    <ClCompile Include="Renderer\D3D11\Material\D3D11Material.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Mesh.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Vertex.cpp" />
     <ClCompile Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.cpp" />
@@ -130,7 +131,6 @@
     <ClCompile Include="Renderer\General\TextureBuffer_OGL.cpp" />
     <ClCompile Include="Renderer\General\TextureCubemap.cpp" />
     <ClCompile Include="Renderer\General\Texture_OGL.cpp" />
-    <ClCompile Include="Renderer\Lights\Light3D.cpp" />
     <ClCompile Include="Renderer\Lights\LightSystem.cpp" />
     <ClCompile Include="Renderer\Lights\ShadowCastingLight3D.cpp" />
     <ClCompile Include="Renderer\Material\MaterialBank.cpp" />
@@ -205,6 +205,7 @@
     <ClCompile Include="UI\ButtonWidget.cpp" />
     <ClCompile Include="UI\LabelWidget.cpp" />
     <ClCompile Include="UI\RadioWidget.cpp" />
+    <ClCompile Include="UI\UIRenderer.cpp" />
     <ClCompile Include="UI\UISystemEnums.cpp" />
     <ClCompile Include="UI\WidgetGroup.cpp" />
     <ClCompile Include="UI\WidgetSkin.cpp" />
@@ -284,10 +285,12 @@
     <ClInclude Include="Renderer\Animation\Motion.hpp" />
     <ClInclude Include="Renderer\Animation\Skeleton.hpp" />
     <ClInclude Include="Renderer\Cameras\Camera2D.hpp" />
+    <ClInclude Include="Renderer\Cameras\Camera3D.hpp" />
     <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp" />
     <ClInclude Include="Renderer\D3D11\General\D3D11Renderer.hpp" />
     <ClInclude Include="Renderer\D3D11\General\RHI.hpp" />
     <ClInclude Include="Renderer\D3D11\General\RHIDeviceWindow.hpp" />
+    <ClInclude Include="Renderer\D3D11\Material\D3D11Material.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Mesh.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Vertex.hpp" />
     <ClInclude Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.hpp" />
@@ -399,6 +402,7 @@
     <ClInclude Include="Tools\FBX.hpp" />
     <ClInclude Include="Tools\FBX\SceneImport.hpp" />
     <ClInclude Include="UI\ButtonWidget.hpp" />
+    <ClInclude Include="UI\UIRenderer.hpp" />
     <ClInclude Include="UI\WidgetPropertyAnim.hpp" />
     <ClInclude Include="UI\LabelWidget.hpp" />
     <ClInclude Include="UI\RadioWidget.hpp" />

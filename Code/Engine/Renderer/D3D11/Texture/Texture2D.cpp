@@ -9,6 +9,9 @@
 //---------------------------------------------------------------------------------------------------------------------------
 Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindFlags bindFlags, eTextureCPUAccessFlags accessFlags) {
 
+	UNREFERENCED_PARAMETER(accessFlags);
+	UNREFERENCED_PARAMETER(bindFlags);
+
 	m_resourceViews.resize(RESOURCE_TYPE_NUM_VIEWS);
 
 	int numComponents = 0;
@@ -49,6 +52,8 @@ Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindF
 	data.SysMemPitch = m_textureSize.x * numComponents; //WARNING: Assuming RGBA8
 
 	HRESULT hr = GetDevice()->CreateTexture2D(&desc, &data, &m_textureHandle);
+
+	ASSERT_OR_DIE(SUCCEEDED(hr), "ERROR: Could not create D3D11 texture.");
 
 	if (generateMips) {
 		UseAsShaderResourceView();

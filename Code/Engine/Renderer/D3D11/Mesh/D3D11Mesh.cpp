@@ -95,7 +95,7 @@ void D3D11Mesh::BindIndBufferToDeviceWindow() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11Mesh::SetIndexBuffer(uint32_t* indBuffer, size_t bufferSize, size_t numInds) {
+void D3D11Mesh::SetIndexBuffer(uint32_t* indBuffer, size_t bufferSize, uint numInds) {
 
 	m_pIndData = new uint32_t[numInds];
 	memcpy_s(m_pIndData, sizeof(uint32_t) * numInds, indBuffer, bufferSize);

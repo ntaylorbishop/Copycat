@@ -93,6 +93,8 @@ uint16_t GetVertexByteSize(eVertexType vertType) {
 		return 0;
 	}
 	}
+
+	return 0;
 }
 
 

@@ -70,10 +70,6 @@ float Model::CalcDistFromCamera() const {
 
 	Vector4 depth = Vector4(m_model.GetPosition(), 1.f) * viewProj;
 	return depth.z;
-
-	Vector3 camLoc		= BeirusRenderer::GetPlayerCamera()->m_position;
-	Vector3 meshPos		= m_model.GetPosition();
-	return DotProduct(camLoc, meshPos - camLoc);
 }
 
 

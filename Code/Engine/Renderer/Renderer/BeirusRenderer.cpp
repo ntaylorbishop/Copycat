@@ -80,8 +80,6 @@ STATIC void BeirusRenderer::Initialize(const RGBA& clearColor) {
 	dnMat->CreateUniform("gTexNormal", UNIFORM_TEXTURE2D, 1, 4);
 
 	OIT::Get();
-
-	Material* lineMat = MaterialBank::GetMaterial("");
 }
 
 
@@ -497,16 +495,16 @@ STATIC void BeirusRenderer::DrawCircle(const Camera2D& cam, const RGBA& color, c
 	uint numPoints = 100;
 	float degDiff = 360.f / (float)numPoints;
 	float deg = 0.f;
-	for (uint i = 0; i < numPoints; i++) {
+	for (unsigned short i = 0; i < numPoints; i++) {
 		Vector3 p1 = position + Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
-		TexturedVertex_TBNBN v1(p1, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
-		verts.push_back(v1);
+		TexturedVertex_TBNBN v1Local(p1, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
+		verts.push_back(v1Local);
 
 		deg += degDiff;
 
 		Vector3 p2 = position + Vector3(radius * CosDegrees(deg), radius * SinDegrees(deg), 0.f);
-		TexturedVertex_TBNBN v2(p2, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
-		verts.push_back(v2);
+		TexturedVertex_TBNBN v2Local(p2, color, Vector2(0.f, 0.f), Vector3::ZERO, Vector3::ZERO, Vector3::ZERO, Vector4::ZERO, IntVector4::ZERO);
+		verts.push_back(v2Local);
 
 		deg += degDiff;
 

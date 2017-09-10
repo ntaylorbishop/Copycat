@@ -113,6 +113,7 @@ bool FileUtils::CreateFileIfDoesntExist(const String& dir, const String& file) {
 		LPCWSTR sw = stemp.c_str();
 
 		CreateFile(sw, GENERIC_READ, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
+		return false;
 	}
 }
 
@@ -355,7 +356,7 @@ String FileUtils::GetWorkingDirectoryPath() {
 
 	const int len = 512;
 	char wBuffer[len];
-	int err = GetModuleFileNameA(NULL, wBuffer, len);
+	GetModuleFileNameA(NULL, wBuffer, len);
 
 	//char sBuffer[512];
 	//size_t* numCharsConverted = nullptr;

@@ -60,7 +60,7 @@ ClickableObject::~ClickableObject() {
 
 //---------------------------------------------------------------------------------------------------------------------------
 VIRTUAL void ClickableObject::Update(float deltaSeconds) {
-
+	UNREFERENCED_PARAMETER(deltaSeconds);
 }
 
 

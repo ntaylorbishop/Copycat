@@ -210,6 +210,12 @@
     <Filter Include="Rendering\D3D11\Shaders">
       <UniqueIdentifier>{06365cd4-ea60-47e1-aefe-1b87c99d15ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Cameras">
+      <UniqueIdentifier>{f5836fbf-b99e-46d4-bd36-601ff182c064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11\Material">
+      <UniqueIdentifier>{3f598471-15dc-45da-a408-75b1e5696b69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -662,10 +668,6 @@
     <ClCompile Include="Renderer\ReflectionProbes\StaticReflectionProbeManager.cpp">
       <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClCompile>
-    <ClCompile Include="EventSystem\NamedProperties.cpp" />
-    <ClCompile Include="Renderer\Lights\Light3D.cpp">
-      <Filter>Rendering\OpenGL\Lights</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\DeviceWindow.cpp">
       <Filter>Rendering\OpenGL</Filter>
     </ClCompile>
@@ -722,6 +724,15 @@
     </ClCompile>
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Vertex.cpp">
       <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Cameras\Camera3D.cpp">
+      <Filter>Rendering\Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIRenderer.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Material\D3D11Material.cpp">
+      <Filter>Rendering\D3D11\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1321,6 +1332,15 @@
     </ClInclude>
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Vertex.hpp">
       <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Cameras\Camera3D.hpp">
+      <Filter>Rendering\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIRenderer.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Material\D3D11Material.hpp">
+      <Filter>Rendering\D3D11\Material</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
