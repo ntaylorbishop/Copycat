@@ -25,6 +25,14 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Tools Debug Game|Win32">
+      <Configuration>Tools Debug Game</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Tools Debug Game|x64">
+      <Configuration>Tools Debug Game</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Tools Debug|Win32">
       <Configuration>Tools Debug</Configuration>
       <Platform>Win32</Platform>
@@ -72,6 +80,7 @@
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Input\XboxController.cpp" />
     <ClCompile Include="Math\EulerAngles.cpp" />
+    <ClCompile Include="Math\Matrix44.cpp" />
     <ClCompile Include="Math\MatrixStack44.cpp" />
     <ClCompile Include="Math\Objects\GeomObject.cpp" />
     <ClCompile Include="Math\Objects\Sphere.cpp" />
@@ -93,6 +102,22 @@
     <ClCompile Include="Renderer\Animation\Skeleton.cpp" />
     <ClCompile Include="Renderer\Cameras\Camera2D.cpp" />
     <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp" />
+    <ClCompile Include="Renderer\D3D11\General\D3D11Renderer.cpp" />
+    <ClCompile Include="Renderer\D3D11\General\RHI.cpp" />
+    <ClCompile Include="Renderer\D3D11\General\RHIDeviceWindow.cpp" />
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11Mesh.cpp" />
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11Vertex.cpp" />
+    <ClCompile Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.cpp" />
+    <ClCompile Include="Renderer\D3D11\Resources\D3D11Resource.cpp" />
+    <ClCompile Include="Renderer\D3D11\Resources\D3D11SamplerState.cpp" />
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11PixelShader.cpp" />
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11Shader.cpp" />
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11ShaderProgram.cpp" />
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11Uniform.cpp" />
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11VertexShader.cpp" />
+    <ClCompile Include="Renderer\D3D11\Shaders\RHIShaderUtils.cpp" />
+    <ClCompile Include="Renderer\D3D11\Texture\D3D11Texture.cpp" />
+    <ClCompile Include="Renderer\D3D11\Texture\Texture2D.cpp" />
     <ClCompile Include="Renderer\DeviceWindow.cpp" />
     <ClCompile Include="Renderer\Effects\DepthAndNormalsPass.cpp" />
     <ClCompile Include="Renderer\Effects\Tonemapping.cpp" />
@@ -236,6 +261,7 @@
     <ClInclude Include="Input\InputSystem.hpp" />
     <ClInclude Include="Input\XboxController.hpp" />
     <ClInclude Include="Math\EulerAngles.hpp" />
+    <ClInclude Include="Math\Matrix44.hpp" />
     <ClInclude Include="Math\MatrixStack44.hpp" />
     <ClInclude Include="Math\Objects\AABB3.hpp" />
     <ClInclude Include="Math\Objects\GeomObject.hpp" />
@@ -259,6 +285,22 @@
     <ClInclude Include="Renderer\Animation\Skeleton.hpp" />
     <ClInclude Include="Renderer\Cameras\Camera2D.hpp" />
     <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp" />
+    <ClInclude Include="Renderer\D3D11\General\D3D11Renderer.hpp" />
+    <ClInclude Include="Renderer\D3D11\General\RHI.hpp" />
+    <ClInclude Include="Renderer\D3D11\General\RHIDeviceWindow.hpp" />
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11Mesh.hpp" />
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11Vertex.hpp" />
+    <ClInclude Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.hpp" />
+    <ClInclude Include="Renderer\D3D11\Resources\D3D11Resource.hpp" />
+    <ClInclude Include="Renderer\D3D11\Resources\D3D11SamplerState.hpp" />
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11PixelShader.hpp" />
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11Shader.hpp" />
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11ShaderProgram.hpp" />
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11Uniform.hpp" />
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11VertexShader.hpp" />
+    <ClInclude Include="Renderer\D3D11\Shaders\RHIShaderUtils.hpp" />
+    <ClInclude Include="Renderer\D3D11\Texture\D3D11Texture.hpp" />
+    <ClInclude Include="Renderer\D3D11\Texture\Texture2D.hpp" />
     <ClInclude Include="Renderer\DeviceWindow.hpp" />
     <ClInclude Include="Renderer\Effects\DepthAndNormalsPass.hpp" />
     <ClInclude Include="Renderer\Effects\Tonemapping.hpp" />
@@ -408,7 +450,19 @@
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
@@ -466,7 +520,13 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'" Label="PropertySheets">
@@ -504,9 +564,21 @@
     <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
     <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\x64\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|Win32'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\x64\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'">
+    <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\$(PlatformShortName)\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|x64'">
     <OutDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
     <IncludePath>$(FBXSDK_DIR)include\;$(IncludePath)</IncludePath>
@@ -598,7 +670,47 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;TOOLS_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Lib>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;TOOLS_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)../../Beirus/Code/;$(SolutionDir)Code/</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tools Debug Game|x64'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>

@@ -78,57 +78,6 @@
     <Filter Include="Rendering">
       <UniqueIdentifier>{11bb3d38-4d42-4033-ab2e-67294ff7100a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Sprites">
-      <UniqueIdentifier>{65802aa0-171c-40aa-8bc5-a309bbcabeb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\OpenGL">
-      <UniqueIdentifier>{7a6a0277-16e0-4786-b780-8b1fa61420c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Renderer">
-      <UniqueIdentifier>{69b2ae30-ef5b-4dee-8b18-340637c9f456}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Fonts">
-      <UniqueIdentifier>{c9789472-14a5-4be5-a8ee-3a128d4cad67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\General">
-      <UniqueIdentifier>{2dda13f1-8a89-4d75-8f42-efae195b55ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Material">
-      <UniqueIdentifier>{d2803e81-475b-4e5e-b669-0f9723f52ecf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Vertex">
-      <UniqueIdentifier>{a2db6e16-2b61-4a07-ac56-0a9a5b5aaaeb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Animation">
-      <UniqueIdentifier>{dcbcc4b4-bef4-46de-a7fa-810dd50cc285}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\SpriteRenderer">
-      <UniqueIdentifier>{601837cb-1944-4e56-9ed2-32674d1e04e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\SpriteRenderer\ParticleSystems">
-      <UniqueIdentifier>{917e0fb3-2d04-4b8a-8af6-1b15db2630a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Framebuffers">
-      <UniqueIdentifier>{18e41851-48dc-4a31-bc93-66219d41fd67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Cameras">
-      <UniqueIdentifier>{f0f5b6b9-3397-4697-85c1-47f662900f7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Structures">
-      <UniqueIdentifier>{0f20387b-87c1-47aa-8da4-4f3c67ae208e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Lights">
-      <UniqueIdentifier>{7c9f4790-d132-4a30-9267-bd8225f75580}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Mesh">
-      <UniqueIdentifier>{e5f463d1-86ee-40fc-8264-8c5ae80b45b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Shaders">
-      <UniqueIdentifier>{83082a12-8df5-4094-baf9-5435c3e32485}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Shaders\ShaderProgramAndUniforms">
-      <UniqueIdentifier>{caad9826-5672-4abf-a95f-fb5c50c29f14}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{948054fd-88df-4dfe-9eff-05197e19c80a}</UniqueIdentifier>
     </Filter>
@@ -153,9 +102,6 @@
     <Filter Include="UI\Widgets\WidgetBase">
       <UniqueIdentifier>{09fd923f-f083-4801-8bb4-00f2f59c0683}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Texture">
-      <UniqueIdentifier>{cf5f92e3-168b-48ca-8b63-fe7aefe2374f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{e03c738d-35a4-488f-85d6-7174e443ae79}</UniqueIdentifier>
     </Filter>
@@ -177,17 +123,92 @@
     <Filter Include="Structures\ThreadSafe">
       <UniqueIdentifier>{e83ae56c-c79a-4758-af35-35fd8963499f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Effects and Passes">
-      <UniqueIdentifier>{dd2cf257-e68a-4001-9a5b-6de7741c43e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\Effects and Passes\OIT">
-      <UniqueIdentifier>{987aa6bd-06c3-4909-81c3-51b15b04f72f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Rendering\ReflectionProbes">
-      <UniqueIdentifier>{f26aa1fd-1b92-42de-ba65-0256269685ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math\Objects">
       <UniqueIdentifier>{dd8ce9ad-66a7-45fb-87d5-b835002a5888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL">
+      <UniqueIdentifier>{c8519fa9-84ee-4aaa-b8f9-31ebaa4de241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Animation">
+      <UniqueIdentifier>{dcbcc4b4-bef4-46de-a7fa-810dd50cc285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Cameras">
+      <UniqueIdentifier>{f0f5b6b9-3397-4697-85c1-47f662900f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Effects and Passes">
+      <UniqueIdentifier>{dd2cf257-e68a-4001-9a5b-6de7741c43e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Effects and Passes\OIT">
+      <UniqueIdentifier>{987aa6bd-06c3-4909-81c3-51b15b04f72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Fonts">
+      <UniqueIdentifier>{c9789472-14a5-4be5-a8ee-3a128d4cad67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Framebuffers">
+      <UniqueIdentifier>{18e41851-48dc-4a31-bc93-66219d41fd67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\General">
+      <UniqueIdentifier>{2dda13f1-8a89-4d75-8f42-efae195b55ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Material">
+      <UniqueIdentifier>{d2803e81-475b-4e5e-b669-0f9723f52ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Mesh">
+      <UniqueIdentifier>{e5f463d1-86ee-40fc-8264-8c5ae80b45b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Lights">
+      <UniqueIdentifier>{7c9f4790-d132-4a30-9267-bd8225f75580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\OGLUtils">
+      <UniqueIdentifier>{7a6a0277-16e0-4786-b780-8b1fa61420c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Renderer">
+      <UniqueIdentifier>{69b2ae30-ef5b-4dee-8b18-340637c9f456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Shaders">
+      <UniqueIdentifier>{83082a12-8df5-4094-baf9-5435c3e32485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Shaders\ShaderProgramAndUniforms">
+      <UniqueIdentifier>{caad9826-5672-4abf-a95f-fb5c50c29f14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\SpriteRenderer">
+      <UniqueIdentifier>{601837cb-1944-4e56-9ed2-32674d1e04e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\SpriteRenderer\ParticleSystems">
+      <UniqueIdentifier>{917e0fb3-2d04-4b8a-8af6-1b15db2630a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\ReflectionProbes">
+      <UniqueIdentifier>{f26aa1fd-1b92-42de-ba65-0256269685ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Sprites">
+      <UniqueIdentifier>{65802aa0-171c-40aa-8bc5-a309bbcabeb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Texture">
+      <UniqueIdentifier>{cf5f92e3-168b-48ca-8b63-fe7aefe2374f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Structures">
+      <UniqueIdentifier>{0f20387b-87c1-47aa-8da4-4f3c67ae208e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\OpenGL\Vertex">
+      <UniqueIdentifier>{a2db6e16-2b61-4a07-ac56-0a9a5b5aaaeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11">
+      <UniqueIdentifier>{28845bac-7bd0-4e74-9c66-55eaf5930cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11\General">
+      <UniqueIdentifier>{7673355b-a1eb-46cf-b9a4-7da13ee273a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11\Mesh">
+      <UniqueIdentifier>{b4137eb4-99b9-4622-8c22-bc7f53b9c5b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11\Resources">
+      <UniqueIdentifier>{1e9545d4-df7d-4c25-970a-b7637712bf67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11\Texture">
+      <UniqueIdentifier>{8613947f-16f5-4925-a34b-f2723dba4fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\D3D11\Shaders">
+      <UniqueIdentifier>{06365cd4-ea60-47e1-aefe-1b87c99d15ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -252,49 +273,46 @@
       <Filter>General\Time</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Fonts\BitmapFont.cpp">
-      <Filter>Rendering\Fonts</Filter>
+      <Filter>Rendering\OpenGL\Fonts</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Fonts\Font.cpp">
-      <Filter>Rendering\Fonts</Filter>
+      <Filter>Rendering\OpenGL\Fonts</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Fonts\Glyph.cpp">
-      <Filter>Rendering\Fonts</Filter>
+      <Filter>Rendering\OpenGL\Fonts</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\General\RGBA.cpp">
-      <Filter>Rendering\General</Filter>
+      <Filter>Rendering\OpenGL\General</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\OpenGL\OpenGLEnums.cpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\OpenGL\OpenGLExtensions.cpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Sprites\SpriteAnim.cpp">
-      <Filter>Rendering\Sprites</Filter>
+      <Filter>Rendering\OpenGL\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Sprites\Spritesheet.cpp">
-      <Filter>Rendering\Sprites</Filter>
+      <Filter>Rendering\OpenGL\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="..\ThirdParty\Parsers\xmlParser.cpp">
       <Filter>ThirdParty\Parsers</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Vertex\Vertex.cpp">
-      <Filter>Rendering\Vertex</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Vertex\VertexDefinition.cpp">
-      <Filter>Rendering\Vertex</Filter>
+      <Filter>Rendering\OpenGL\Vertex</Filter>
     </ClCompile>
     <ClCompile Include="..\ThirdParty\MikkT\mikktspace.c">
       <Filter>ThirdParty</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Animation\Motion.cpp">
-      <Filter>Rendering\Animation</Filter>
+      <Filter>Rendering\OpenGL\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Animation\Skeleton.cpp">
-      <Filter>Rendering\Animation</Filter>
+      <Filter>Rendering\OpenGL\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Animation\Animator.cpp">
-      <Filter>Rendering\Animation</Filter>
+      <Filter>Rendering\OpenGL\Animation</Filter>
     </ClCompile>
     <ClCompile Include="General\Core\TheMemoryManager.cpp">
       <Filter>General\Core\Memory</Filter>
@@ -306,19 +324,19 @@
       <Filter>General\Logger</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\Sprite.cpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\SpriteResource.cpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\TheSpriteRenderer.cpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\SpriteLayer.cpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\SpriteDatabase.cpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\ThirdParty\FastDelegateDemo.cpp">
       <Filter>ThirdParty\Delegates</Filter>
@@ -327,7 +345,7 @@
       <Filter>General\Time</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\AnimatedSprite.cpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="General\Profiler\Profiler.cpp">
       <Filter>General\Profiler</Filter>
@@ -354,10 +372,10 @@
       <Filter>Math\Range</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Material\MaterialBank.cpp">
-      <Filter>Rendering\Material</Filter>
+      <Filter>Rendering\OpenGL\Material</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Renderer\BeirusRenderer.cpp">
-      <Filter>Rendering\Renderer</Filter>
+      <Filter>Rendering\OpenGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Console\Command.cpp">
       <Filter>Console</Filter>
@@ -369,10 +387,10 @@
       <Filter>Console</Filter>
     </ClCompile>
     <ClCompile Include="Framebuffer_OGL.cpp">
-      <Filter>Rendering\Framebuffers</Filter>
+      <Filter>Rendering\OpenGL\Framebuffers</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp">
-      <Filter>Rendering\Cameras</Filter>
+      <Filter>Rendering\OpenGL\Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Input\InputSystem.cpp">
       <Filter>Input</Filter>
@@ -380,59 +398,56 @@
     <ClCompile Include="Input\XboxController.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\DeviceWindow.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="General\Core\BeirusEngine.cpp">
       <Filter>General\Core</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Lights\LightSystem.cpp">
-      <Filter>Rendering\Lights</Filter>
+      <Filter>Rendering\OpenGL\Lights</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Cameras\Camera2D.cpp">
-      <Filter>Rendering\Cameras</Filter>
+      <Filter>Rendering\OpenGL\Cameras</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\Mesh_OGL.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\MeshBuilder.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\MeshRenderer_OGL.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\StaticMesh2D.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\Sampler2D_OGL.cpp">
-      <Filter>Rendering\Shaders</Filter>
+      <Filter>Rendering\OpenGL\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\Shader_OGL.cpp">
-      <Filter>Rendering\Shaders</Filter>
+      <Filter>Rendering\OpenGL\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Material\Material_OGL.cpp">
-      <Filter>Rendering\Material</Filter>
+      <Filter>Rendering\OpenGL\Material</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\ComputeShader_OGL.cpp">
-      <Filter>Rendering\Shaders</Filter>
+      <Filter>Rendering\OpenGL\Shaders</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\ShaderProgram_OGL.cpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\Uniform.cpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\ShaderUtils_OGL.cpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\ComputeShaderProgram_OGL.cpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Structures\SSBO.cpp">
-      <Filter>Rendering\Structures</Filter>
+      <Filter>Rendering\OpenGL\Structures</Filter>
     </ClCompile>
     <ClCompile Include="GPUPerformanceTimer_OGL.cpp">
-      <Filter>Rendering\Renderer</Filter>
+      <Filter>Rendering\OpenGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem\GlobalEventSystem.cpp">
       <Filter>EventSystem</Filter>
@@ -501,49 +516,49 @@
       <Filter>UI\Widgets\WidgetBase</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\General\Texture_OGL.cpp">
-      <Filter>Rendering\Texture</Filter>
+      <Filter>Rendering\OpenGL\Texture</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\General\TextureBuffer_OGL.cpp">
-      <Filter>Rendering\Texture</Filter>
+      <Filter>Rendering\OpenGL\Texture</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\OpenGL\OpenGLUtils.cpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Renderer\GlobalStateManager.cpp">
-      <Filter>Rendering\Renderer</Filter>
+      <Filter>Rendering\OpenGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\General\TextureCubemap.cpp">
-      <Filter>Rendering\Texture</Filter>
+      <Filter>Rendering\OpenGL\Texture</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Lights\ShadowCastingLight3D.cpp">
-      <Filter>Rendering\Lights</Filter>
+      <Filter>Rendering\OpenGL\Lights</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\OpenGL\OpenGLErrorReporter.cpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Effects\SSAO.cpp">
-      <Filter>Rendering\Effects and Passes</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Material\RenderState.cpp">
-      <Filter>Rendering\Material</Filter>
+      <Filter>Rendering\OpenGL\Material</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\Particle2D.cpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitter2D.cpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystem2D.cpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitterDefinition2D.cpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystemDefinition2D.cpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClCompile>
     <ClCompile Include="Math\Transform\Transform.cpp">
       <Filter>Math\Transform</Filter>
@@ -594,37 +609,37 @@
       <Filter>Structures</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Shaders\ShaderProgramParser.cpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClCompile>
     <ClCompile Include="Structures\BeirusHashTable.cpp">
       <Filter>Structures</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Effects\DepthAndNormalsPass.cpp">
-      <Filter>Rendering\Effects and Passes</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Effects\OIT\OIT.cpp">
-      <Filter>Rendering\Effects and Passes\OIT</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes\OIT</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\Model.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Structures\BeirusMeshCollection.cpp">
-      <Filter>Rendering\Structures</Filter>
+      <Filter>Rendering\OpenGL\Structures</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\PrimitiveMesh.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\ReflectionProbes\DynamicReflectionProbe.cpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\ReflectionProbes\DynamicReflectionProbeManager.cpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Effects\Tonemapping.cpp">
-      <Filter>Rendering\Effects and Passes</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\LineMesh.cpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Scene\ClickableObject.cpp">
       <Filter>Scene</Filter>
@@ -642,14 +657,71 @@
       <Filter>Math\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\ReflectionProbes\StaticReflectionProbe.cpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\ReflectionProbes\StaticReflectionProbeManager.cpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem\NamedProperties.cpp" />
     <ClCompile Include="Renderer\Lights\Light3D.cpp">
-      <Filter>Rendering\Lights</Filter>
+      <Filter>Rendering\OpenGL\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DeviceWindow.cpp">
+      <Filter>Rendering\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\General\D3D11Renderer.cpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\General\RHI.cpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\General\RHIDeviceWindow.cpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11Mesh.cpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11PixelShader.cpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11Shader.cpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11ShaderProgram.cpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11Uniform.cpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Shaders\D3D11VertexShader.cpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Shaders\RHIShaderUtils.cpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Texture\D3D11Texture.cpp">
+      <Filter>Rendering\D3D11\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Texture\Texture2D.cpp">
+      <Filter>Rendering\D3D11\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.cpp">
+      <Filter>Rendering\D3D11\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Resources\D3D11Resource.cpp">
+      <Filter>Rendering\D3D11\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Resources\D3D11SamplerState.cpp">
+      <Filter>Rendering\D3D11\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix44.cpp">
+      <Filter>Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Vertex\Vertex.cpp">
+      <Filter>Rendering\OpenGL\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11Vertex.cpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -729,52 +801,49 @@
       <Filter>General\Time</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Fonts\BitmapFont.hpp">
-      <Filter>Rendering\Fonts</Filter>
+      <Filter>Rendering\OpenGL\Fonts</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Fonts\Font.hpp">
-      <Filter>Rendering\Fonts</Filter>
+      <Filter>Rendering\OpenGL\Fonts</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Fonts\Glyph.hpp">
-      <Filter>Rendering\Fonts</Filter>
+      <Filter>Rendering\OpenGL\Fonts</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\General\RGBA.hpp">
-      <Filter>Rendering\General</Filter>
+      <Filter>Rendering\OpenGL\General</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\OpenGL\OpenGLEnums.hpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\OpenGL\OpenGLExtensions.hpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Sprites\SpriteAnim.hpp">
-      <Filter>Rendering\Sprites</Filter>
+      <Filter>Rendering\OpenGL\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Sprites\Spritesheet.hpp">
-      <Filter>Rendering\Sprites</Filter>
+      <Filter>Rendering\OpenGL\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Material\Material.hpp">
-      <Filter>Rendering\Material</Filter>
+      <Filter>Rendering\OpenGL\Material</Filter>
     </ClInclude>
     <ClInclude Include="..\ThirdParty\Parsers\xmlParser.h">
       <Filter>ThirdParty\Parsers</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Vertex\Vertex.hpp">
-      <Filter>Rendering\Vertex</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Vertex\VertexDefinition.hpp">
-      <Filter>Rendering\Vertex</Filter>
+      <Filter>Rendering\OpenGL\Vertex</Filter>
     </ClInclude>
     <ClInclude Include="..\ThirdParty\MikkT\mikktspace.h">
       <Filter>ThirdParty</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Animation\Motion.hpp">
-      <Filter>Rendering\Animation</Filter>
+      <Filter>Rendering\OpenGL\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Animation\Skeleton.hpp">
-      <Filter>Rendering\Animation</Filter>
+      <Filter>Rendering\OpenGL\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Animation\Animator.hpp">
-      <Filter>Rendering\Animation</Filter>
+      <Filter>Rendering\OpenGL\Animation</Filter>
     </ClInclude>
     <ClInclude Include="General\Core\TheMemoryManager.hpp">
       <Filter>General\Core\Memory</Filter>
@@ -789,22 +858,22 @@
       <Filter>General\Logger</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\Sprite.hpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\SpriteResource.hpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\TheSpriteRenderer.hpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\SpriteLayer.hpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\SpriteDatabase.hpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Framebuffer.hpp">
-      <Filter>Rendering\Framebuffers</Filter>
+      <Filter>Rendering\OpenGL\Framebuffers</Filter>
     </ClInclude>
     <ClInclude Include="..\ThirdParty\FastDelegate.h">
       <Filter>ThirdParty\Delegates</Filter>
@@ -816,7 +885,7 @@
       <Filter>General\Time</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\AnimatedSprite.hpp">
-      <Filter>Rendering\SpriteRenderer</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="General\Profiler\Profiler.hpp">
       <Filter>General\Profiler</Filter>
@@ -849,10 +918,10 @@
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Material\MaterialBank.hpp">
-      <Filter>Rendering\Material</Filter>
+      <Filter>Rendering\OpenGL\Material</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Renderer\BeirusRenderer.hpp">
-      <Filter>Rendering\Renderer</Filter>
+      <Filter>Rendering\OpenGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Console\Command.hpp">
       <Filter>Console</Filter>
@@ -864,7 +933,7 @@
       <Filter>Console</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp">
-      <Filter>Rendering\Cameras</Filter>
+      <Filter>Rendering\OpenGL\Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Input\InputSystem.hpp">
       <Filter>Input</Filter>
@@ -872,59 +941,56 @@
     <ClInclude Include="Input\XboxController.hpp">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\DeviceWindow.hpp">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="General\Core\BeirusEngine.hpp">
       <Filter>General\Core</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Lights\LightSystem.hpp">
-      <Filter>Rendering\Lights</Filter>
+      <Filter>Rendering\OpenGL\Lights</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Lights\Light3D.hpp">
-      <Filter>Rendering\Lights</Filter>
+      <Filter>Rendering\OpenGL\Lights</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Cameras\Camera2D.hpp">
-      <Filter>Rendering\Cameras</Filter>
+      <Filter>Rendering\OpenGL\Cameras</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\Mesh.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\MeshBuilder.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\MeshRenderer.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\StaticMesh2D.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\Sampler2D.hpp">
-      <Filter>Rendering\Shaders</Filter>
+      <Filter>Rendering\OpenGL\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\Shader.hpp">
-      <Filter>Rendering\Shaders</Filter>
+      <Filter>Rendering\OpenGL\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\ComputeShader.hpp">
-      <Filter>Rendering\Shaders</Filter>
+      <Filter>Rendering\OpenGL\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\ShaderProgram.hpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\Uniform.hpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\ShaderUtils.hpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\ComputeShaderProgram.hpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Structures\SSBO.hpp">
-      <Filter>Rendering\Structures</Filter>
+      <Filter>Rendering\OpenGL\Structures</Filter>
     </ClInclude>
     <ClInclude Include="GPUPerformanceTimer.hpp">
-      <Filter>Rendering\Renderer</Filter>
+      <Filter>Rendering\OpenGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="EventSystem\GlobalEventSystem.hpp">
       <Filter>EventSystem</Filter>
@@ -1014,55 +1080,52 @@
       <Filter>UI\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\General\Texture.hpp">
-      <Filter>Rendering\Texture</Filter>
+      <Filter>Rendering\OpenGL\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\General\TextureBuffer.hpp">
-      <Filter>Rendering\Texture</Filter>
+      <Filter>Rendering\OpenGL\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\OpenGL\OpenGLUtils.hpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Renderer\GlobalStateManager.hpp">
-      <Filter>Rendering\Renderer</Filter>
+      <Filter>Rendering\OpenGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\General\TextureCubemap.hpp">
-      <Filter>Rendering\Texture</Filter>
+      <Filter>Rendering\OpenGL\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Lights\ShadowCastingLight3D.hpp">
-      <Filter>Rendering\Lights</Filter>
+      <Filter>Rendering\OpenGL\Lights</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Scene.hpp">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\OpenGL\OpenGLErrorReporter.hpp">
-      <Filter>Rendering\OpenGL</Filter>
+      <Filter>Rendering\OpenGL\OGLUtils</Filter>
     </ClInclude>
     <ClInclude Include="Config\RenderingConfig.hpp">
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Effects\SSAO.hpp">
-      <Filter>Rendering\Effects and Passes</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Material\RenderState.hpp">
-      <Filter>Rendering\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Renderer\RendererCommon.hpp">
-      <Filter>Rendering</Filter>
+      <Filter>Rendering\OpenGL\Material</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\Particle2D.hpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitter2D.hpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystem2D.hpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleEmitterDefinition2D.hpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\SpriteRenderer\ParticleSystem\ParticleSystemDefinition2D.hpp">
-      <Filter>Rendering\SpriteRenderer\ParticleSystems</Filter>
+      <Filter>Rendering\OpenGL\SpriteRenderer\ParticleSystems</Filter>
     </ClInclude>
     <ClInclude Include="Math\Transform\Transform.hpp">
       <Filter>Math\Transform</Filter>
@@ -1125,49 +1188,49 @@
       <Filter>Structures</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\ShaderProgramParser.hpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
     </ClInclude>
     <ClInclude Include="Structures\BeirusHashTable.hpp">
       <Filter>Structures</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Effects\DepthAndNormalsPass.hpp">
-      <Filter>Rendering\Effects and Passes</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Effects\OIT\OIT.hpp">
-      <Filter>Rendering\Effects and Passes\OIT</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes\OIT</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Effects\OIT\Pixel.hpp">
-      <Filter>Rendering\Effects and Passes\OIT</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes\OIT</Filter>
     </ClInclude>
     <ClInclude Include="General\Core\Allocators\ObjectPool.hpp">
       <Filter>Structures</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\Model.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Structures\BeirusMeshCollection.hpp">
-      <Filter>Rendering\Structures</Filter>
+      <Filter>Rendering\OpenGL\Structures</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\General\RenderingEnums.hpp">
-      <Filter>Rendering\General</Filter>
+      <Filter>Rendering\OpenGL\General</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\PrimitiveMesh.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\General\RenderCommon.hpp">
-      <Filter>Rendering\General</Filter>
+      <Filter>Rendering\OpenGL\General</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\ReflectionProbes\DynamicReflectionProbe.hpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\ReflectionProbes\DynamicReflectionProbeManager.hpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Effects\Tonemapping.hpp">
-      <Filter>Rendering\Effects and Passes</Filter>
+      <Filter>Rendering\OpenGL\Effects and Passes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Mesh\LineMesh.hpp">
-      <Filter>Rendering\Mesh</Filter>
+      <Filter>Rendering\OpenGL\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Scene\ClickableObject.hpp">
       <Filter>Scene</Filter>
@@ -1191,13 +1254,73 @@
       <Filter>ThirdParty</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\ReflectionProbes\StaticReflectionProbe.hpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\ReflectionProbes\StaticReflectionProbeManager.hpp">
-      <Filter>Rendering\ReflectionProbes</Filter>
+      <Filter>Rendering\OpenGL\ReflectionProbes</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Shaders\UniformConstants.hpp">
-      <Filter>Rendering\Shaders\ShaderProgramAndUniforms</Filter>
+      <Filter>Rendering\OpenGL\Shaders\ShaderProgramAndUniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DeviceWindow.hpp">
+      <Filter>Rendering\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderer\RendererCommon.hpp">
+      <Filter>Rendering\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\General\D3D11Renderer.hpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\General\RHI.hpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\General\RHIDeviceWindow.hpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11Mesh.hpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11PixelShader.hpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11Shader.hpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11ShaderProgram.hpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11Uniform.hpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Shaders\D3D11VertexShader.hpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Shaders\RHIShaderUtils.hpp">
+      <Filter>Rendering\D3D11\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Texture\D3D11Texture.hpp">
+      <Filter>Rendering\D3D11\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Texture\Texture2D.hpp">
+      <Filter>Rendering\D3D11\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.hpp">
+      <Filter>Rendering\D3D11\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Resources\D3D11Resource.hpp">
+      <Filter>Rendering\D3D11\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Resources\D3D11SamplerState.hpp">
+      <Filter>Rendering\D3D11\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix44.hpp">
+      <Filter>Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vertex\Vertex.hpp">
+      <Filter>Rendering\OpenGL\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11Vertex.hpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
