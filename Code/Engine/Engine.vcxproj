@@ -103,6 +103,7 @@
     <ClCompile Include="Renderer\Cameras\Camera3D.cpp" />
     <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp" />
     <ClCompile Include="Renderer\D3D11\General\D3D11Renderer.cpp" />
+    <ClCompile Include="Renderer\D3D11\General\FileParsing.cpp" />
     <ClCompile Include="Renderer\D3D11\General\RHI.cpp" />
     <ClCompile Include="Renderer\D3D11\General\RHIDeviceWindow.cpp" />
     <ClCompile Include="Renderer\D3D11\Material\D3D11Material.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="Renderer\Cameras\Camera3D.hpp" />
     <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp" />
     <ClInclude Include="Renderer\D3D11\General\D3D11Renderer.hpp" />
+    <ClInclude Include="Renderer\D3D11\General\FileParsing.hpp" />
     <ClInclude Include="Renderer\D3D11\General\RHI.hpp" />
     <ClInclude Include="Renderer\D3D11\General\RHIDeviceWindow.hpp" />
     <ClInclude Include="Renderer\D3D11\Material\D3D11Material.hpp" />

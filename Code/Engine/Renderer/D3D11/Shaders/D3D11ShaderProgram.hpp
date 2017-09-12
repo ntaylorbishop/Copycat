@@ -45,8 +45,8 @@ struct SamplerBindInfo {
 //---------------------------------------------------------------------------------------------------------------------------
 class D3D11ShaderProgram {
 public:
-	D3D11ShaderProgram()	{ }
-	~D3D11ShaderProgram()	{ }
+	static D3D11ShaderProgram* CreateOrGetShaderProgram(const String& name);
+
 
 	void SetVertexShader(D3D11VertexShader* pVertShader)	{ m_pVertexShader = pVertShader; }
 	void SetPixelShader(D3D11PixelShader* pPixelShader)		{ m_pPixelShader = pPixelShader; }
@@ -58,6 +58,9 @@ public:
 	void Use();
 
 private:
+	D3D11ShaderProgram()	{ }
+	~D3D11ShaderProgram()	{ }
+
 	void BindConstantBuffers();
 	void BindResources();
 	void BindSamplers();
@@ -69,7 +72,12 @@ private:
 	std::vector<ResourceBindInfo> m_resources;
 	std::vector<SamplerBindInfo> m_samplers;
 
+	static std::map<size_t, D3D11ShaderProgram*> s_shaderProgramRegistry;
 };
+
+typedef std::map<size_t, D3D11ShaderProgram*>				D3D11ShaderProgramMap;
+typedef std::map<size_t, D3D11ShaderProgram*>::iterator		D3D11ShaderProgramMapIter;
+typedef std::pair<size_t, D3D11ShaderProgram*>				D3D11ShaderProgramMapPair;
 
 
 //---------------------------------------------------------------------------------------------------------------------------

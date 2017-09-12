@@ -1,6 +1,27 @@
 #include "Engine/Renderer/D3D11/Shaders/D3D11ShaderProgram.hpp"
 
 
+STATIC std::map<size_t, D3D11ShaderProgram*> D3D11ShaderProgram::s_shaderProgramRegistry;
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC D3D11ShaderProgram* D3D11ShaderProgram::CreateOrGetShaderProgram(const String& name) {
+
+	size_t hash = std::hash<String>()(name);
+	D3D11ShaderProgramMapIter it = s_shaderProgramRegistry.find(hash);
+
+	if (it != s_shaderProgramRegistry.end()) {
+		return it->second;
+	}
+	else {
+	
+		D3D11ShaderProgram* nShaderProgram = new D3D11ShaderProgram();
+		s_shaderProgramRegistry.insert(D3D11ShaderProgramMapPair(hash, nShaderProgram));
+		return nShaderProgram;
+	}
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11ShaderProgram::Use() {
 

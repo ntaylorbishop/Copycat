@@ -734,6 +734,9 @@
     <ClCompile Include="Renderer\D3D11\Material\D3D11Material.cpp">
       <Filter>Rendering\D3D11\Material</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\D3D11\General\FileParsing.cpp">
+      <Filter>Rendering\D3D11\General</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">
@@ -1341,6 +1344,9 @@
     </ClInclude>
     <ClInclude Include="Renderer\D3D11\Material\D3D11Material.hpp">
       <Filter>Rendering\D3D11\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\General\FileParsing.hpp">
+      <Filter>Rendering\D3D11\General</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
