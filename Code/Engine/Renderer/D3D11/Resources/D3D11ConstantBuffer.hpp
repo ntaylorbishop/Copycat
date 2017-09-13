@@ -23,6 +23,7 @@ public:
 	ID3D11Buffer* GetDeviceBufferHandle() { return m_pDeviceBuffer; }
 
 private:
+	String						m_name				= "NULL";
 	std::vector<D3D11Uniform*>	m_uniforms;
 	byte*						m_pByteBuffer		= nullptr;
 	uint						m_currSizeOfBuffer	= 0;

@@ -734,7 +734,7 @@
     <ClCompile Include="Renderer\D3D11\Material\D3D11Material.cpp">
       <Filter>Rendering\D3D11\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\D3D11\General\FileParsing.cpp">
+    <ClCompile Include="Renderer\D3D11\General\D3D11ShaderFileParsing.cpp">
       <Filter>Rendering\D3D11\General</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1345,7 +1345,7 @@
     <ClInclude Include="Renderer\D3D11\Material\D3D11Material.hpp">
       <Filter>Rendering\D3D11\Material</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\D3D11\General\FileParsing.hpp">
+    <ClInclude Include="Renderer\D3D11\General\D3D11ShaderFileParsing.hpp">
       <Filter>Rendering\D3D11\General</Filter>
     </ClInclude>
   </ItemGroup>

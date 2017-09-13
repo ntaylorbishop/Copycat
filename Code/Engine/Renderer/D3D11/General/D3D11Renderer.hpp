@@ -5,7 +5,7 @@
 
 class D3D11Renderer {
 public:
-	static void Get();
+	static D3D11Renderer* Get();
 	void SetViewport(const Vector2& viewportSize);
 
 private:

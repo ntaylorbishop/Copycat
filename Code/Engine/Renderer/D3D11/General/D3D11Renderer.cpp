@@ -1,9 +1,23 @@
 #include "Engine/Renderer/D3D11/General/D3D11Renderer.hpp"
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
+#include "Engine/Renderer/D3D11/General/FileParsing.hpp"
 #include <d3d11_1.h>
 
 
-STATIC D3D11Renderer* s_d3d11Renderer;
+STATIC D3D11Renderer* D3D11Renderer::s_d3d11Renderer;
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC D3D11Renderer* D3D11Renderer::Get() {
+
+	if (s_d3d11Renderer != nullptr) {
+		return s_d3d11Renderer;
+	}
+	else {
+		s_d3d11Renderer = new D3D11Renderer();
+		return s_d3d11Renderer;
+	}
+}
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -21,15 +35,11 @@ void D3D11Renderer::SetViewport(const Vector2& viewportSize) {
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------------
-void D3D11Renderer::DrawSquare2D() {
-
-}
-
 
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Renderer::D3D11Renderer() {
 
+	ParseInAllShaderData();
 }
 
 
