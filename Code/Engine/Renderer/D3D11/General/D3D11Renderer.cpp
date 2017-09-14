@@ -1,6 +1,6 @@
 #include "Engine/Renderer/D3D11/General/D3D11Renderer.hpp"
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
-#include "Engine/Renderer/D3D11/General/FileParsing.hpp"
+#include "Engine/Renderer/D3D11/General/D3D11ShaderFileParsing.hpp"
 #include <d3d11_1.h>
 
 
@@ -39,6 +39,7 @@ void D3D11Renderer::SetViewport(const Vector2& viewportSize) {
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Renderer::D3D11Renderer() {
 
+	ParseInDefaultConstantBuffers();
 	ParseInAllShaderData();
 }
 

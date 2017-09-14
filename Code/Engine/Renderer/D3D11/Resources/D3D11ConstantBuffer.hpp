@@ -9,9 +9,7 @@
 
 class D3D11ConstantBuffer {
 public:
-	D3D11ConstantBuffer() { }
-	D3D11ConstantBuffer(uint byteSizeOfBuffer);
-	~D3D11ConstantBuffer();
+	static D3D11ConstantBuffer* CreateOrGetConstantBuffer(const String& cBufferName, uint byteSizeOfBuffer);
 
 	void CreateBufferOnDevice();
 	void ReleaseLocalBuffer();
@@ -19,31 +17,25 @@ public:
 
 	void AddUniform(D3D11Uniform* uniToAdd) { m_uniforms.push_back(uniToAdd); }
 
-	byte* GetBuffer() { return m_pByteBuffer; }
-	ID3D11Buffer* GetDeviceBufferHandle() { return m_pDeviceBuffer; }
+	byte* GetBuffer()						{ return m_pByteBuffer;		}
+	ID3D11Buffer* GetDeviceBufferHandle()	{ return m_pDeviceBuffer;	}
+	String GetName() const					{ return m_name;			}
 
 private:
+	D3D11ConstantBuffer() { }
+	D3D11ConstantBuffer(const String& cBufferName, uint byteSizeOfBuffer);
+	~D3D11ConstantBuffer();
+
 	String						m_name				= "NULL";
 	std::vector<D3D11Uniform*>	m_uniforms;
 	byte*						m_pByteBuffer		= nullptr;
 	uint						m_currSizeOfBuffer	= 0;
 	uint						m_bufferSize		= 0;
 	ID3D11Buffer*				m_pDeviceBuffer		= nullptr;
+
+	static std::map<size_t, D3D11ConstantBuffer*> s_cBufferRegistry;
 };
 
-
-
-template<typename T>
-void D3D11ConstantBuffer::AddElement(T elem) {
-
-	memcpy_s(m_pByteBuffer + m_bufferSize, m_bufferSize, (void*)&elem, sizeof(T));
-	m_bufferSize += sizeof(T);
-}
-
-/*
-template<typename T>
-void D3D11ConstantBuffer::AddElement(const T elem) {
-
-	memcpy_s(m_pByteBuffer + m_bufferSize, m_bufferSize, (void*)&elem, sizeof(T));
-	m_bufferSize += sizeof(T);
-}*/
+typedef std::map<size_t, D3D11ConstantBuffer*>				D3D11CBufferMap;
+typedef std::map<size_t, D3D11ConstantBuffer*>::iterator	D3D11CBufferMapIter;
+typedef std::pair<size_t, D3D11ConstantBuffer*>				D3D11CBufferMapPair;

@@ -24,6 +24,9 @@ public:
 
 
 	XMMATRIX m_matrix;
+
+	static const Matrix44 BASIS;
+	static const Matrix44 IDENTITY;
 };
 
 
