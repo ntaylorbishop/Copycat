@@ -6,6 +6,25 @@
 #include "ThirdParty/stb_image.c"
 #pragma warning(pop)
 
+
+STATIC std::map<size_t, Texture2D*> Texture2D::s_textureRegistry;
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC Texture2D* Texture2D::GetTexture(const char* imageFilePath) {
+
+	size_t hash = std::hash<String>()(String(imageFilePath));
+	D3D11TextureMapIter it = s_textureRegistry.find(hash);
+
+	if (it != s_textureRegistry.end()) {
+		return it->second;
+	}
+	else {
+		return nullptr;
+	}
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------------
 Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindFlags bindFlags, eTextureCPUAccessFlags accessFlags) {
 
@@ -59,6 +78,9 @@ Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindF
 		UseAsShaderResourceView();
 		//GetDeviceContext()->GenerateMips(GetSRV());
 	}
+
+	size_t hash = std::hash<String>()(String(imageFilePath));
+	s_textureRegistry.insert(D3D11TextureMapPair(hash, this));
 }
 
 

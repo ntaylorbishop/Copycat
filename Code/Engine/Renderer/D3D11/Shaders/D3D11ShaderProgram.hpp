@@ -58,13 +58,14 @@ public:
 	void Use();
 
 private:
-	D3D11ShaderProgram()	{ }
-	~D3D11ShaderProgram()	{ }
+	D3D11ShaderProgram(const String& name) : m_name(name)	{ }
+	~D3D11ShaderProgram()									{ }
 
 	void BindConstantBuffers();
 	void BindResources();
 	void BindSamplers();
 
+	String				m_name			= "NULL";
 	D3D11VertexShader*	m_pVertexShader	= nullptr;
 	D3D11PixelShader*	m_pPixelShader	= nullptr;
 

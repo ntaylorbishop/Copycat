@@ -15,7 +15,7 @@ STATIC D3D11ShaderProgram* D3D11ShaderProgram::CreateOrGetShaderProgram(const St
 	}
 	else {
 	
-		D3D11ShaderProgram* nShaderProgram = new D3D11ShaderProgram();
+		D3D11ShaderProgram* nShaderProgram = new D3D11ShaderProgram(name);
 		s_shaderProgramRegistry.insert(D3D11ShaderProgramMapPair(hash, nShaderProgram));
 		return nShaderProgram;
 	}

@@ -5,6 +5,21 @@ STATIC std::map<size_t, D3D11ConstantBuffer*> D3D11ConstantBuffer::s_cBufferRegi
 
 
 //---------------------------------------------------------------------------------------------------------------------------
+STATIC D3D11ConstantBuffer* D3D11ConstantBuffer::GetConstantBuffer(const String& cBufferName) {
+
+	size_t hash = std::hash<String>()(cBufferName);
+	D3D11CBufferMapIter it = s_cBufferRegistry.find(hash);
+
+	if (it != s_cBufferRegistry.end()) {
+		return it->second;
+	}
+	else {
+		return nullptr;
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
 STATIC D3D11ConstantBuffer* D3D11ConstantBuffer::CreateOrGetConstantBuffer(const String& cBufferName, uint byteSizeOfBuffer) {
 
 	size_t hash = std::hash<String>()(cBufferName);

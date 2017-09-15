@@ -28,7 +28,3 @@ private:
 
 	static TextureDatabase* s_texDB;
 };
-
-typedef std::map<String, D3D11Texture*>::iterator		D3D11TextureMapIterator;
-typedef std::map<String, D3D11Texture*>::const_iterator	D3D11TextureMapConstIterator;
-typedef std::pair<String, D3D11Texture*>				D3D11TextureMapPair;

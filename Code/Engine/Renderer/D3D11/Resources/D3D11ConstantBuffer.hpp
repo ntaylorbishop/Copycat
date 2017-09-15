@@ -9,6 +9,7 @@
 
 class D3D11ConstantBuffer {
 public:
+	static D3D11ConstantBuffer* GetConstantBuffer(const String& cBufferName);
 	static D3D11ConstantBuffer* CreateOrGetConstantBuffer(const String& cBufferName, uint byteSizeOfBuffer);
 
 	void CreateBufferOnDevice();

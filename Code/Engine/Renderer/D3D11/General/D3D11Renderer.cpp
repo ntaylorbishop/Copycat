@@ -1,6 +1,7 @@
 #include "Engine/Renderer/D3D11/General/D3D11Renderer.hpp"
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
 #include "Engine/Renderer/D3D11/General/D3D11ShaderFileParsing.hpp"
+#include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
 #include <d3d11_1.h>
 
 
@@ -39,8 +40,16 @@ void D3D11Renderer::SetViewport(const Vector2& viewportSize) {
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Renderer::D3D11Renderer() {
 
+	Texture2D* defaultDiffuse = new Texture2D("Data/Textures/Brick2.png", true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+	Texture2D* defaultNormal = new Texture2D("Data/Textures/Brick_Normal.png", true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+	UNUSED(defaultDiffuse);
+	UNUSED(defaultNormal);
+
+	CreateDefaultSamplers();
 	ParseInDefaultConstantBuffers();
 	ParseInAllShaderData();
+
+	int a = 0;
 }
 
 

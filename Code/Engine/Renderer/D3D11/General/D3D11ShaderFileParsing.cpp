@@ -3,6 +3,7 @@
 #include "Engine/Utils/GeneralUtils/XMLUtils.hpp"
 #include "Engine/Renderer/D3D11/Shaders/D3D11ShaderProgram.hpp"
 #include "Engine/Math/Matrix44.hpp"
+#include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
 
 
 bool	D3D11_BOOL_FALSE	= false;
@@ -12,116 +13,6 @@ double	DOUBLE_ZERO			= 0.0;
 int		INT_ZERO			= 0;
 uint	UINT_ZERO			= 0;
 short	SHORT_ZERO			= 0;
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseDefaultConstantBuffers(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode) {
-
-	for (int i = 0; i < cBufferNode.nChildNode(); i++) {
-
-		XMLNode cBuffer = cBufferNode.getChildNode(i);
-
-
-	}
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseConstantBuffer(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode) {
-
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseShaderResources(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode) {
-
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode) {
-
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseFragmentShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode) {
-
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseShaderXML(const XMLNode& shaderNode) {
-
-	const char* shaderName = shaderNode.getAttribute(0).lpszValue;
-	D3D11ShaderProgram* newProg = D3D11ShaderProgram::CreateOrGetShaderProgram(shaderName);
-
-	for (int i = 0; i < shaderNode.nChildNode(); i++) {
-
-		XMLNode childNode = shaderNode.getChildNode(i);
-		const char* nodeName = childNode.getName();
-		
-		if (strcmp(nodeName, "VertexShader") == 0) {
-			ParseVertexShader(newProg, childNode);
-		}
-		else if (strcmp(nodeName, "FragmentShader") == 0) {
-			ParseFragmentShader(newProg, childNode);
-		}
-		else if (strcmp(nodeName, "ShaderResourceView") == 0) {
-			ParseShaderResources(newProg, childNode);
-		}
-		else if (strcmp(nodeName, "DefaultConstantBuffers") == 0) {
-			ParseDefaultConstantBuffers(newProg, childNode);
-		}
-		else if (strcmp(nodeName, "ConstantBuffer") == 0) {
-			ParseConstantBuffer(newProg, childNode);
-		}
-	}
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-static void ParseInShaderData(const String& shaderName) {
-
-	XMLNode root = XMLNode::parseFile(shaderName.c_str());
-
-	for (int i = 0; i < root.nChildNode(); i++) {
-
-		XMLNode shaderNode = root.getChildNode(i);
-		ASSERT_OR_DIE(strcmp(shaderNode.getName(), "Shader") == 0, "Only shader nodes allowed when parsing shader data.");
-
-		ParseShaderXML(shaderNode);
-	}
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-void ParseInAllShaderData() {
-
-	std::vector<String> shaderFiles = FileUtils::EnumerateFiles("Data/ShaderDefinitions/", "*.xml", true);
-
-	std::vector<String>::const_iterator shaderFileIt = shaderFiles.begin();
-	for (shaderFileIt; shaderFileIt != shaderFiles.end(); ++shaderFileIt) {
-
-		String shaderFilename = *shaderFileIt;
-		ParseInShaderData(shaderFilename);
-	}
-}
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//---------------------------------------------------------------------------------------------------------------------------
-void ParseInAllMaterialData() {
-
-}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,63 +78,57 @@ static void* GetDefaultUniformValue(const String& uniValue, eUniformType uniType
 		switch (uniType) {
 		case UNIFORM_FLOAT: {
 			return (void*)&D3D11_FLOAT_ZERO;
-			break;
 		}
 		case UNIFORM_DOUBLE: {
 			return (void*)&DOUBLE_ZERO;
-			break;
 		}
 		case UNIFORM_VECTOR3: {
 			return (void*)&Vector3::ZERO;
-			break;
 		}
 		case UNIFORM_VECTOR2: {
 			return (void*)&Vector2::ZERO;
-			break;
 		}
 		case UNIFORM_VECTOR4: {
 			return (void*)&Vector4::ZERO;
-			break;
 		}
 		case UNIFORM_MAT4: {
 			return (void*)&Matrix44::IDENTITY;
-			break;
 		}
 		case UNIFORM_BOOL: {
 			return (void*)&BOOL_FALSE;
-			break;
 		}
 		case UNIFORM_INT: {
 			return (void*)&INT_ZERO;
-			break;
 		}
 		case UNIFORM_UINT: {
 			return (void*)&UINT_ZERO;
-			break;
 		}
 		case UNIFORM_SHORT: {
 			return (void*)&SHORT_ZERO;
-			break;
 		}
 		case UNIFORM_RGBA: {
 			return (void*)&RGBA::WHITE;
-			break;
+		}
+		default: {
+			return nullptr;
 		}
 		}
 	}
+	else {
+		return nullptr;
+	}
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 static void ParseDefaultConstantBuffer(const XMLNode& cBufferNode) {
 
-	ASSERT_OR_DIE(strcmp(cBufferNode.getName(), "ConstantBuffer") == 0, "ERROR: Constant buffers in default constant buffers file need to be named properly.");
-	
 	String cBufferName = cBufferNode.getAttribute(0).lpszValue;
 	int cBufferSize = XMLUtils::ParseInt(cBufferNode.getAttribute(1).lpszValue);
 
 	D3D11ConstantBuffer* newBuffer = D3D11ConstantBuffer::CreateOrGetConstantBuffer(cBufferName, cBufferSize);
 
-	for (uint i = 0; i < cBufferNode.nChildNode(); i++) {
+	for (int i = 0; i < cBufferNode.nChildNode(); i++) {
 
 		XMLNode bufferUniNode = cBufferNode.getChildNode(i);
 
@@ -260,21 +145,214 @@ static void ParseDefaultConstantBuffer(const XMLNode& cBufferNode) {
 	}
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseDefaultConstantBuffer(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode, eWhichShaderBound whichShader) {
+
+	String cBufferName = cBufferNode.getAttribute(0).lpszValue;
+	String bindPointStr = cBufferNode.getAttribute(1).lpszValue;
+	int bindPoint = XMLUtils::ParseInt(bindPointStr);
+
+	D3D11ConstantBuffer* defBuffer = D3D11ConstantBuffer::GetConstantBuffer(cBufferName);
+	ASSERT_OR_DIE(defBuffer != nullptr, "ERROR: No default buffer exists by that name.");
+	newProg->AddConstantBuffer(bindPoint, defBuffer, whichShader);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseConstantBuffer(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode, eWhichShaderBound whichShader) {
+
+	String cBufferName = cBufferNode.getAttribute(0).lpszValue;
+	int cBufferSize = XMLUtils::ParseInt(cBufferNode.getAttribute(1).lpszValue);
+	int cBufferBindPoint = XMLUtils::ParseInt(cBufferNode.getAttribute(2).lpszValue);
+
+	D3D11ConstantBuffer* newBuffer = D3D11ConstantBuffer::CreateOrGetConstantBuffer(cBufferName, cBufferSize);
+
+	for (int i = 0; i < cBufferNode.nChildNode(); i++) {
+
+		XMLNode bufferUniNode = cBufferNode.getChildNode(i);
+
+		ASSERT_OR_DIE(strcmp(bufferUniNode.getName(), "Uniform") == 0, "ERROR: Constant buffers can only contain uniforms in XML.");
+
+		String uniName = bufferUniNode.getAttribute(0).lpszValue;
+		String uniTypeStr = bufferUniNode.getAttribute(1).lpszValue;
+		String uniValStr = bufferUniNode.getAttribute(2).lpszValue;
+		eUniformType uniType = D3D11Uniform::UnserializeType(uniTypeStr);
+		void* defaultData = GetDefaultUniformValue(uniValStr, uniType);
+
+		D3D11Uniform* newUni = new D3D11Uniform(uniName.c_str(), uniType, defaultData);
+		newBuffer->AddUniform(newUni);
+	}
+
+	newProg->AddConstantBuffer(cBufferBindPoint, newBuffer, whichShader);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseShaderResource(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode, eWhichShaderBound whichShader) {
+
+	String bindPointStr = cBufferNode.getAttribute(0).lpszValue;
+	int bindPoint = XMLUtils::ParseInt(bindPointStr);
+	
+
+	Texture2D* defaultTex = Texture2D::GetTexture("Data/Textures/Brick2.png");
+	D3D11Resource* texID = defaultTex->GetSRVResource();
+	newProg->AddResource(bindPoint, texID, whichShader);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseSampler(D3D11ShaderProgram* newProg, const XMLNode& samplerNode, eWhichShaderBound whichShader) {
+
+	String samplerName = samplerNode.getAttribute(0).lpszValue;
+	String bindPointStr = samplerNode.getAttribute(1).lpszValue;
+	int bindPoint = XMLUtils::ParseInt(bindPointStr);
+	D3D11SamplerState* sampler = D3D11SamplerState::GetSampler(samplerName);
+
+	newProg->AddSampler(bindPoint, sampler, whichShader);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode) {
+	
+	for (int i = 0; i < vertexShaderNode.nChildNode(); i++) {
+
+		XMLNode childNode = vertexShaderNode.getChildNode(i);
+		String nodeName = childNode.getName();
+
+		if (nodeName == "ConstantBuffer") {
+			ParseConstantBuffer(newProg, childNode, WHICH_SHADER_VERTEX);
+		}
+		else if (nodeName == "ShaderResourceView") {
+			ParseShaderResource(newProg, childNode, WHICH_SHADER_VERTEX);
+		}
+		else if (nodeName == "Sampler") {
+			ParseSampler(newProg, childNode, WHICH_SHADER_VERTEX);
+		}
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseFragmentShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode) {
+
+	for (int i = 0; i < vertexShaderNode.nChildNode(); i++) {
+
+		XMLNode childNode = vertexShaderNode.getChildNode(i);
+		String nodeName = childNode.getName();
+
+		if (nodeName == "ConstantBuffer") {
+			ParseConstantBuffer(newProg, childNode, WHICH_SHADER_FRAGMENT);
+		}
+		else if (nodeName == "ShaderResourceView") {
+			ParseShaderResource(newProg, childNode, WHICH_SHADER_FRAGMENT);
+		}
+		else if (nodeName == "Sampler") {
+			ParseSampler(newProg, childNode, WHICH_SHADER_FRAGMENT);
+		}
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseShaderXML(D3D11ShaderProgram* newProg, const XMLNode& shaderNode) {
+
+	for (int i = 0; i < shaderNode.nChildNode(); i++) {
+
+		XMLNode childNode = shaderNode.getChildNode(i);
+		const char* nodeName = childNode.getName();
+		
+		if (strcmp(nodeName, "VertexShader") == 0) {
+			ParseVertexShader(newProg, childNode);
+		}
+		else if (strcmp(nodeName, "FragmentShader") == 0) {
+			ParseFragmentShader(newProg, childNode);
+		}
+		else if (strcmp(nodeName, "ShaderResourceView") == 0) {
+			ParseShaderResource(newProg, childNode, WHICH_SHADER_BOTH);
+		}
+		else if (strcmp(nodeName, "DefaultConstantBuffer") == 0) {
+			ParseDefaultConstantBuffer(newProg, childNode, WHICH_SHADER_BOTH);
+		}
+		else if (strcmp(nodeName, "ConstantBuffer") == 0) {
+			ParseConstantBuffer(newProg, childNode, WHICH_SHADER_BOTH);
+		}
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+static void ParseInShaderData(const String& shaderName) {
+
+	XMLNode root = XMLNode::parseFile(shaderName.c_str());
+	root = root.getChildNode(0);
+
+	const char* shaderProgName = root.getAttribute(0).lpszValue;
+
+	if (shaderProgName == nullptr) {
+		return; //Isn't a shader file
+	}
+
+	D3D11ShaderProgram* newProg = D3D11ShaderProgram::CreateOrGetShaderProgram(shaderProgName);
+
+	for (int i = 0; i < root.nChildNode(); i++) {
+
+		XMLNode shaderNode = root.getChildNode(i);
+		ParseShaderXML(newProg, shaderNode);
+	}
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void ParseInAllShaderData() {
+
+	std::vector<String> shaderFiles = FileUtils::EnumerateFiles("Data/ShaderDefinitions/", "*.xml", true);
+
+	std::vector<String>::const_iterator shaderFileIt = shaderFiles.begin();
+	for (shaderFileIt; shaderFileIt != shaderFiles.end(); ++shaderFileIt) {
+
+		String shaderFilename = *shaderFileIt;
+		ParseInShaderData(shaderFilename);
+	}
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//---------------------------------------------------------------------------------------------------------------------------
+void ParseInAllMaterialData() {
+
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //---------------------------------------------------------------------------------------------------------------------------
 void ParseInDefaultConstantBuffers() {
-
-	size_t size = sizeof(Matrix44);
 
 	const char* cBuffersFilename = "Data/ShaderDefinitions/DefaultConstantBuffers.xml";
 	XMLNode root = XMLNode::parseFile(cBuffersFilename);
 	root = root.getChildNode(0);
 
-	for (uint i = 0; i < root.nChildNode(); i++) {
+	for (int i = 0; i < root.nChildNode(); i++) {
 
 		XMLNode cBufferNode = root.getChildNode(i);
 
 		ParseDefaultConstantBuffer(cBufferNode);
 	}
+}
 
-	int a = 0;
+
+//---------------------------------------------------------------------------------------------------------------------------
+void CreateDefaultSamplers() {
+
+	D3D11SamplerState* linearSampler = new D3D11SamplerState(D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, 
+		D3D11_TEXTURE_ADDRESS_WRAP, D3D11_TEXTURE_ADDRESS_WRAP, D3D11_COMPARISON_NEVER);
+	D3D11SamplerState::AddSamplerToRegistry(linearSampler, "linear");
 }

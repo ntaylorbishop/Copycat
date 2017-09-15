@@ -31,6 +31,8 @@ enum eTextureCPUAccessFlags {
 //---------------------------------------------------------------------------------------------------------------------------
 class Texture2D : public D3D11Texture {
 public:
+	static Texture2D* GetTexture(const char* imageFilePath);
+
 	Texture2D(const char* imageFilePath, bool generateMips, eTextureBindFlags bindFlags, eTextureCPUAccessFlags accessFlags);
 	~Texture2D();
 
@@ -55,4 +57,10 @@ private:
 	ID3D11Texture2D*			m_textureHandle	= nullptr;
 	std::vector<D3D11Resource*> m_resourceViews;
 	uint						m_mipLevel		= 0; //Mip level 0 is the full chain
+
+	static std::map<size_t, Texture2D*> s_textureRegistry;
 };
+
+typedef std::map<size_t, Texture2D*>				D3D11TextureMap;
+typedef std::map<size_t, Texture2D*>::iterator		D3D11TextureMapIter;
+typedef std::pair<size_t, Texture2D*>				D3D11TextureMapPair;

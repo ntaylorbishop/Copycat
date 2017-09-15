@@ -13,3 +13,4 @@ extern short	SHORT_ZERO;
 void ParseInAllShaderData();
 void ParseInAllMaterialData();
 void ParseInDefaultConstantBuffers();
+void CreateDefaultSamplers();
