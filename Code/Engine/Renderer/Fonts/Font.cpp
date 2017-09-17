@@ -60,8 +60,9 @@ STATIC void Font::DrawText2D(const String& textName, const Vector2& position, co
 //---------------------------------------------------------------------------------------------------------------------------
 void Font::DrawText2D(const Vector2& position, const std::string& str, float scale, const RGBA& color) {
 
-	if (str.size() == 0)
+	if (str.size() == 0) {
 		return;
+	}
 
 	Vector2 cursor = position + Vector2(0.f, m_lineHeight * scale);
 	Glyph* prevGlyph = nullptr;

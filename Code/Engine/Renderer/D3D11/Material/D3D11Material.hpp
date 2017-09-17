@@ -2,10 +2,13 @@
 #include "Engine/Renderer/D3D11/Shaders/D3D11ShaderProgram.hpp"
 
 
+//---------------------------------------------------------------------------------------------------------------------------
 class D3D11Material {
 public:
 	D3D11Material(const String& shaderName);
 	~D3D11Material() { }
+
+	void AddUniform(const String& constBufferName, D3D11Uniform* matUni);
 
 	void AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* pConstBuffer, eWhichShaderBound whichShadersToBindTo);
 	void AddResource(uint bindPoint, D3D11Resource* pResource, eWhichShaderBound whichShadersToBindTo);
@@ -14,26 +17,24 @@ public:
 	void Use();
 
 private:
-	void BindConstantBuffers();
 	void BindResources();
 	void BindSamplers();
 
 	D3D11ShaderProgram* m_shaderProg = nullptr;
 
-	std::vector<ConstBufferBindInfo>	m_constBuffers;
+	std::vector<D3D11BufferUniform>		m_uniforms;
 	std::vector<ResourceBindInfo>		m_resources;
 	std::vector<SamplerBindInfo>		m_samplers;
 };
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-inline void D3D11Material::AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* pConstBuffer, eWhichShaderBound whichShadersToBindTo) {
+inline void D3D11Material::AddUniform(const String& constBufferName, D3D11Uniform* matUni) {
 
-	ConstBufferBindInfo boundBuffer;
-	boundBuffer.m_bindPoint = bindPoint;
-	boundBuffer.m_pConstBuffer = pConstBuffer;
-	boundBuffer.m_whichShaders = whichShadersToBindTo;
-	m_constBuffers.push_back(boundBuffer);
+	D3D11BufferUniform bufferUniform;
+	bufferUniform.cBufferName = constBufferName;
+	bufferUniform.uniform = matUni;
+	m_uniforms.push_back(bufferUniform);
 }
 
 

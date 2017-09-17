@@ -48,8 +48,6 @@ D3D11Renderer::D3D11Renderer() {
 	CreateDefaultSamplers();
 	ParseInDefaultConstantBuffers();
 	ParseInAllShaderData();
-
-	int a = 0;
 }
 
 

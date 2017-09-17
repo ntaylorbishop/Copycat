@@ -25,24 +25,16 @@ STATIC D3D11ShaderProgram* D3D11ShaderProgram::CreateOrGetShaderProgram(const St
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11ShaderProgram::Use() {
 
-	GetDeviceContext()->VSSetShader(m_pVertexShader->GetShaderHandle(), nullptr, 0);
-	GetDeviceContext()->PSSetShader(m_pPixelShader->GetShaderHandle(), nullptr, 0);
-
 	BindConstantBuffers();
 	BindResources();
 	BindSamplers();
+}
 
-	//ID3D11Buffer* pConstBufferHandle = m_cBuffer->GetDeviceBufferHandle();
-	//ID3D11Buffer* pLightBufferHandle = m_lightBuffer->GetDeviceBufferHandle();
-	//ID3D11SamplerState* pSamplerStateHandle = g_samplerState.GetSamplerHandle();
-	//
-	//GetDeviceContext()->VSSetShader(m_pVertexShader->GetShaderHandle(), nullptr, 0);
-	//GetDeviceContext()->VSSetConstantBuffers(0, 1, &pConstBufferHandle);
-	//GetDeviceContext()->PSSetShader(m_pPixelShader->GetShaderHandle(), nullptr, 0);
-	//GetDeviceContext()->PSSetShaderResources(0, 1, &texID);
-	//GetDeviceContext()->PSSetShaderResources(1, 1, &normID);
-	//GetDeviceContext()->PSSetConstantBuffers(1, 1, &pLightBufferHandle);
-	//GetDeviceContext()->PSSetSamplers(0, 1, &pSamplerStateHandle);
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11ShaderProgram::BindShaders() {
+	GetDeviceContext()->VSSetShader(m_pVertexShader->GetShaderHandle(), nullptr, 0);
+	GetDeviceContext()->PSSetShader(m_pPixelShader->GetShaderHandle(), nullptr, 0);
 }
 
 
@@ -53,6 +45,41 @@ void D3D11ShaderProgram::BindConstantBuffers() {
 
 		ID3D11Buffer* pConstBufferHandle = m_constBuffers[i].m_pConstBuffer->GetDeviceBufferHandle();
 		uint bindPoint = m_constBuffers[i].m_bindPoint;
+
+		m_constBuffers[i].m_pConstBuffer->UpdateBufferOnDevice();
+
+		switch (m_constBuffers[i].m_whichShaders) {
+		case WHICH_SHADER_VERTEX: {
+			GetDeviceContext()->VSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
+			break;
+		}
+		case WHICH_SHADER_FRAGMENT: {
+			GetDeviceContext()->PSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
+			break;
+		}
+		case WHICH_SHADER_BOTH: {
+			GetDeviceContext()->VSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
+			GetDeviceContext()->PSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
+			break;
+		}
+		}
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11ShaderProgram::BindConstantBuffers(const std::vector<D3D11BufferUniform>& matUniforms) {
+
+	//Go through buffers and check if we need to bind new uniforms
+
+
+	//Update buffers and bind them
+	for (size_t i = 0; i < m_constBuffers.size(); i++) {
+
+		ID3D11Buffer* pConstBufferHandle = m_constBuffers[i].m_pConstBuffer->GetDeviceBufferHandle();
+		uint bindPoint = m_constBuffers[i].m_bindPoint;
+
+		m_constBuffers[i].m_pConstBuffer->UpdateBufferOnDevice();
 
 		switch (m_constBuffers[i].m_whichShaders) {
 		case WHICH_SHADER_VERTEX: {

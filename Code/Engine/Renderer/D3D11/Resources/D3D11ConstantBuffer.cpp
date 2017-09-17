@@ -30,6 +30,7 @@ STATIC D3D11ConstantBuffer* D3D11ConstantBuffer::CreateOrGetConstantBuffer(const
 	}
 	else {
 		D3D11ConstantBuffer* nCBuffer = new D3D11ConstantBuffer(cBufferName, byteSizeOfBuffer);
+		nCBuffer->CreateBufferOnDevice();
 		s_cBufferRegistry.insert(D3D11CBufferMapPair(hash, nCBuffer));
 		return nCBuffer;
 	}
@@ -78,7 +79,7 @@ void D3D11ConstantBuffer::ReleaseLocalBuffer() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11ConstantBuffer::UpdateBufferOnDevice() {
+void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11BufferUniform>) {
 
 	byte* pCurrSpotInBuffer = m_pByteBuffer;
 

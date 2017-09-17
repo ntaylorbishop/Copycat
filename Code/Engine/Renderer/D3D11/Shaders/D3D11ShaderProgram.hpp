@@ -17,6 +17,12 @@ enum eWhichShaderBound {
 };
 
 
+//---------------------------------------------------------------------------------------------------------------------------
+struct D3D11BufferUniform {
+	String			cBufferName = "NULL";
+	D3D11Uniform*	uniform = nullptr;
+};
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 struct ConstBufferBindInfo {
@@ -61,7 +67,9 @@ private:
 	D3D11ShaderProgram(const String& name) : m_name(name)	{ }
 	~D3D11ShaderProgram()									{ }
 
+	void BindShaders();
 	void BindConstantBuffers();
+	void BindConstantBuffers(const std::vector<D3D11BufferUniform>& matUniforms);
 	void BindResources();
 	void BindSamplers();
 
@@ -74,6 +82,8 @@ private:
 	std::vector<SamplerBindInfo> m_samplers;
 
 	static std::map<size_t, D3D11ShaderProgram*> s_shaderProgramRegistry;
+
+	friend class D3D11Material;
 };
 
 typedef std::map<size_t, D3D11ShaderProgram*>				D3D11ShaderProgramMap;

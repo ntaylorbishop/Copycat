@@ -13,36 +13,13 @@ void D3D11Material::Use() {
 	
 	m_shaderProg->Use();
 
-	BindConstantBuffers();
+	m_shaderProg->BindShaders();
+	m_shaderProg->BindConstantBuffers(m_uniforms);
+	m_shaderProg->BindResources();
+	m_shaderProg->BindSamplers();
+
 	BindResources();
 	BindSamplers();
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-void D3D11Material::BindConstantBuffers() {
-
-	for (size_t i = 0; i < m_constBuffers.size(); i++) {
-
-		ID3D11Buffer* pConstBufferHandle = m_constBuffers[i].m_pConstBuffer->GetDeviceBufferHandle();
-		uint bindPoint = m_constBuffers[i].m_bindPoint;
-
-		switch (m_constBuffers[i].m_whichShaders) {
-		case WHICH_SHADER_VERTEX: {
-			GetDeviceContext()->VSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
-			break;
-		}
-		case WHICH_SHADER_FRAGMENT: {
-			GetDeviceContext()->PSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
-			break;
-		}
-		case WHICH_SHADER_BOTH: {
-			GetDeviceContext()->VSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
-			GetDeviceContext()->PSSetConstantBuffers(bindPoint, 1, &pConstBufferHandle);
-			break;
-		}
-		}
-	}
 }
 
 
