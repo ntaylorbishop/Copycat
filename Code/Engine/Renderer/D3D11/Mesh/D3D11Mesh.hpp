@@ -16,6 +16,7 @@ public:
 	void BindVertBufferToDeviceWindow();
 	void BindIndBufferToDeviceWindow();
 	void SetIndexBuffer(uint32_t* indBuffer, size_t bufferSize, uint numInds);
+	uint GetNumInds() const { return m_numInds; }
 
 	D3D11_BUFFER_DESC		m_bufferDesc;
 	D3D11_SUBRESOURCE_DATA	m_initData;

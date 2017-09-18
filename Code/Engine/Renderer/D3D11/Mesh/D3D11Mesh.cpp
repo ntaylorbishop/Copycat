@@ -91,6 +91,7 @@ void D3D11Mesh::BindVertBufferToDeviceWindow() {
 void D3D11Mesh::BindIndBufferToDeviceWindow() {
 
 	RHIDeviceWindow::Get()->m_pDeviceContext->IASetIndexBuffer(m_pIndBuffer, DXGI_FORMAT_R32_UINT, 0);
+	RHIDeviceWindow::Get()->m_pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 

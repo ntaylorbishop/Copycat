@@ -737,6 +737,9 @@
     <ClCompile Include="Renderer\D3D11\General\D3D11ShaderFileParsing.cpp">
       <Filter>Rendering\D3D11\General</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.cpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">
@@ -1347,6 +1350,9 @@
     </ClInclude>
     <ClInclude Include="Renderer\D3D11\General\D3D11ShaderFileParsing.hpp">
       <Filter>Rendering\D3D11\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.hpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

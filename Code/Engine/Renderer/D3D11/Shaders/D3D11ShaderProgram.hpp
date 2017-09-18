@@ -18,13 +18,6 @@ enum eWhichShaderBound {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-struct D3D11BufferUniform {
-	String			cBufferName = "NULL";
-	D3D11Uniform*	uniform = nullptr;
-};
-
-
-//---------------------------------------------------------------------------------------------------------------------------
 struct ConstBufferBindInfo {
 	uint m_bindPoint = 0;
 	D3D11ConstantBuffer* m_pConstBuffer = nullptr;

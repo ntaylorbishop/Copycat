@@ -9,7 +9,7 @@ public:
 		: D3D11Shader(shaderName, shaderType) 
 		, m_pShaderHandle(CreateVertexShader())
 	{ }
-	~D3D11VertexShader();
+	~D3D11VertexShader() = default;
 
 
 	ID3D11VertexShader* GetShaderHandle() { return m_pShaderHandle; }

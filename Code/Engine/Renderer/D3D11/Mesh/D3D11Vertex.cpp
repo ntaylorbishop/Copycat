@@ -142,3 +142,25 @@ void SetInputLayout(eVertexType vertType, D3D11_INPUT_ELEMENT_DESC*& layout, UIN
 	}
 	}
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+eVertexType ParseVertexTypeFromString(const String& vertTypeStr) {
+
+	if (vertTypeStr == "PC") {
+		return VERTEX_TYPE_PC;
+	}
+	else if (vertTypeStr == "PCT") {
+		return VERTEX_TYPE_PCT;
+	}
+	else if (vertTypeStr == "PCTN") {
+		return VERTEX_TYPE_PCTN;
+	}
+	else if (vertTypeStr == "PCTTBN") {
+		return VERTEX_TYPE_PCTTBN;
+	}
+	else if (vertTypeStr == "PCTTBNBN") {
+		return VERTEX_TYPE_PCTTBNBN;
+	}
+	return VERTEX_TYPE_NUM_TYPES;
+}

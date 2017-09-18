@@ -8,7 +8,7 @@ public:
 		: D3D11Shader(shaderName, shaderType) 
 		, m_shaderHandle(CreatePixelShader())
 	{ }
-	~D3D11PixelShader();
+	~D3D11PixelShader() = default;
 
 
 	ID3D11PixelShader* GetShaderHandle() { return m_shaderHandle; }

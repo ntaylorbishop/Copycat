@@ -11,8 +11,6 @@ D3D11Material::D3D11Material(const String& shaderName) {
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Material::Use() {
 	
-	m_shaderProg->Use();
-
 	m_shaderProg->BindShaders();
 	m_shaderProg->BindConstantBuffers(m_uniforms);
 	m_shaderProg->BindResources();

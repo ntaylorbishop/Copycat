@@ -30,3 +30,5 @@ size_t CreateVertex(byte* buffer, size_t bufferSize, const Vector3& pos, const R
 uint16_t GetVertexByteSize(eVertexType vertType);
 
 void SetInputLayout(eVertexType vertType, D3D11_INPUT_ELEMENT_DESC*& layout, UINT& numElements);
+
+eVertexType ParseVertexTypeFromString(const String& vertTypeStr);

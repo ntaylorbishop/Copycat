@@ -70,16 +70,13 @@ void D3D11ShaderProgram::BindConstantBuffers() {
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11ShaderProgram::BindConstantBuffers(const std::vector<D3D11BufferUniform>& matUniforms) {
 
-	//Go through buffers and check if we need to bind new uniforms
-
-
 	//Update buffers and bind them
 	for (size_t i = 0; i < m_constBuffers.size(); i++) {
 
 		ID3D11Buffer* pConstBufferHandle = m_constBuffers[i].m_pConstBuffer->GetDeviceBufferHandle();
 		uint bindPoint = m_constBuffers[i].m_bindPoint;
 
-		m_constBuffers[i].m_pConstBuffer->UpdateBufferOnDevice();
+		m_constBuffers[i].m_pConstBuffer->UpdateBufferOnDevice(matUniforms);
 
 		switch (m_constBuffers[i].m_whichShaders) {
 		case WHICH_SHADER_VERTEX: {

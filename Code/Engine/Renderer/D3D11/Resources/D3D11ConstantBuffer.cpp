@@ -79,13 +79,57 @@ void D3D11ConstantBuffer::ReleaseLocalBuffer() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11BufferUniform>) {
+void D3D11ConstantBuffer::UpdateBufferOnDevice() {
 
 	byte* pCurrSpotInBuffer = m_pByteBuffer;
 
 	for (size_t i = 0; i < m_uniforms.size(); i++) {
 
 		D3D11Uniform* currUniform = m_uniforms[i];
+		size_t uniSize = currUniform->GetByteSize();
+
+		memcpy_s(pCurrSpotInBuffer, m_bufferSize, currUniform->GetData(), uniSize);
+		pCurrSpotInBuffer += currUniform->GetByteSize();
+	}
+
+	RHIDeviceWindow::Get()->m_pDeviceContext->UpdateSubresource(m_pDeviceBuffer, 0, nullptr, m_pByteBuffer, 0, 0);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11BufferUniform>& overrideUniforms) {
+
+	//Combine base uniforms with overridden uniforms
+	std::vector<D3D11Uniform*> uniformsToAdd;
+
+	for (size_t i = 0; i < overrideUniforms.size(); i++) {
+
+		if (overrideUniforms[i].cBufferName == m_name) {
+			uniformsToAdd.push_back(overrideUniforms[i].uniform);
+		}
+	}
+
+	for (size_t i = 0; i < m_uniforms.size(); i++) {
+
+		bool isUniformAlreadyBeingBound = false;
+		for (size_t j = 0; j < uniformsToAdd.size(); j++) {
+
+			if (m_uniforms[i]->GetName() == uniformsToAdd[j]->GetName()) {
+				isUniformAlreadyBeingBound = true;
+			}
+		}
+
+		if (!isUniformAlreadyBeingBound) {
+			uniformsToAdd.push_back(m_uniforms[i]);
+		}
+	}
+
+	//Add uniforms to byte buffer and add them
+	byte* pCurrSpotInBuffer = m_pByteBuffer;
+
+	for (size_t i = 0; i < uniformsToAdd.size(); i++) {
+
+		D3D11Uniform* currUniform = uniformsToAdd[i];
 		size_t uniSize = currUniform->GetByteSize();
 
 		memcpy_s(pCurrSpotInBuffer, m_bufferSize, currUniform->GetData(), uniSize);

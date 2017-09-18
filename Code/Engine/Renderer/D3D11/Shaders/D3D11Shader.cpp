@@ -1,10 +1,41 @@
 #include "Engine/Renderer/D3D11/Shaders/D3D11Shader.hpp"
 #include "Engine/Renderer/D3D11/Shaders/RHIShaderUtils.hpp"
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
+#include "Engine/Renderer/D3D11/Shaders/D3D11PixelShader.hpp"
+#include "Engine/Renderer/D3D11/Shaders/D3D11VertexShader.hpp"
+
+
+STATIC std::map<size_t, D3D11Shader*> D3D11Shader::s_shaderRegistry;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //STRUCTORS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC D3D11Shader* D3D11Shader::CreateOrGetShader(const String& shaderPath, eD3D11ShaderType shaderType) {
+
+	size_t hash = std::hash<String>()(shaderPath + SerializeShaderType(shaderType));
+	D3D11ShaderMapIter it = s_shaderRegistry.find(hash);
+
+	if (it != s_shaderRegistry.end()) {
+		return it->second;
+	}
+	else {
+		if (shaderType == D3D11SHADERTYPE_VERTEX) {
+			D3D11VertexShader* nShader = new D3D11VertexShader(shaderPath.c_str(), shaderType);
+			s_shaderRegistry.insert(D3D11ShaderMapPair(hash, nShader));
+			return nShader;
+		}
+		else if (shaderType == D3D11SHADERTYPE_FRAGMENT) {
+			D3D11PixelShader* nShader = new D3D11PixelShader(shaderPath.c_str(), shaderType);
+			s_shaderRegistry.insert(D3D11ShaderMapPair(hash, nShader));
+			return nShader;
+		}
+	}
+
+	return nullptr;
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 static ID3DBlob* CompileShader(const char* shaderName, eD3D11ShaderType shaderType) {
@@ -83,4 +114,20 @@ ID3D11PixelShader* D3D11Shader::CreatePixelShader() {
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Shader::~D3D11Shader() {
 
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC String D3D11Shader::SerializeShaderType(eD3D11ShaderType shaderType) {
+
+	switch (shaderType) {
+	case D3D11SHADERTYPE_VERTEX: {
+		return "Vertex";
+	}
+	case D3D11SHADERTYPE_FRAGMENT: {
+		return "Fragment";
+	}
+	}
+
+	return "ERROR: SerializeShaderType";
 }

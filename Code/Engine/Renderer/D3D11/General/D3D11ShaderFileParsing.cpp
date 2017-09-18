@@ -4,6 +4,7 @@
 #include "Engine/Renderer/D3D11/Shaders/D3D11ShaderProgram.hpp"
 #include "Engine/Math/Matrix44.hpp"
 #include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
+#include "Engine/Renderer/D3D11/Shaders/D3D11PixelShader.hpp"
 
 
 bool	D3D11_BOOL_FALSE	= false;
@@ -160,6 +161,17 @@ static void ParseDefaultConstantBuffer(D3D11ShaderProgram* newProg, const XMLNod
 
 
 //---------------------------------------------------------------------------------------------------------------------------
+static void ParseProgramDefaultConstantBuffers(D3D11ShaderProgram* newProg, const XMLNode& cBuffersNode, eWhichShaderBound whichShader) {
+
+	for (int i = 0; i < cBuffersNode.nChildNode(); i++) {
+
+		XMLNode cBufferNode = cBuffersNode.getChildNode(i);
+		ParseDefaultConstantBuffer(newProg, cBufferNode, whichShader);
+	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
 static void ParseConstantBuffer(D3D11ShaderProgram* newProg, const XMLNode& cBufferNode, eWhichShaderBound whichShader) {
 
 	String cBufferName = cBufferNode.getAttribute(0).lpszValue;
@@ -214,8 +226,14 @@ static void ParseSampler(D3D11ShaderProgram* newProg, const XMLNode& samplerNode
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode) {
-	
+static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode, eVertexType vertType) {
+
+	String vertPath = vertexShaderNode.getAttribute(0).lpszValue;
+	D3D11VertexShader* vertShader = (D3D11VertexShader*)D3D11Shader::CreateOrGetShader(vertPath, D3D11SHADERTYPE_VERTEX);
+	newProg->SetVertexShader(vertShader);
+
+	vertShader->BindVertexLayoutToDeviceWindow(vertType);
+
 	for (int i = 0; i < vertexShaderNode.nChildNode(); i++) {
 
 		XMLNode childNode = vertexShaderNode.getChildNode(i);
@@ -235,11 +253,15 @@ static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertex
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-static void ParseFragmentShader(D3D11ShaderProgram* newProg, const XMLNode& vertexShaderNode) {
+static void ParseFragmentShader(D3D11ShaderProgram* newProg, const XMLNode& fragShaderNode) {
 
-	for (int i = 0; i < vertexShaderNode.nChildNode(); i++) {
+	String fragShaderPath = fragShaderNode.getAttribute(0).lpszValue;
+	D3D11PixelShader* pixShader = (D3D11PixelShader*)D3D11Shader::CreateOrGetShader(fragShaderPath, D3D11SHADERTYPE_VERTEX);
+	newProg->SetPixelShader(pixShader);
 
-		XMLNode childNode = vertexShaderNode.getChildNode(i);
+	for (int i = 0; i < fragShaderNode.nChildNode(); i++) {
+
+		XMLNode childNode = fragShaderNode.getChildNode(i);
 		String nodeName = childNode.getName();
 
 		if (nodeName == "ConstantBuffer") {
@@ -256,28 +278,24 @@ static void ParseFragmentShader(D3D11ShaderProgram* newProg, const XMLNode& vert
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-static void ParseShaderXML(D3D11ShaderProgram* newProg, const XMLNode& shaderNode) {
+static void ParseShaderXML(D3D11ShaderProgram* newProg, const XMLNode& shaderNode, eVertexType vertType) {
 
-	for (int i = 0; i < shaderNode.nChildNode(); i++) {
+	const char* nodeName = shaderNode.getName();
 
-		XMLNode childNode = shaderNode.getChildNode(i);
-		const char* nodeName = childNode.getName();
-		
-		if (strcmp(nodeName, "VertexShader") == 0) {
-			ParseVertexShader(newProg, childNode);
-		}
-		else if (strcmp(nodeName, "FragmentShader") == 0) {
-			ParseFragmentShader(newProg, childNode);
-		}
-		else if (strcmp(nodeName, "ShaderResourceView") == 0) {
-			ParseShaderResource(newProg, childNode, WHICH_SHADER_BOTH);
-		}
-		else if (strcmp(nodeName, "DefaultConstantBuffer") == 0) {
-			ParseDefaultConstantBuffer(newProg, childNode, WHICH_SHADER_BOTH);
-		}
-		else if (strcmp(nodeName, "ConstantBuffer") == 0) {
-			ParseConstantBuffer(newProg, childNode, WHICH_SHADER_BOTH);
-		}
+	if (strcmp(nodeName, "VertexShader") == 0) {
+		ParseVertexShader(newProg, shaderNode, vertType);
+	}
+	else if (strcmp(nodeName, "FragmentShader") == 0) {
+		ParseFragmentShader(newProg, shaderNode);
+	}
+	else if (strcmp(nodeName, "ShaderResourceView") == 0) {
+		ParseShaderResource(newProg, shaderNode, WHICH_SHADER_BOTH);
+	}
+	else if (strcmp(nodeName, "DefaultConstantBuffers") == 0) {
+		ParseProgramDefaultConstantBuffers(newProg, shaderNode, WHICH_SHADER_BOTH);
+	}
+	else if (strcmp(nodeName, "ConstantBuffer") == 0) {
+		ParseConstantBuffer(newProg, shaderNode, WHICH_SHADER_BOTH);
 	}
 }
 
@@ -296,10 +314,13 @@ static void ParseInShaderData(const String& shaderName) {
 
 	D3D11ShaderProgram* newProg = D3D11ShaderProgram::CreateOrGetShaderProgram(shaderProgName);
 
+	String vertTypeStr = root.getAttribute(1).lpszValue;
+	eVertexType vertType = ParseVertexTypeFromString(vertTypeStr);
+
 	for (int i = 0; i < root.nChildNode(); i++) {
 
 		XMLNode shaderNode = root.getChildNode(i);
-		ParseShaderXML(newProg, shaderNode);
+		ParseShaderXML(newProg, shaderNode, vertType);
 	}
 }
 
