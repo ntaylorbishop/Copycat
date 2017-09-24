@@ -347,10 +347,12 @@ LRESULT CALLBACK WindowsMessageHandlingProcedure(HWND windowHandle, UINT wmMessa
 		break;
 
 	case WM_SETFOCUS:
+		InputSystem::SetHasFocus(true);
 		//DeviceWindow::OnGainedFocus();
 		break;
 
 	case WM_KILLFOCUS:
+		InputSystem::SetHasFocus(false);
 		//DeviceWindow::OnLostFocus();
 		break;
 

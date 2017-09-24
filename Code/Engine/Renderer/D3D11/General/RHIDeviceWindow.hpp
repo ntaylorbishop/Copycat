@@ -8,8 +8,9 @@
 #include <DXGI.h>
 #include <dxgidebug.h>
 
-#pragma comment( lib, "d3d11.lib" )
-#pragma comment( lib, "DXGI.lib" )
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "DXGI.lib")
+#pragma comment(lib, "D3DCompiler.lib")
 
 class RHIDeviceWindow {
 public:
@@ -20,9 +21,11 @@ public:
 
 	static void ClearAndPresent();
 
-	static RHIDeviceWindow*	Get()			{ return s_deviceWindow;		}
-	ID3D11Device*			GetD3DDevice()	{ return m_pd3dDevice;			}
-	ID3D11DeviceContext*	GetD3DContext() { return m_pDeviceContext;	}
+	static RHIDeviceWindow*	Get()						{ return s_deviceWindow;		}
+	ID3D11Device*			GetD3DDevice()				{ return m_pd3dDevice;			}
+	ID3D11DeviceContext*	GetD3DContext()				{ return m_pDeviceContext;		}
+	ID3D11RenderTargetView*	GetDefaultRenderTarget()	{ return m_pRenderTargetView;	}
+
 
 public:
 	//STRUCTORS

@@ -18,10 +18,12 @@ public:
 
 	void LookAt(Vector3& camPos, float yaw, float pitch, float roll);
 	void SetAsPerspectiveProjection(float fovRads, float aspectRatio, float near, float farPlane);
+	void SetAsOrthographicProjection(float viewWidth, float viewHeight, float zNear, float zFar);
 	void SetAsIdentity();
 	void Transpose();
 	void Invert();
-
+	void SetPosition(const Vector3& position);
+	void Scale(const Vector3& scale);
 
 	XMMATRIX m_matrix;
 
@@ -73,6 +75,28 @@ inline void Matrix44::SetAsPerspectiveProjection(float fovRads, float aspectRati
 
 
 //---------------------------------------------------------------------------------------------------------------------------
+inline void Matrix44::SetAsOrthographicProjection(float viewWidth, float viewHeight, float zNear, float zFar) {
+	m_matrix = XMMatrixOrthographicLH(viewWidth, viewHeight, zNear, zFar);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
 inline void Matrix44::SetAsIdentity() {
 	m_matrix = XMMatrixIdentity();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+inline void Matrix44::SetPosition(const Vector3& position) {
+
+	XMVECTOR pos = XMVectorSet(position.x, position.y, position.z, 1.f);
+	m_matrix.r[3] = pos;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+inline void Matrix44::Scale(const Vector3& scale) {
+
+	XMMATRIX scalingMatrix = XMMatrixScaling(scale.x, scale.y, scale.z);
+	m_matrix = scalingMatrix * m_matrix;
 }

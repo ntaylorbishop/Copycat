@@ -11,6 +11,20 @@ D3D11Mesh::D3D11Mesh(eVertexType vertType, size_t numVerts)
 	m_pVertData = (byte*)malloc(m_vertByteSize * numVerts);
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Mesh::InitializeMeshOnDevice(uint32_t* indBuffer, uint numInds) {
+
+	CreateVertexBufferOnDevice();
+	BindVertBufferToDeviceWindow();
+
+	// Create index buffer
+	SetIndexBuffer(indBuffer, numInds * sizeof(uint32_t), numInds);
+	CreateIndexBufferOnDevice();
+	BindIndBufferToDeviceWindow();
+}
+
+
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Mesh::AddVertex(const Vector3& pos, const RGBA& col) {
 	CreateVertex(m_pVertData + m_numVerts * m_vertByteSize, m_bufferSize, pos, col);

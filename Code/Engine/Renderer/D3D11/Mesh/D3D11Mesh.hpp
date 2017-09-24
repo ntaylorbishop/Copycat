@@ -6,6 +6,8 @@ class D3D11Mesh {
 public:
 	D3D11Mesh(eVertexType vertType, size_t numVerts);
 
+	void InitializeMeshOnDevice(uint32_t* indBuffer, uint numInds);
+
 	void AddVertex(const Vector3& pos, const RGBA& col);
 	void AddVertex(const Vector3& pos, const RGBA& col, const Vector2& tex);
 	void AddVertex(const Vector3& pos, const RGBA& col, const Vector2& tex, const Vector4& normal);

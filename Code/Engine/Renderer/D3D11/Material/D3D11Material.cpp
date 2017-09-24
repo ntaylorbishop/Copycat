@@ -73,3 +73,17 @@ void D3D11Material::BindSamplers() {
 		}
 	}
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+D3D11Uniform* D3D11Material::GetUniform(const String& bufferName, const String& uniformName) {
+
+	for (size_t i = 0; i < m_uniforms.size(); i++) {
+
+		if (m_uniforms[i].cBufferName == bufferName && m_uniforms[i].uniform->GetName() == uniformName) {
+			return m_uniforms[i].uniform;
+		}
+	}
+
+	return nullptr;
+}

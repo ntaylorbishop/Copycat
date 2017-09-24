@@ -2,7 +2,7 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11VertexShader::BindVertexLayoutToDeviceWindow(eVertexType vertType) {
+void D3D11VertexShader::CreateVertexLayout(eVertexType vertType) {
 
 	UINT numElements = 0;
 	SetInputLayout(vertType, m_pInputDesc, numElements);
@@ -13,9 +13,14 @@ void D3D11VertexShader::BindVertexLayoutToDeviceWindow(eVertexType vertType) {
 
 	GetCompiledBlob()->Release();
 
-	if (FAILED(hr))
+	if (FAILED(hr)) {
 		ERROR_AND_DIE("HR FAILED");
+	}
+}
 
-	// Set the input layout
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11VertexShader::BindVertexLayout() {
+
 	RHIDeviceWindow::Get()->m_pDeviceContext->IASetInputLayout(m_pVertLayout);
 }

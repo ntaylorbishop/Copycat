@@ -232,17 +232,17 @@ void RHIDeviceWindow::CreateDevice() {
 	hr = m_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &m_pRenderTargetView);
 	pBackBuffer->Release();
 
-	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
-
-	// Setup the viewport
-	D3D11_VIEWPORT vp;
-	vp.Width = (FLOAT)width;
-	vp.Height = (FLOAT)height;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
-	m_pDeviceContext->RSSetViewports(1, &vp);
+// 	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+// 
+// 	// Setup the viewport
+// 	D3D11_VIEWPORT vp;
+// 	vp.Width = (FLOAT)width;
+// 	vp.Height = (FLOAT)height;
+// 	vp.MinDepth = 0.0f;
+// 	vp.MaxDepth = 1.0f;
+// 	vp.TopLeftX = 0;
+// 	vp.TopLeftY = 0;
+// 	m_pDeviceContext->RSSetViewports(1, &vp);
 }
 
 

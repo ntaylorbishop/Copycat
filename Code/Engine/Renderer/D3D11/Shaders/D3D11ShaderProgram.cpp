@@ -33,6 +33,7 @@ void D3D11ShaderProgram::Use() {
 
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11ShaderProgram::BindShaders() {
+	m_pVertexShader->BindVertexLayout();
 	GetDeviceContext()->VSSetShader(m_pVertexShader->GetShaderHandle(), nullptr, 0);
 	GetDeviceContext()->PSSetShader(m_pPixelShader->GetShaderHandle(), nullptr, 0);
 }

@@ -14,7 +14,8 @@ public:
 
 	ID3D11VertexShader* GetShaderHandle() { return m_pShaderHandle; }
 
-	void BindVertexLayoutToDeviceWindow(eVertexType vertType);
+	void CreateVertexLayout(eVertexType vertType);
+	void BindVertexLayout();
 
 
 private:

@@ -112,22 +112,24 @@ TheSpriteRenderer::TheSpriteRenderer(float virtualSize, float aspectRatio)
 	m_ortho.ChangeToProjectionMatrix(m_virtualBounds.x, m_virtualBounds.y, -1.f, 1.f);
 	InitializeDefaultShaders();
 
-	const Vector2* screenSize = BeirusRenderer::GetScreenSize();
+	return;
 
-	m_currentColorTarget = new TextureBuffer((int)screenSize->x, (int)screenSize->y, TEXTURE_FORMAT_RGBA8);
-	std::vector<TextureBuffer*> fboTextures1;
-	fboTextures1.push_back(m_currentColorTarget);
-	m_currentSurface = new Framebuffer(fboTextures1, nullptr);
-
-	m_effectColorTarget = new TextureBuffer((int)screenSize->x, (int)screenSize->y, TEXTURE_FORMAT_D24S8);
-	std::vector<TextureBuffer*> fboTextures2;
-	fboTextures2.push_back(m_effectColorTarget);
-	m_effectSurface = new Framebuffer(fboTextures2, nullptr);
-
-	BeirusRenderer::DisableBackfaceCulling();
-	BeirusRenderer::DisableDepthTesting();
-
-	m_view = Matrix4::IDENTITY;
+// 	const Vector2* screenSize = BeirusRenderer::GetScreenSize();
+// 
+// 	m_currentColorTarget = new TextureBuffer((int)screenSize->x, (int)screenSize->y, TEXTURE_FORMAT_RGBA8);
+// 	std::vector<TextureBuffer*> fboTextures1;
+// 	fboTextures1.push_back(m_currentColorTarget);
+// 	m_currentSurface = new Framebuffer(fboTextures1, nullptr);
+// 
+// 	m_effectColorTarget = new TextureBuffer((int)screenSize->x, (int)screenSize->y, TEXTURE_FORMAT_D24S8);
+// 	std::vector<TextureBuffer*> fboTextures2;
+// 	fboTextures2.push_back(m_effectColorTarget);
+// 	m_effectSurface = new Framebuffer(fboTextures2, nullptr);
+// 
+// 	BeirusRenderer::DisableBackfaceCulling();
+// 	BeirusRenderer::DisableDepthTesting();
+// 
+// 	m_view = Matrix4::IDENTITY;
 }
 TheSpriteRenderer::~TheSpriteRenderer() { 
 	delete m_currentSurface;

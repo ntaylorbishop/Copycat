@@ -38,7 +38,8 @@ public:
 	void*			GetData()							{ return m_data;		}
 	const char*		GetName() const						{ return m_name;		}
 	size_t			GetByteSize() const					{ return m_elemSize;	}
-	void			SetCount(size_t count)				{ m_count = count;		}
+	void			SetCount(size_t count)				{ m_count	= count;	}
+	void			SetData(void* data)					{ m_data	= data;		}
 
 	//TYPE CHECKING
 	template <typename T>

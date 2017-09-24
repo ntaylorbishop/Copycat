@@ -5,6 +5,7 @@
 #include "Engine/Math/Matrix44.hpp"
 #include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
 #include "Engine/Renderer/D3D11/Shaders/D3D11PixelShader.hpp"
+#include "Engine/UI/UIRenderer.hpp"
 
 
 bool	D3D11_BOOL_FALSE	= false;
@@ -28,7 +29,7 @@ static void* GetDefaultUniformValue(const String& uniValue, eUniformType uniType
 		return nullptr;
 	}
 	else if (uniValue == "defaultProjUI") {
-		return nullptr;
+		return UIRenderer::Get()->GetDefaultOrtho();
 	}
 	else if (uniValue == "cameraPos") {
 		return nullptr;
@@ -230,9 +231,9 @@ static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertex
 
 	String vertPath = vertexShaderNode.getAttribute(0).lpszValue;
 	D3D11VertexShader* vertShader = (D3D11VertexShader*)D3D11Shader::CreateOrGetShader(vertPath, D3D11SHADERTYPE_VERTEX);
+	vertShader->CreateVertexLayout(vertType);
 	newProg->SetVertexShader(vertShader);
 
-	vertShader->BindVertexLayoutToDeviceWindow(vertType);
 
 	for (int i = 0; i < vertexShaderNode.nChildNode(); i++) {
 
@@ -256,7 +257,7 @@ static void ParseVertexShader(D3D11ShaderProgram* newProg, const XMLNode& vertex
 static void ParseFragmentShader(D3D11ShaderProgram* newProg, const XMLNode& fragShaderNode) {
 
 	String fragShaderPath = fragShaderNode.getAttribute(0).lpszValue;
-	D3D11PixelShader* pixShader = (D3D11PixelShader*)D3D11Shader::CreateOrGetShader(fragShaderPath, D3D11SHADERTYPE_VERTEX);
+	D3D11PixelShader* pixShader = (D3D11PixelShader*)D3D11Shader::CreateOrGetShader(fragShaderPath, D3D11SHADERTYPE_FRAGMENT);
 	newProg->SetPixelShader(pixShader);
 
 	for (int i = 0; i < fragShaderNode.nChildNode(); i++) {

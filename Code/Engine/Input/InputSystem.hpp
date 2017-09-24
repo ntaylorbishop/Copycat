@@ -82,6 +82,9 @@ public:
 	static void DisableInputToGame();
 	static void EnableInputToGame();
 
+	static void SetHasFocus(bool hasFocus)	{ s_theInputSystem->m_hasFocus = hasFocus;	}
+	static bool GetHasFocus()				{ return s_theInputSystem->m_hasFocus;		}
+
 private:
 	//STRUCTORS
 	InputSystem();
@@ -108,6 +111,7 @@ private:
 	bool m_isInputEnabledForGame	= true;
 
 	uint64_t m_frameNumber			= 0;
+	bool m_hasFocus					= false;
 
 	static InputSystem* s_theInputSystem;
 
