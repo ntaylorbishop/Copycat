@@ -14,6 +14,7 @@ class D3D11Resource {
 public:
 	D3D11Resource() { }
 	D3D11Resource(ID3D11Resource* pResource, eResourceType resourceType);
+	~D3D11Resource();
 
 	ID3D11DepthStencilView*		AsDepthStencilView();
 	ID3D11RenderTargetView*		AsRenderTargetView();

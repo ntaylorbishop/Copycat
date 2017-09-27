@@ -13,7 +13,7 @@ public:
 	static UIRenderer* Get();
 
 	void DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& color, float tint);
-	void DrawFontGlyph(D3D11Material* mat, const Vector2& texCoords, const AABB2& quad, const RGBA& color, float tint);
+	void DrawTexturedAABB2(D3D11Material* mat, const Vector2& pos, const Vector2& size);
 	Matrix44* GetDefaultOrtho() { return &m_defaultOrtho; }
 
 private:

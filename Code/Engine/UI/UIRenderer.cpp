@@ -67,11 +67,16 @@ void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& 
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void UIRenderer::DrawFontGlyph(D3D11Material* mat, const Vector2& texCoords, const AABB2& quad, const RGBA& color, float tint) {
+void UIRenderer::DrawTexturedAABB2(D3D11Material* mat, const Vector2& pos, const Vector2& size) {
 
-	UNUSED(mat);
-	UNUSED(texCoords);
-	UNUSED(quad);
-	UNUSED(color);
-	UNUSED(tint);
+	Matrix44 modelMat = Matrix44::IDENTITY;
+
+	modelMat.SetPosition(Vector3(pos.x, pos.y, 0.f));
+	modelMat.Scale(Vector3(size.x, size.y, 1.f));
+
+	D3D11Uniform* uniform = mat->GetUniform("Model2D", "uModel");
+	ASSERT_OR_DIE(uniform != nullptr, "ERROR: Mat should be based off the Default2D shader program.");
+	uniform->SetData((void*)&modelMat);
+
+	m_scratchMR->RenderMeshWithMaterial(m_quadMesh, m_2dBlankMat);
 }

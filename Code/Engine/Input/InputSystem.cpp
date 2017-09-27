@@ -2,6 +2,7 @@
 #include "Engine/General/Core/BeirusEngine.hpp"
 #include "Engine/General/Core/WindowHandler.hpp"
 #include "Engine/Renderer/DeviceWindow.hpp"
+#include "Engine/EventSystem/GlobalEventSystem.hpp"
 
 STATIC InputSystem* InputSystem::s_theInputSystem = nullptr;
 
@@ -216,6 +217,7 @@ STATIC bool InputSystem::GetMouseWheelDown() {
 //---------------------------------------------------------------------------------------------------------------------------
 STATIC void InputSystem::Quitting(bool isNowQuitting) {
 	s_theInputSystem->m_quit = isNowQuitting;
+	EventSystem::FireEvent("Shutdown");
 }
 
 

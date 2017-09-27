@@ -5,6 +5,7 @@
 #include "Engine/General/Core/EngineCommon.hpp"
 #include "Engine/Math/IntVector2.hpp"
 #include "Engine/Renderer/D3D11/Resources/D3D11Resource.hpp"
+#include "Engine/EventSystem/GlobalEventSystem.hpp"
 
 //---------------------------------------------------------------------------------------------------------------------------
 enum eTextureBindFlags {
@@ -52,6 +53,8 @@ public:
 	D3D11Resource*				GetUAVResource() { return m_resourceViews[RESOURCE_TYPE_UNORDERED_ACCESS_VIEW]; }
 
 private:
+
+	static void ShutdownEvent(NamedProperties& np);
 	
 	IntVector2					m_textureSize	= IntVector2::ZERO;
 	ID3D11Texture2D*			m_textureHandle	= nullptr;

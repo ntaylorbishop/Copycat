@@ -57,6 +57,15 @@ D3D11Resource::D3D11Resource(ID3D11Resource* pResource, eResourceType resourceTy
 
 
 //---------------------------------------------------------------------------------------------------------------------------
+D3D11Resource::~D3D11Resource() {
+
+	return;
+	m_pResource->Release();
+	m_view->Release();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
 ID3D11DepthStencilView* D3D11Resource::AsDepthStencilView() {
 
 	ASSERT_OR_DIE(m_resourceType == RESOURCE_TYPE_DEPTH_STENCIL_VIEW, "ERROR: Resource is not depth stencil view.");

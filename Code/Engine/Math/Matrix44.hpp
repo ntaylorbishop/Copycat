@@ -76,7 +76,7 @@ inline void Matrix44::SetAsPerspectiveProjection(float fovRads, float aspectRati
 
 //---------------------------------------------------------------------------------------------------------------------------
 inline void Matrix44::SetAsOrthographicProjection(float viewWidth, float viewHeight, float zNear, float zFar) {
-	m_matrix = XMMatrixOrthographicLH(viewWidth, viewHeight, zNear, zFar);
+	m_matrix = XMMatrixOrthographicOffCenterLH(0.f, viewWidth, 0.f, viewHeight, zNear, zFar);
 }
 
 

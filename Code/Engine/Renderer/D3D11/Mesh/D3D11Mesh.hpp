@@ -1,10 +1,12 @@
 #pragma once
 
 #include "Engine/Renderer/D3D11/Mesh/D3D11Vertex.hpp"
+#include "Engine/EventSystem/GlobalEventSystem.hpp"
 
 class D3D11Mesh {
 public:
 	D3D11Mesh(eVertexType vertType, size_t numVerts);
+	void Destroy();
 
 	void InitializeMeshOnDevice(uint32_t* indBuffer, uint numInds);
 
@@ -24,6 +26,8 @@ public:
 	D3D11_SUBRESOURCE_DATA	m_initData;
 
 private:
+	void AddMeshToList();
+	static void BindListShutdownEvent(NamedProperties& np);
 
 	byte*			m_pVertData		= nullptr;
 	uint32_t*		m_pIndData		= nullptr;
@@ -34,4 +38,7 @@ private:
 	ID3D11Buffer*   m_pVertBuffer	= nullptr;
 	ID3D11Buffer*   m_pIndBuffer	= nullptr;
 	uint			m_numInds		= 0;
+	D3D11Mesh*		m_next			= nullptr;
+
+	static D3D11Mesh* s_meshList;
 };

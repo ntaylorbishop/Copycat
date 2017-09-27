@@ -1,5 +1,7 @@
 #include "Engine/Renderer/D3D11/Mesh/D3D11Mesh.hpp"
 
+STATIC D3D11Mesh* D3D11Mesh::s_meshList = nullptr;
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Mesh::D3D11Mesh(eVertexType vertType, size_t numVerts)
@@ -9,6 +11,57 @@ D3D11Mesh::D3D11Mesh(eVertexType vertType, size_t numVerts)
 	, m_bufferSize(m_vertByteSize * numVerts)
 {
 	m_pVertData = (byte*)malloc(m_vertByteSize * numVerts);
+	AddMeshToList();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Mesh::Destroy() {
+
+	delete m_pVertData;
+	m_pVertData = nullptr;
+	delete m_pIndData;
+	m_pIndData = nullptr;
+	m_pVertBuffer->Release();
+	m_pIndBuffer->Release();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Mesh::AddMeshToList() {
+
+	if (s_meshList == nullptr) {
+		EventSystem::RegisterEventCallback("Shutdown", &D3D11Mesh::BindListShutdownEvent);
+		s_meshList = this;
+		return;
+	}
+
+	D3D11Mesh* curr = s_meshList;
+
+	while (curr->m_next) {
+		curr = curr->m_next;
+	}
+
+	curr->m_next = this;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC void D3D11Mesh::BindListShutdownEvent(NamedProperties& np) {
+
+	//WARNING: Need to figure out how to delete without 
+	return;
+
+	UNUSED(np);
+
+	D3D11Mesh* curr = s_meshList;
+	while (curr) {
+
+		D3D11Mesh* next = curr->m_next;
+		curr->Destroy();
+		delete curr;
+		curr = next;
+	}
 }
 
 

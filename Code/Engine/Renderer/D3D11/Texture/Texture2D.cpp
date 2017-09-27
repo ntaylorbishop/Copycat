@@ -7,7 +7,18 @@
 #pragma warning(pop)
 
 
-STATIC std::map<size_t, Texture2D*> Texture2D::s_textureRegistry;
+STATIC D3D11TextureMap Texture2D::s_textureRegistry;
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC void Texture2D::ShutdownEvent(NamedProperties& np) {
+
+	D3D11TextureMapIter it = s_textureRegistry.begin();
+
+	for (it; it != s_textureRegistry.end(); ++it) {
+		delete it->second;
+	}
+}
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -27,6 +38,10 @@ STATIC Texture2D* Texture2D::GetTexture(const char* imageFilePath) {
 
 //---------------------------------------------------------------------------------------------------------------------------
 Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindFlags bindFlags, eTextureCPUAccessFlags accessFlags) {
+
+	if (s_textureRegistry.empty()) {
+		EventSystem::RegisterEventCallback("Shutdown", &Texture2D::ShutdownEvent);
+	}
 
 	UNREFERENCED_PARAMETER(accessFlags);
 	UNREFERENCED_PARAMETER(bindFlags);
@@ -87,6 +102,12 @@ Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindF
 //---------------------------------------------------------------------------------------------------------------------------
 Texture2D::~Texture2D() {
 
+	for (size_t i = 0; i < m_resourceViews.size(); i++) {
+		delete m_resourceViews[i];
+	}
+
+	//if(m_textureHandle->)
+	//m_textureHandle->Release();
 }
 
 
