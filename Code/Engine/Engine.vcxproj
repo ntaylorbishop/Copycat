@@ -224,6 +224,7 @@
     <ClCompile Include="Utils\GeneralUtils\Endianness.cpp" />
     <ClCompile Include="Utils\GeneralUtils\XMLUtils.cpp" />
     <ClCompile Include="Utils\HardwareUtils.cpp" />
+    <ClCompile Include="Utils\Memory.cpp" />
     <ClCompile Include="Utils\StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +431,7 @@
     <ClInclude Include="Utils\GeneralUtils\Endianness.hpp" />
     <ClInclude Include="Utils\GeneralUtils\XMLUtils.hpp" />
     <ClInclude Include="Utils\HardwareUtils.hpp" />
+    <ClInclude Include="Utils\Memory.hpp" />
     <ClInclude Include="Utils\StringUtils.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

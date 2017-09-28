@@ -740,6 +740,9 @@
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.cpp">
       <Filter>Rendering\D3D11\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\Memory.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">
@@ -1353,6 +1356,9 @@
     </ClInclude>
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.hpp">
       <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Memory.hpp">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

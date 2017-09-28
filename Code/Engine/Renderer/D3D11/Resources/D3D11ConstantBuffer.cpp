@@ -1,4 +1,5 @@
 #include "Engine/Renderer/D3D11/Resources/D3D11ConstantBuffer.hpp"
+#include "Engine/Utils/Memory.hpp"
 
 
 STATIC std::map<size_t, D3D11ConstantBuffer*> D3D11ConstantBuffer::s_cBufferRegistry;
@@ -114,8 +115,12 @@ void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11BufferUnif
 		bool isUniformAlreadyBeingBound = false;
 		for (size_t j = 0; j < uniformsToAdd.size(); j++) {
 
-			if (m_uniforms[i]->GetName() == uniformsToAdd[j]->GetName()) {
+			String uniName = m_uniforms[i]->GetName();
+			String uniAddName = uniformsToAdd[j]->GetName();
+
+			if (uniName == uniAddName) {
 				isUniformAlreadyBeingBound = true;
+				break;
 			}
 		}
 
@@ -125,15 +130,16 @@ void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11BufferUnif
 	}
 
 	//Add uniforms to byte buffer and add them
-	byte* pCurrSpotInBuffer = m_pByteBuffer;
+	size_t currIdx = 0;
 
 	for (size_t i = 0; i < uniformsToAdd.size(); i++) {
 
 		D3D11Uniform* currUniform = uniformsToAdd[i];
-		size_t uniSize = currUniform->GetByteSize();
+		size_t blockSize = currUniform->GetByteSize();
 
-		memcpy_s(pCurrSpotInBuffer, m_bufferSize, currUniform->GetData(), uniSize);
-		pCurrSpotInBuffer += currUniform->GetByteSize();
+		Memory::Copy(m_pByteBuffer, currIdx, m_bufferSize, (byte*)currUniform->GetData(), blockSize);
+		
+		currIdx += currUniform->GetByteSize();
 	}
 
 	RHIDeviceWindow::Get()->m_pDeviceContext->UpdateSubresource(m_pDeviceBuffer, 0, nullptr, m_pByteBuffer, 0, 0);
