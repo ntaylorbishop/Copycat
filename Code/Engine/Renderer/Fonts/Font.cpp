@@ -3,6 +3,9 @@
 #include "Engine/Renderer/Material/Material.hpp"
 #include "Engine/Renderer/Mesh/Mesh.hpp"
 #include "Engine/Renderer/Mesh/MeshRenderer.hpp"
+#include "Engine/Renderer/D3D11/Material/D3D11Material.hpp"
+#include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
+#include "Engine/UI/UIRenderer.hpp"
 
 STATIC map<const char*, Font*, std::less<const char*>, UntrackedAllocator<std::pair<const char*, Font*>>> Font::s_fontRegistry;
 
@@ -89,7 +92,12 @@ void Font::DrawText2D(const Vector2& position, const std::string& str, float sca
 
 			AABB2 quadToDrawOn = AABB2(mins, maxs);
 
-			BeirusRenderer::DrawTexturedAABB2(m_material, currGlyph->GetTextureCoords(m_textureScale), color, quadToDrawOn);
+			AABB2 texCoordsForGlyph = currGlyph->GetTextureCoords(m_textureScale);
+			m_texCoords = Vector4(texCoordsForGlyph.mins.x, texCoordsForGlyph.mins.y, texCoordsForGlyph.maxs.x, texCoordsForGlyph.maxs.y);
+			m_tint = color;
+			UIRenderer::Get()->DrawTexturedAABB2(m_material, mins, size);
+
+			//BeirusRenderer::DrawTexturedAABB2(m_material, currGlyph->GetTextureCoords(m_textureScale), color, quadToDrawOn);
 
 			cursor.x += currGlyph->GetXAdvance() * scale;
 			prevGlyph = currGlyph;
@@ -199,13 +207,20 @@ Font::Font(std::string fontName)
 	, m_lineBase(0.f)
 {
 	std::string filePath = "Data/Fonts/" + fontName + ".png";
-	Texture* texture = Texture::CreateOrGetTexture(filePath);
-	texture->GenerateMipmap();
-	m_material = new Material("Default2D");
-	m_material->SetName(fontName);
+	Texture2D* fontTex = new Texture2D(filePath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
 
-	m_material->CreateUniform("gTexDiffuse", UNIFORM_TEXTURE2D, 1, 0, texture);
+	D3D11Resource* texID = fontTex->GetSRVResource();
 
+	m_material = new D3D11Material("Default2D");
+
+	D3D11Uniform* tintUni		= new D3D11Uniform("tint",		UNIFORM_RGBA,		&m_tint);
+	D3D11Uniform* texCoordsUni	= new D3D11Uniform("texCoords", UNIFORM_VECTOR4,	&m_texCoords);
+
+	m_material->AddUniform("TexCoordsAndTint", tintUni);
+	m_material->AddUniform("TexCoordsAndTint", texCoordsUni);
+
+	m_material->AddResource(0, texID, WHICH_SHADER_FRAGMENT);
+	
 	LoadGlyphsFromFile();
 }
 

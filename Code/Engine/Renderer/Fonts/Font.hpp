@@ -17,6 +17,8 @@
 
 const char* const DEFAULT_ENGINE_FONT = "Tahoma";
 
+class D3D11Material;
+
 class Font {
 public:
 	static Font* CreateOrGetFont(std::string fontName);
@@ -54,9 +56,13 @@ private:
 	static map<const char*, Font*, std::less<const char*>, UntrackedAllocator<std::pair<const char*, Font*>>> s_fontRegistry;
 	
 	std::string m_fontName;
-	Material* m_material;
+	//Material* m_material;
+	D3D11Material* m_material;
 	std::map<uchar, Glyph*> m_glyphs;
 	Vector2 m_textureScale;
 	float m_lineHeight;
 	float m_lineBase;
+
+	RGBA m_tint;
+	Vector4 m_texCoords;
 };

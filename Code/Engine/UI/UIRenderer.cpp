@@ -75,8 +75,15 @@ void UIRenderer::DrawTexturedAABB2(D3D11Material* mat, const Vector2& pos, const
 	modelMat.Scale(Vector3(size.x, size.y, 1.f));
 
 	D3D11Uniform* uniform = mat->GetUniform("Model2D", "uModel");
-	ASSERT_OR_DIE(uniform != nullptr, "ERROR: Mat should be based off the Default2D shader program.");
-	uniform->SetData((void*)&modelMat);
 
-	m_scratchMR->RenderMeshWithMaterial(m_quadMesh, m_2dBlankMat);
+	if (!uniform) {
+		//User didn't add model uni, let's add it
+		D3D11Uniform* modelUni = new D3D11Uniform("uModel", UNIFORM_MAT4, &modelMat);
+		mat->AddUniform("Model2D", modelUni);
+	}
+	else {
+		uniform->SetData((void*)&modelMat);
+	}
+
+	m_scratchMR->RenderMeshWithMaterial(m_quadMesh, mat);
 }

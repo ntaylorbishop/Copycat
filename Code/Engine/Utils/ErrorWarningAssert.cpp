@@ -245,6 +245,6 @@ void RecoverableError( const char* cppFileName, int cppLineNum, const std::strin
 
 
 void Exit() {
-	TheLogger::FlushRemainingMessages();
+	//TheLogger::FlushRemainingMessages();
 	exit(0);
 }
