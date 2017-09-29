@@ -2,6 +2,7 @@
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
 #include "Engine/Renderer/D3D11/General/D3D11ShaderFileParsing.hpp"
 #include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
+#include "Engine/Renderer/D3D11/General/D3D11BlendState.hpp"
 #include <d3d11_1.h>
 
 
@@ -36,6 +37,19 @@ void D3D11Renderer::SetViewport(const Vector2& viewportSize) {
 }
 
 
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Renderer::EnableAlphaBlending() {
+
+	m_defaultAlphaBlendState->BindToDevice();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Renderer::EnableOpaqueBlending() {
+
+	D3D11BlendState::BindDefault();
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Renderer::D3D11Renderer() {
@@ -45,6 +59,7 @@ D3D11Renderer::D3D11Renderer() {
 	UNUSED(defaultDiffuse);
 	UNUSED(defaultNormal);
 
+	InitializeDefaultBlendStates();
 	CreateDefaultSamplers();
 	ParseInDefaultConstantBuffers();
 	ParseInAllShaderData();
@@ -54,5 +69,14 @@ D3D11Renderer::D3D11Renderer() {
 //---------------------------------------------------------------------------------------------------------------------------
 D3D11Renderer::~D3D11Renderer() {
 
+	delete m_defaultAlphaBlendState;
+	m_defaultAlphaBlendState = nullptr;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Renderer::InitializeDefaultBlendStates() {
+
+	m_defaultAlphaBlendState = new D3D11BlendState(false, false, true, BLEND_MODE_SRC_ALPHA, BLEND_MODE_INV_SRC_ALPHA, BLEND_OP_ADD,
+		BLEND_MODE_ONE, BLEND_MODE_ZERO, BLEND_OP_ADD, COLOR_WRITE_ENABLE_ALL);
+}

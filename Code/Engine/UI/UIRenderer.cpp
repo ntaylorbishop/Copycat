@@ -59,6 +59,8 @@ void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& 
 	modelMat.SetPosition(Vector3(pos.x, pos.y, 0.f));
 	modelMat.Scale(Vector3(size.x, size.y, 1.f));
 
+	modelMat.Transpose();
+
 	D3D11Uniform* uniform = m_2dBlankMat->GetUniform("Model2D", "uModel");
 	uniform->SetData((void*)&modelMat);
 
@@ -73,6 +75,8 @@ void UIRenderer::DrawTexturedAABB2(D3D11Material* mat, const Vector2& pos, const
 
 	modelMat.SetPosition(Vector3(pos.x, pos.y, 0.f));
 	modelMat.Scale(Vector3(size.x, size.y, 1.f));
+
+	modelMat.Transpose();
 
 	D3D11Uniform* uniform = mat->GetUniform("Model2D", "uModel");
 

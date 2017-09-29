@@ -5,6 +5,7 @@
 #include "Engine/Renderer/Mesh/MeshRenderer.hpp"
 #include "Engine/Renderer/D3D11/Material/D3D11Material.hpp"
 #include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
+#include "Engine/Renderer/D3D11/General/D3D11Renderer.hpp"
 #include "Engine/UI/UIRenderer.hpp"
 
 STATIC map<const char*, Font*, std::less<const char*>, UntrackedAllocator<std::pair<const char*, Font*>>> Font::s_fontRegistry;
@@ -67,6 +68,8 @@ void Font::DrawText2D(const Vector2& position, const std::string& str, float sca
 		return;
 	}
 
+	D3D11Renderer::Get()->EnableAlphaBlending();
+
 	Vector2 cursor = position + Vector2(0.f, m_lineHeight * scale);
 	Glyph* prevGlyph = nullptr;
 
@@ -95,6 +98,7 @@ void Font::DrawText2D(const Vector2& position, const std::string& str, float sca
 			AABB2 texCoordsForGlyph = currGlyph->GetTextureCoords(m_textureScale);
 			m_texCoords = Vector4(texCoordsForGlyph.mins.x, texCoordsForGlyph.mins.y, texCoordsForGlyph.maxs.x, texCoordsForGlyph.maxs.y);
 			m_tint = color;
+
 			UIRenderer::Get()->DrawTexturedAABB2(m_material, mins, size);
 
 			//BeirusRenderer::DrawTexturedAABB2(m_material, currGlyph->GetTextureCoords(m_textureScale), color, quadToDrawOn);
@@ -103,6 +107,8 @@ void Font::DrawText2D(const Vector2& position, const std::string& str, float sca
 			prevGlyph = currGlyph;
 		}
 	}
+
+	D3D11Renderer::Get()->EnableOpaqueBlending();
 }
 
 

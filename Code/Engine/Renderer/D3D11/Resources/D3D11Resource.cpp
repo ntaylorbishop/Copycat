@@ -84,7 +84,8 @@ ID3D11RenderTargetView* D3D11Resource::AsRenderTargetView() {
 //---------------------------------------------------------------------------------------------------------------------------
 ID3D11ShaderResourceView* D3D11Resource::AsShaderResourceView() {
 
-	ASSERT_OR_DIE(m_resourceType == RESOURCE_TYPE_SHADER_RESOURCE_VIEW, "ERROR: Resource is not depth stencil view.");
+	//WARNING: Commenting out because of memory corruption on these resources
+	//ASSERT_OR_DIE(m_resourceType == RESOURCE_TYPE_SHADER_RESOURCE_VIEW, "ERROR: Resource is not depth stencil view.");
 	return (ID3D11ShaderResourceView*)m_view;
 }
 

@@ -102,6 +102,7 @@
     <ClCompile Include="Renderer\Cameras\Camera2D.cpp" />
     <ClCompile Include="Renderer\Cameras\Camera3D.cpp" />
     <ClCompile Include="Renderer\Cameras\PlayerCamera3D.cpp" />
+    <ClCompile Include="Renderer\D3D11\General\D3D11BlendState.cpp" />
     <ClCompile Include="Renderer\D3D11\General\D3D11Renderer.cpp" />
     <ClCompile Include="Renderer\D3D11\General\D3D11ShaderFileParsing.cpp" />
     <ClCompile Include="Renderer\D3D11\General\RHI.cpp" />
@@ -290,6 +291,8 @@
     <ClInclude Include="Renderer\Cameras\Camera2D.hpp" />
     <ClInclude Include="Renderer\Cameras\Camera3D.hpp" />
     <ClInclude Include="Renderer\Cameras\PlayerCamera3D.hpp" />
+    <ClInclude Include="Renderer\D3D11\General\D3D11BlendState.hpp" />
+    <ClInclude Include="Renderer\D3D11\General\D3D11Common.hpp" />
     <ClInclude Include="Renderer\D3D11\General\D3D11Renderer.hpp" />
     <ClInclude Include="Renderer\D3D11\General\D3D11ShaderFileParsing.hpp" />
     <ClInclude Include="Renderer\D3D11\General\RHI.hpp" />
