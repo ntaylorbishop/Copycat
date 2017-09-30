@@ -7,6 +7,8 @@
 #include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
 #include "Engine/Renderer/D3D11/General/D3D11Renderer.hpp"
 #include "Engine/UI/UIRenderer.hpp"
+#include "Engine/Renderer/D3D11/Mesh/D3D11Mesh.hpp"
+#include "Engine/Renderer/D3D11/Mesh/D3D11MeshRenderer.hpp"
 
 STATIC map<const char*, Font*, std::less<const char*>, UntrackedAllocator<std::pair<const char*, Font*>>> Font::s_fontRegistry;
 
@@ -73,6 +75,10 @@ void Font::DrawText2D(const Vector2& position, const std::string& str, float sca
 	Vector2 cursor = position + Vector2(0.f, m_lineHeight * scale);
 	Glyph* prevGlyph = nullptr;
 
+	D3D11Mesh* meshToDraw = new D3D11Mesh(VERTEX_TYPE_PCT, str.size() * 4);
+	D3D11MeshRenderer mr;
+	std::vector<uint32_t> inds;
+
 	for (unsigned int i = 0; i < str.size(); i++) {
 		std::map<unsigned char, Glyph*>::iterator glyphIterator = m_glyphs.find(str[i]);
 
@@ -93,20 +99,45 @@ void Font::DrawText2D(const Vector2& position, const std::string& str, float sca
 			Vector2 mins = cursor + Vector2(offset.x + currGlyph->GetWidth() * scale, -offset.y);
 			Vector2 maxs = mins - size;
 
-			AABB2 quadToDrawOn = AABB2(mins, maxs);
+			AABB2 drawQuad = AABB2(mins, maxs);
 
-			AABB2 texCoordsForGlyph = currGlyph->GetTextureCoords(m_textureScale);
-			m_texCoords = Vector4(texCoordsForGlyph.mins.x, texCoordsForGlyph.mins.y, texCoordsForGlyph.maxs.x, texCoordsForGlyph.maxs.y);
+			AABB2 glyphTexCoords = currGlyph->GetTextureCoords(m_textureScale);
+			m_texCoords = Vector4(glyphTexCoords.mins.x, glyphTexCoords.mins.y, glyphTexCoords.maxs.x, glyphTexCoords.maxs.y);
 			m_tint = color;
 
-			UIRenderer::Get()->DrawTexturedAABB2(m_material, mins, size);
 
+			//UIRenderer::Get()->DrawTexturedAABB2(m_material, mins, size);
 			//BeirusRenderer::DrawTexturedAABB2(m_material, currGlyph->GetTextureCoords(m_textureScale), color, quadToDrawOn);
+
+			meshToDraw->AddVertex(Vector3(drawQuad.mins.x, drawQuad.mins.y, 1.f), RGBA::WHITE, Vector2(glyphTexCoords.mins.x, glyphTexCoords.maxs.y));
+			meshToDraw->AddVertex(Vector3(drawQuad.mins.x, drawQuad.maxs.y, 1.f), RGBA::WHITE, Vector2(glyphTexCoords.mins.x, glyphTexCoords.mins.y));
+			meshToDraw->AddVertex(Vector3(drawQuad.maxs.x, drawQuad.mins.y, 1.f), RGBA::WHITE, Vector2(glyphTexCoords.maxs.x, glyphTexCoords.maxs.y));
+			meshToDraw->AddVertex(Vector3(drawQuad.maxs.x, drawQuad.maxs.y, 1.f), RGBA::WHITE, Vector2(glyphTexCoords.maxs.x, glyphTexCoords.mins.y));
+
+			uint32_t startIdx = i * 4;
+
+			inds.push_back(startIdx + 1);
+			inds.push_back(startIdx + 2);
+			inds.push_back(startIdx + 0);
+			inds.push_back(startIdx + 3);
+			inds.push_back(startIdx + 2);
+			inds.push_back(startIdx + 1);
 
 			cursor.x += currGlyph->GetXAdvance() * scale;
 			prevGlyph = currGlyph;
 		}
 	}
+
+
+	meshToDraw->CreateVertexBufferOnDevice();
+	meshToDraw->BindVertBufferToDeviceWindow();
+
+	meshToDraw->SetIndexBuffer(inds.data(), inds.size() * sizeof(uint32_t), inds.size());
+	meshToDraw->CreateIndexBufferOnDevice();
+	meshToDraw->BindIndBufferToDeviceWindow();
+
+	mr.RenderMeshWithMaterial(meshToDraw, m_material);
+	delete meshToDraw;
 
 	D3D11Renderer::Get()->EnableOpaqueBlending();
 }

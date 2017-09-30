@@ -11,7 +11,7 @@ D3D11Mesh::D3D11Mesh(eVertexType vertType, size_t numVerts)
 	, m_bufferSize(m_vertByteSize * numVerts)
 {
 	m_pVertData = (byte*)malloc(m_vertByteSize * numVerts);
-	AddMeshToList();
+	//AddMeshToList();
 }
 
 

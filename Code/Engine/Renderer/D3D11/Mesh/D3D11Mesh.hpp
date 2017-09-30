@@ -6,6 +6,7 @@
 class D3D11Mesh {
 public:
 	D3D11Mesh(eVertexType vertType, size_t numVerts);
+	~D3D11Mesh() { Destroy(); }
 	void Destroy();
 
 	void InitializeMeshOnDevice(uint32_t* indBuffer, uint numInds);
