@@ -1,4 +1,5 @@
 #include "Engine/Console/Cursor.hpp"
+#include "Engine/UI/UIRenderer.hpp"
 
 //STRUCTORS
 //---------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +37,8 @@ void Cursor::Update(float deltaSeconds) {
 void Cursor::BlinkCursor() const {
 	if (m_age > 0.f) {
 		AABB2 cursorPipe = AABB2(m_position, m_position + Vector2(m_thickness, m_height));
-		BeirusRenderer::DrawAABB2(cursorPipe, RGBA::WHITE);
+		UIRenderer::Get()->DrawAABB2(cursorPipe.mins, cursorPipe.maxs - cursorPipe.mins, RGBA::WHITE);
+		//BeirusRenderer::DrawAABB2(cursorPipe, RGBA::WHITE);
 	}
 }
 

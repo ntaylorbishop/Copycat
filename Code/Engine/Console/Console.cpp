@@ -9,6 +9,7 @@
 #include "Engine/Renderer/Mesh/MeshRenderer.hpp"
 #include "Engine/Renderer/Mesh/Mesh.hpp"
 #include "Engine/Renderer/Material/Material.hpp"
+#include "Engine/UI/UIRenderer.hpp"
 
 STATIC Console* Console::s_theBeirusConsole = nullptr;
 STATIC std::map<size_t, console_command_cb, std::less<size_t>, UntrackedAllocator<std::pair<size_t, console_command_cb>>> Console::s_commands;
@@ -192,7 +193,7 @@ Console::Console(KEYCODE keybind)
 	, m_keybind(keybind)
 {
 	m_cursor = new(MEMORY_GENERAL) Cursor(24.f, 3.f, 0.1f, Vector2(5.f, 3.f));
-	m_consoleFont = BitmapFont::CreateOrGetFont("SquirrelFixedFont");
+	//m_consoleFont = BitmapFont::CreateOrGetFont("SquirrelFixedFont");
 	m_newConsoleFont = Font::CreateOrGetFont("Tahoma");
 }
 
@@ -356,7 +357,8 @@ void Console::RenderConsole() const {
 void Console::RenderCommandLine() const {
 
 	AABB2 quad = AABB2(Vector2(0.f, 0.f), Vector2(BeirusRenderer::GetScreenSize()->x, 30.f));
-	BeirusRenderer::DrawAABB2(quad, RGBA(0.f, 0.f, 0.f, 0.5f));
+	UIRenderer::Get()->DrawAABB2(Vector2(0.f, 0.f), Vector2(UIRenderer::Get()->GetScreenSize().x, 30.f), RGBA(0.f, 0.f, 0.f, 0.5f));
+	//BeirusRenderer::DrawAABB2(quad, RGBA(0.f, 0.f, 0.f, 0.5f));
 
 	m_cursor->BlinkCursor();
 }
@@ -378,10 +380,11 @@ void Console::RenderCurrentInput() const {
 //---------------------------------------------------------------------------------------------------------------------------
 void Console::RenderPreviousInputs() const {
 
-	const Vector2* screenSize = BeirusRenderer::GetScreenSize();
+	const Vector2* screenSize = &UIRenderer::Get()->GetScreenSize();
 
 	AABB2 quad = AABB2(Vector2(10.f, 50.f), Vector2(screenSize->x - 10.f, 200.f));
-	BeirusRenderer::DrawAABB2(quad, RGBA(0.f, 0.f, 0.f, 0.5f));
+	UIRenderer::Get()->DrawAABB2(quad.mins, quad.maxs - quad.mins, RGBA(0.f, 0.f, 0.f, 0.5f));
+	//BeirusRenderer::DrawAABB2(quad, RGBA(0.f, 0.f, 0.f, 0.5f));
 
 	if (m_prevInputs.empty())
 		return;

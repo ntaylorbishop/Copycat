@@ -39,9 +39,9 @@ STATIC Texture2D* Texture2D::GetTexture(const char* imageFilePath) {
 //---------------------------------------------------------------------------------------------------------------------------
 Texture2D::Texture2D(const char* imageFilePath, bool generateMips, eTextureBindFlags bindFlags, eTextureCPUAccessFlags accessFlags) {
 
-	if (s_textureRegistry.empty()) {
-		EventSystem::RegisterEventCallback("Shutdown", &Texture2D::ShutdownEvent);
-	}
+	//if (s_textureRegistry.empty()) {
+	//	EventSystem::RegisterEventCallback("Shutdown", &Texture2D::ShutdownEvent);
+	//}
 
 	UNREFERENCED_PARAMETER(accessFlags);
 	UNREFERENCED_PARAMETER(bindFlags);

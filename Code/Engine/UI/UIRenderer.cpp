@@ -3,6 +3,7 @@
 #include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
 #include "Engine/Renderer/D3D11/Mesh/D3D11Mesh.hpp"
 #include "Engine/Renderer/D3D11/Mesh/D3D11MeshRenderer.hpp"
+#include "Engine/Renderer/D3D11/General/D3D11Renderer.hpp"
 
 
 STATIC UIRenderer* UIRenderer::s_uiRenderer = nullptr;
@@ -30,7 +31,10 @@ UIRenderer::UIRenderer() {
 	m_2dBlankMat->AddResource(0, texID, WHICH_SHADER_FRAGMENT);
 
 	D3D11Uniform* modelUni = new D3D11Uniform("uModel", UNIFORM_MAT4, (void*)&Matrix44::IDENTITY);
+	D3D11Uniform* tintUni = new D3D11Uniform("tint",	UNIFORM_RGBA, (void*)&m_blankMatTint);
+
 	m_2dBlankMat->AddUniform("Model2D", modelUni);
+	m_2dBlankMat->AddUniform("TexCoordsAndTint", tintUni);
 
 
 	// Create vertex buffer
@@ -49,10 +53,11 @@ UIRenderer::UIRenderer() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& color, float tint) {
+void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& color) {
 
-	UNUSED(tint);
-	UNUSED(color);
+	if (color.a < 1.f) {
+		D3D11Renderer::Get()->EnableAlphaBlending();
+	}
 
 	Matrix44 modelMat = Matrix44::IDENTITY;
 
@@ -63,8 +68,13 @@ void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& 
 
 	D3D11Uniform* uniform = m_2dBlankMat->GetUniform("Model2D", "uModel");
 	uniform->SetData((void*)&modelMat);
+	m_blankMatTint = color;
 
 	m_scratchMR->RenderMeshWithMaterial(m_quadMesh, m_2dBlankMat);
+
+	if (color.a < 1.f) {
+		D3D11Renderer::Get()->EnableOpaqueBlending();
+	}
 }
 
 

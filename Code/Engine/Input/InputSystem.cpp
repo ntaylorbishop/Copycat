@@ -332,10 +332,10 @@ LRESULT CALLBACK WindowsMessageHandlingProcedure(HWND windowHandle, UINT wmMessa
 		InputSystem::SetKeyDownStatus(asKey, true);
 
 		if (asKey == VK_ESCAPE) {
-			//if (Console::IsValid() && Console::IsConsoleOpen()) {
+			if (Console::IsValid() && Console::IsConsoleOpen()) {
 				InputSystem::Quitting(true);
 				return 0;
-			//}
+			}
 		}
 		break;
 

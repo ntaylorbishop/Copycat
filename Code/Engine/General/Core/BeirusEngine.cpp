@@ -28,7 +28,6 @@ void BeirusEngine::Initialize() {
 	//BeirusRenderer::InitDefaultProjectionMats();
 	InputSystem::Initialize();
 	//BeirusRenderer::Initialize(RGBA(0.1f, 0.1f, 0.1f, 1.f));
-	//Console::Initialize(CONSOLE_KEYBIND);
 	EventSystem::Initialize();
 	//UISystem::Initialize();
 
@@ -73,7 +72,7 @@ STATIC void BeirusEngine::Update(float deltaSeconds) {
 	s_theBeirusEngine->UpdateFrameNumber();
 
 	s_theBeirusEngine->m_engineClock->Update(deltaSeconds);
-	//Console::Update(deltaSeconds);
+	Console::Update(deltaSeconds);
 	//UISystem::Update(deltaSeconds);
 
 	#if MEMORY_TRACKING != 0
@@ -95,7 +94,7 @@ void BeirusEngine::Render() {
 	//g_theMemoryManager->Render();
 	//#endif
 	//
-	//Console::Render();
+	Console::Render();
 	//UISystem::Render();
 	//BeirusRenderer::Render();
 }
