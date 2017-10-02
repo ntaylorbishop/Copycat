@@ -2,13 +2,6 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-D3D11Material::D3D11Material(const String& shaderName) {
-
-	m_shaderProg = D3D11ShaderProgram::CreateOrGetShaderProgram(shaderName);
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
 void D3D11Material::Use() {
 	
 	m_shaderProg->BindShaders();
@@ -76,17 +69,36 @@ void D3D11Material::BindSamplers() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-D3D11Uniform* D3D11Material::GetUniform(const String& bufferName, const String& uniformName) {
+D3D11Uniform* D3D11Material::GetUniform(const String& uniformName) {
 
 	for (size_t i = 0; i < m_uniforms.size(); i++) {
 
-		String cBufferName = m_uniforms[i].cBufferName;
-		String matUniName = m_uniforms[i].uniform->GetName();
+		String matUniName = m_uniforms[i]->GetName();
 
-		if (cBufferName == bufferName && matUniName == uniformName) {
-			return m_uniforms[i].uniform;
+		if (matUniName == uniformName) {
+			return m_uniforms[i];
 		}
 	}
 
 	return nullptr;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11Material::ValidateNewUniform(const String& newUniName) {
+
+	bool uniExistsOnShader = false;
+	for (size_t i = 0; i < m_shaderProg->m_constBuffers.size(); i++) {
+
+		D3D11ConstantBuffer* currBuffer = m_shaderProg->m_constBuffers[i].m_pConstBuffer;
+		for (size_t j = 0; j < currBuffer->m_uniforms.size(); j++) {
+
+			String currBufferUniName = currBuffer->m_uniforms[j]->GetName();
+			if (currBufferUniName == newUniName) {
+				uniExistsOnShader = true;
+			}
+		}
+	}
+
+	ASSERT_OR_DIE(uniExistsOnShader, "Uniform name of new uniform being added to D3D11Material does not exist on shader");
 }

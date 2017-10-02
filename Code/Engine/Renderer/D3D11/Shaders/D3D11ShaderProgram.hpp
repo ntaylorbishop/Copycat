@@ -62,7 +62,7 @@ private:
 
 	void BindShaders();
 	void BindConstantBuffers();
-	void BindConstantBuffers(const std::vector<D3D11BufferUniform>& matUniforms);
+	void BindConstantBuffers(const std::vector<D3D11Uniform*>& matUniforms);
 	void BindResources();
 	void BindSamplers();
 
@@ -82,17 +82,6 @@ private:
 typedef std::map<size_t, D3D11ShaderProgram*>				D3D11ShaderProgramMap;
 typedef std::map<size_t, D3D11ShaderProgram*>::iterator		D3D11ShaderProgramMapIter;
 typedef std::pair<size_t, D3D11ShaderProgram*>				D3D11ShaderProgramMapPair;
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-inline void D3D11ShaderProgram::AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* pConstBuffer, eWhichShaderBound whichShadersToBindTo) {
-
-	ConstBufferBindInfo boundBuffer;
-	boundBuffer.m_bindPoint = bindPoint;
-	boundBuffer.m_pConstBuffer = pConstBuffer;
-	boundBuffer.m_whichShaders = whichShadersToBindTo;
-	m_constBuffers.push_back(boundBuffer);
-}
 
 
 //---------------------------------------------------------------------------------------------------------------------------

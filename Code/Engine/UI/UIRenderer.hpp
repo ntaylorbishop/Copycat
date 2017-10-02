@@ -20,14 +20,16 @@ public:
 	Vector2 GetScreenSize()				{ return SCREEN_SIZE_UI;	}
 
 private:
-	UIRenderer();
+	UIRenderer() = default;
 	~UIRenderer() = default;
+	void Initialize();
 
+	bool				m_hasInitialized	= false;
 	Matrix44			m_defaultOrtho;
-	D3D11Material*		m_2dBlankMat	= nullptr;
-	D3D11Mesh*			m_quadMesh		= nullptr;
-	D3D11MeshRenderer*	m_scratchMR		= nullptr;
-	RGBA				m_blankMatTint	= RGBA::WHITE;
+	D3D11Material*		m_2dBlankMat		= nullptr;
+	D3D11Mesh*			m_quadMesh			= nullptr;
+	D3D11MeshRenderer*	m_scratchMR			= nullptr;
+	RGBA				m_blankMatTint		= RGBA::WHITE;
 
 	static UIRenderer*	s_uiRenderer;
 };

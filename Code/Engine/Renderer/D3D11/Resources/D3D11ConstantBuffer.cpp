@@ -98,15 +98,22 @@ void D3D11ConstantBuffer::UpdateBufferOnDevice() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11BufferUniform>& overrideUniforms) {
+void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11Uniform*>& overrideUniforms) {
 
 	//Combine base uniforms with overridden uniforms
 	std::vector<D3D11Uniform*> uniformsToAdd;
 
 	for (size_t i = 0; i < overrideUniforms.size(); i++) {
 
-		if (overrideUniforms[i].cBufferName == m_name) {
-			uniformsToAdd.push_back(overrideUniforms[i].uniform);
+		for (size_t j = 0; j < m_uniforms.size(); j++) {
+
+			String overrideName = overrideUniforms[i]->GetName();
+			String currUniName = m_uniforms[j]->GetName();
+
+			if (currUniName == overrideName) {
+				uniformsToAdd.push_back(overrideUniforms[i]);
+				break;
+			}
 		}
 	}
 

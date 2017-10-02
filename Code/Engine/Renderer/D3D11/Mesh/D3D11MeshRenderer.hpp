@@ -15,7 +15,7 @@ public:
 
 private:
 
-	std::vector<D3D11BufferUniform>		m_uniforms;
-	std::vector<ResourceBindInfo>		m_resources;
-	std::vector<SamplerBindInfo>		m_samplers;
+	std::vector<D3D11Uniform*>		m_uniforms;
+	std::vector<ResourceBindInfo>	m_resources;
+	std::vector<SamplerBindInfo>	m_samplers;
 };

@@ -7,13 +7,6 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-struct D3D11BufferUniform {
-	String			cBufferName = "NULL";
-	D3D11Uniform*	uniform = nullptr;
-};
-
-
-//---------------------------------------------------------------------------------------------------------------------------
 class D3D11ConstantBuffer {
 public:
 	static D3D11ConstantBuffer* GetConstantBuffer(const String& cBufferName);
@@ -22,7 +15,7 @@ public:
 	void CreateBufferOnDevice();
 	void ReleaseLocalBuffer();
 	void UpdateBufferOnDevice();
-	void UpdateBufferOnDevice(const std::vector<D3D11BufferUniform>& overrideUniforms);
+	void UpdateBufferOnDevice(const std::vector<D3D11Uniform*>& overrideUniforms);
 
 	void AddUniform(D3D11Uniform* uniToAdd) { m_uniforms.push_back(uniToAdd); }
 
@@ -43,6 +36,9 @@ private:
 	ID3D11Buffer*				m_pDeviceBuffer		= nullptr;
 
 	static std::map<size_t, D3D11ConstantBuffer*> s_cBufferRegistry;
+
+	friend class D3D11ShaderProgram;
+	friend class D3D11Material;
 };
 
 typedef std::map<size_t, D3D11ConstantBuffer*>				D3D11CBufferMap;

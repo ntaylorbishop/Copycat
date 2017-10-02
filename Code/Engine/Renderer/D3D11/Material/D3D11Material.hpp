@@ -8,35 +8,58 @@ public:
 	D3D11Material(const String& shaderName);
 	~D3D11Material() { }
 
-	void AddUniform(const String& constBufferName, D3D11Uniform* matUni);
+	void AddUniform(D3D11Uniform* matUni);
+	void CreateUniform(const String& name, eUniformType type, void* data);
 
 	void AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* pConstBuffer, eWhichShaderBound whichShadersToBindTo);
 	void AddResource(uint bindPoint, D3D11Resource* pResource, eWhichShaderBound whichShadersToBindTo);
 	void AddSampler(uint bindPoint, D3D11SamplerState* pSampler, eWhichShaderBound whichShadersToBindTo);
 
-	D3D11Uniform* GetUniform(const String& bufferName, const String& uniformName);
+	D3D11Uniform* GetUniform(const String& uniformName);
 
 	void Use();
 
 private:
 	void BindResources();
 	void BindSamplers();
+	void ValidateNewUniform(const String& newUniName);
+
 
 	D3D11ShaderProgram* m_shaderProg = nullptr;
 
-	std::vector<D3D11BufferUniform>		m_uniforms;
-	std::vector<ResourceBindInfo>		m_resources;
-	std::vector<SamplerBindInfo>		m_samplers;
+	std::vector<D3D11Uniform*>		m_uniforms;
+	std::vector<ResourceBindInfo>	m_resources;
+	std::vector<SamplerBindInfo>	m_samplers;
 };
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-inline void D3D11Material::AddUniform(const String& constBufferName, D3D11Uniform* matUni) {
+inline D3D11Material::D3D11Material(const String& shaderName) {
 
-	D3D11BufferUniform bufferUniform;
-	bufferUniform.cBufferName = constBufferName;
-	bufferUniform.uniform = matUni;
-	m_uniforms.push_back(bufferUniform);
+	m_shaderProg = D3D11ShaderProgram::CreateOrGetShaderProgram(shaderName);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+inline void D3D11Material::CreateUniform(const String& name, eUniformType type, void* data) {
+
+#if _DEBUG
+	ValidateNewUniform(name);
+#endif
+
+	D3D11Uniform* newUni = new D3D11Uniform(name.c_str(), type, data);
+	m_uniforms.push_back(newUni);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+inline void D3D11Material::AddUniform(D3D11Uniform* matUni) {
+
+#if _DEBUG
+	ValidateNewUniform(matUni->GetName());
+#endif
+
+	m_uniforms.push_back(matUni);
 }
 
 

@@ -253,8 +253,8 @@ Font::Font(std::string fontName)
 	D3D11Uniform* tintUni		= new D3D11Uniform("tint",		UNIFORM_RGBA,		&m_tint);
 	D3D11Uniform* texCoordsUni	= new D3D11Uniform("texCoords", UNIFORM_VECTOR4,	&m_texCoords);
 
-	m_material->AddUniform("TexCoordsAndTint", tintUni);
-	m_material->AddUniform("TexCoordsAndTint", texCoordsUni);
+	m_material->AddUniform(tintUni);
+	m_material->AddUniform(texCoordsUni);
 
 	m_material->AddResource(0, texID, WHICH_SHADER_FRAGMENT);
 	

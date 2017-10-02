@@ -69,7 +69,7 @@ void D3D11ShaderProgram::BindConstantBuffers() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11ShaderProgram::BindConstantBuffers(const std::vector<D3D11BufferUniform>& matUniforms) {
+void D3D11ShaderProgram::BindConstantBuffers(const std::vector<D3D11Uniform*>& matUniforms) {
 
 	//Update buffers and bind them
 	for (size_t i = 0; i < m_constBuffers.size(); i++) {
@@ -149,4 +149,30 @@ void D3D11ShaderProgram::BindSamplers() {
 		}
 		}
 	}
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+void D3D11ShaderProgram::AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* pConstBuffer, eWhichShaderBound whichShadersToBindTo) {
+
+	//Check to make sure that no uniforms share the same name across constant buffers
+	for (size_t i = 0; i < pConstBuffer->m_uniforms.size(); i++) {
+		
+		for (size_t j = 0; j < m_constBuffers.size(); j++) {
+		
+			D3D11ConstantBuffer* currBuffer = m_constBuffers[j].m_pConstBuffer;
+			for (size_t k = 0; k < currBuffer->m_uniforms.size(); k++) {
+
+				String addingBufferUni = pConstBuffer->m_uniforms[i]->GetName();
+				String currBufferUni = currBuffer->m_uniforms[k]->GetName();
+				ASSERT_OR_DIE(addingBufferUni != currBufferUni, "ERROR: Two constant buffers in a shader program cannot share the same name.");
+			}
+		}
+	}
+
+	ConstBufferBindInfo boundBuffer;
+	boundBuffer.m_bindPoint = bindPoint;
+	boundBuffer.m_pConstBuffer = pConstBuffer;
+	boundBuffer.m_whichShaders = whichShadersToBindTo;
+	m_constBuffers.push_back(boundBuffer);
 }

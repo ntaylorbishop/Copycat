@@ -20,7 +20,7 @@ STATIC UIRenderer* UIRenderer::Get() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-UIRenderer::UIRenderer() {
+void UIRenderer::Initialize() {
 
 	m_defaultOrtho.SetAsOrthographicProjection(1600.f, 900.f, 0.1f, 100.f);
 	m_defaultOrtho.Transpose();
@@ -31,10 +31,10 @@ UIRenderer::UIRenderer() {
 	m_2dBlankMat->AddResource(0, texID, WHICH_SHADER_FRAGMENT);
 
 	D3D11Uniform* modelUni = new D3D11Uniform("uModel", UNIFORM_MAT4, (void*)&Matrix44::IDENTITY);
-	D3D11Uniform* tintUni = new D3D11Uniform("tint",	UNIFORM_RGBA, (void*)&m_blankMatTint);
+	D3D11Uniform* tintUni = new D3D11Uniform("tint", UNIFORM_RGBA, (void*)&m_blankMatTint);
 
-	m_2dBlankMat->AddUniform("Model2D", modelUni);
-	m_2dBlankMat->AddUniform("TexCoordsAndTint", tintUni);
+	m_2dBlankMat->AddUniform(modelUni);
+	m_2dBlankMat->AddUniform(tintUni);
 
 
 	// Create vertex buffer
@@ -49,11 +49,17 @@ UIRenderer::UIRenderer() {
 	//uint32_t indices[] = { 0,2,1, 1,2,3 };
 
 	m_quadMesh->InitializeMeshOnDevice(indices, ARRAYSIZE(indices));
+
+	m_hasInitialized = true;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
 void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& color) {
+
+	if (!m_hasInitialized) {
+		Initialize();
+	}
 
 	if (color.a < 1.f) {
 		D3D11Renderer::Get()->EnableAlphaBlending();
@@ -66,7 +72,7 @@ void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& 
 
 	modelMat.Transpose();
 
-	D3D11Uniform* uniform = m_2dBlankMat->GetUniform("Model2D", "uModel");
+	D3D11Uniform* uniform = m_2dBlankMat->GetUniform("uModel");
 	uniform->SetData((void*)&modelMat);
 	m_blankMatTint = color;
 
@@ -81,6 +87,10 @@ void UIRenderer::DrawAABB2(const Vector2& pos, const Vector2& size, const RGBA& 
 //---------------------------------------------------------------------------------------------------------------------------
 void UIRenderer::DrawTexturedAABB2(D3D11Material* mat, const Vector2& pos, const Vector2& size) {
 
+	if (!m_hasInitialized) {
+		Initialize();
+	}
+
 	Matrix44 modelMat = Matrix44::IDENTITY;
 
 	modelMat.SetPosition(Vector3(pos.x, pos.y, 0.f));
@@ -88,12 +98,12 @@ void UIRenderer::DrawTexturedAABB2(D3D11Material* mat, const Vector2& pos, const
 
 	modelMat.Transpose();
 
-	D3D11Uniform* uniform = mat->GetUniform("Model2D", "uModel");
+	D3D11Uniform* uniform = mat->GetUniform("uModel");
 
 	if (!uniform) {
 		//User didn't add model uni, let's add it
 		D3D11Uniform* modelUni = new D3D11Uniform("uModel", UNIFORM_MAT4, &modelMat);
-		mat->AddUniform("Model2D", modelUni);
+		mat->AddUniform(modelUni);
 	}
 	else {
 		uniform->SetData((void*)&modelMat);
