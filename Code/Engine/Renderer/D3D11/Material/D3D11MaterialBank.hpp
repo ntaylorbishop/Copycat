@@ -3,38 +3,41 @@
 #include <fstream>
 #include "Engine/General/Core/EngineCommon.hpp"
 #include "Engine/Utils/GeneralUtils.hpp"
-#include "Engine/Renderer/Material/Material.hpp"
 #include "ThirdParty/Parsers/xmlParser.h"
+#include "Engine/Renderer/General/RGBA.hpp"
+
+class D3D11Material;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //INITIAL DEFINES
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const RGBA	MATERIAL_AMBIENT_LIGHT				= RGBA(1.f, 1.f, 1.f, 1.f);
-const int	DEFAULT_VIEW_MODE					= 0;
+const RGBA	MATERIAL_AMBIENT_LIGHT = RGBA(1.f, 1.f, 1.f, 1.f);
+extern float MATERIAL_SPEC_POWER;
+const int	DEFAULT_VIEW_MODE = 0;
 
-const char* const DEPTH_TEST_PARAM_ON			= "true";
-const char* const DEPTH_TEST_PARAM_OFF			= "false";
-const char* const DEPTH_TEST_PARAM_DUAL			= "dual";
+const char* const DEPTH_TEST_PARAM_ON = "true";
+const char* const DEPTH_TEST_PARAM_OFF = "false";
+const char* const DEPTH_TEST_PARAM_DUAL = "dual";
 
-const char* const BLEND_MODE_PARAM_OPAQUE		= "opaque";
-const char* const BLEND_MODE_PARAM_TRANSLUCENT	= "translucent";
-const char* const BLEND_MODE_PARAM_ADDITIVE		= "additive";
+const char* const BLEND_MODE_PARAM_OPAQUE = "opaque";
+const char* const BLEND_MODE_PARAM_TRANSLUCENT = "translucent";
+const char* const BLEND_MODE_PARAM_ADDITIVE = "additive";
 
-const char* const BACKFACE_NOCULL				= "noCull";
-const char* const BACKFACE_CULL					= "cull";
+const char* const BACKFACE_NOCULL = "noCull";
+const char* const BACKFACE_CULL = "cull";
 
-const char* const LIGHTING_MODEL_PARAM_PHONG	= "phong";
-const char* const LIGHTING_MODEL_PARAM_BRDF		= "brdf";
-const char* const LIGHTING_MODEL_PARAM_UNLIT	= "unlit";
+const char* const LIGHTING_MODEL_PARAM_PHONG = "phong";
+const char* const LIGHTING_MODEL_PARAM_BRDF = "brdf";
+const char* const LIGHTING_MODEL_PARAM_UNLIT = "unlit";
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //MATERIAL BANK
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class MaterialBank {
+class D3D11MaterialBank {
 public:
 	static void Initialize();
 	static void Destroy();
@@ -42,16 +45,15 @@ public:
 	//INTERFACE
 	static bool AddMaterialsFromMTLFile(const char* filenameAndPath);
 	static bool AddMaterialsFromXMLFile(const char* dir, const char* filename);
-	static bool AddGeneratedMaterial(Material* mat);
-	static Material* GetMaterial(const String& name);
-	static bool InsertMaterial(Material* mat);
-	static Material* InitializeFXAAPostProgram(TextureBuffer* colorTarget, const Vector2* frameBufSize, const Matrix4* projMat);
-	static void AddMaterial(Material* newMat);
+	static bool AddGeneratedMaterial(D3D11Material* mat);
+	static D3D11Material* GetMaterial(const String& name);
+	static bool InsertMaterial(D3D11Material* mat);
+	static void AddMaterial(D3D11Material* newMat);
 
 private:
 	//STRUCTORS
-	MaterialBank() : m_currMaterial(nullptr) { }
-	~MaterialBank();
+	D3D11MaterialBank() : m_currMaterial(nullptr) { }
+	~D3D11MaterialBank();
 
 	//INIT MATERIALS AND DEFAULT PROGRAMS
 	void InitializeMultiLightProgramAndMaterial();
@@ -63,17 +65,17 @@ private:
 	//MTL PARSING
 	void ParseMTLLine(const String& str);
 	void AddCurrWorkingMaterialToBankAndReset();
-	
+
 	//XML PARSING
 	void ParseMaterialXML(const char* dir, XMLNode& matNode);
 
 
 
 
-	static MaterialBank* s_materialBank;
-	std::map<size_t, Material*> m_materials;
-	Material* m_currMaterial					= nullptr;
+	static D3D11MaterialBank* s_materialBank;
+	std::map<size_t, D3D11Material*> m_materials;
+	D3D11Material* m_currMaterial = nullptr;
 };
 
-typedef std::map<size_t, Material*>::iterator MaterialMapIterator;
-typedef std::pair<size_t, Material*> MaterialMapPair;
+typedef std::map<size_t, D3D11Material*>::iterator MaterialMapIterator;
+typedef std::pair<size_t, D3D11Material*> MaterialMapPair;

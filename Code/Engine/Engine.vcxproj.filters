@@ -746,6 +746,9 @@
     <ClCompile Include="Renderer\D3D11\General\D3D11BlendState.cpp">
       <Filter>Rendering\D3D11\General</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Material\D3D11MaterialBank.cpp">
+      <Filter>Rendering\D3D11\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">
@@ -1368,6 +1371,9 @@
     </ClInclude>
     <ClInclude Include="Renderer\D3D11\General\D3D11Common.hpp">
       <Filter>Rendering\D3D11\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Material\D3D11MaterialBank.hpp">
+      <Filter>Rendering\D3D11\Material</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

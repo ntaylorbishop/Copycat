@@ -108,6 +108,7 @@
     <ClCompile Include="Renderer\D3D11\General\RHI.cpp" />
     <ClCompile Include="Renderer\D3D11\General\RHIDeviceWindow.cpp" />
     <ClCompile Include="Renderer\D3D11\Material\D3D11Material.cpp" />
+    <ClCompile Include="Renderer\D3D11\Material\D3D11MaterialBank.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Mesh.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Vertex.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="Renderer\D3D11\General\RHI.hpp" />
     <ClInclude Include="Renderer\D3D11\General\RHIDeviceWindow.hpp" />
     <ClInclude Include="Renderer\D3D11\Material\D3D11Material.hpp" />
+    <ClInclude Include="Renderer\D3D11\Material\D3D11MaterialBank.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Mesh.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Vertex.hpp" />

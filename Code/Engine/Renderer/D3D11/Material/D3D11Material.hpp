@@ -1,6 +1,6 @@
 #include "Engine/Renderer/D3D11/General/RHIDeviceWindow.hpp"
 #include "Engine/Renderer/D3D11/Shaders/D3D11ShaderProgram.hpp"
-
+#include "Engine/Renderer/D3d11/Texture/Texture2D.hpp"
 
 //---------------------------------------------------------------------------------------------------------------------------
 class D3D11Material {
@@ -13,11 +13,15 @@ public:
 
 	void AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* pConstBuffer, eWhichShaderBound whichShadersToBindTo);
 	void AddResource(uint bindPoint, D3D11Resource* pResource, eWhichShaderBound whichShadersToBindTo);
+	void AddTextureResource(uint bindPoint, Texture2D* pTexture, eWhichShaderBound whichShadersToBindTo);
 	void AddSampler(uint bindPoint, D3D11SamplerState* pSampler, eWhichShaderBound whichShadersToBindTo);
 
 	D3D11Uniform* GetUniform(const String& uniformName);
 
 	void Use();
+
+	void SetName(const String& matName)		{ m_name = matName; }
+	String GetName()						{ return m_name;	}
 
 private:
 	void BindResources();
@@ -25,7 +29,8 @@ private:
 	void ValidateNewUniform(const String& newUniName);
 
 
-	D3D11ShaderProgram* m_shaderProg = nullptr;
+	D3D11ShaderProgram* m_shaderProg	= nullptr;
+	String				m_name			= "NULL";
 
 	std::vector<D3D11Uniform*>		m_uniforms;
 	std::vector<ResourceBindInfo>	m_resources;
@@ -82,4 +87,12 @@ inline void D3D11Material::AddSampler(uint bindPoint, D3D11SamplerState* pSample
 	boundResource.m_pSamplerState = pSampler;
 	boundResource.m_whichShaders = whichShadersToBindTo;
 	m_samplers.push_back(boundResource);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+inline void D3D11Material::AddTextureResource(uint bindPoint, Texture2D* pTexture, eWhichShaderBound whichShadersToBindTo) {
+
+	D3D11Resource* texID = pTexture->GetSRVResource();
+	AddResource(bindPoint, texID, whichShadersToBindTo);
 }

@@ -1,12 +1,12 @@
-#include "Engine/Renderer/Material/MaterialBank.hpp"
+#include "Engine/Renderer/D3D11/Material/D3D11MaterialBank.hpp"
 #include "Engine/General/Logger/TheLogger.hpp"
-#include "Engine/Renderer/Shaders/ShaderProgram.hpp"
-#include "Engine/Renderer/General/TextureCubemap.hpp"
 #include "Engine/Renderer/Lights/ShadowCastingLight3D.hpp"
 #include "Engine/Renderer/Effects/SSAO.hpp"
 #include "Engine/Utils/GeneralUtils/XMLUtils.hpp"
+#include "Engine/Renderer/D3D11/Material/D3D11Material.hpp"
 
-STATIC MaterialBank* MaterialBank::s_materialBank = nullptr;
+STATIC D3D11MaterialBank* D3D11MaterialBank::s_materialBank = nullptr;
+float MATERIAL_SPEC_POWER = 20.f;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,16 +15,16 @@ STATIC MaterialBank* MaterialBank::s_materialBank = nullptr;
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC void MaterialBank::Initialize() {
+STATIC void D3D11MaterialBank::Initialize() {
 
 	ASSERT_OR_DIE(s_materialBank == nullptr, "ERROR: Material bank already initialized.");
-	s_materialBank = new MaterialBank();
+	s_materialBank = new D3D11MaterialBank();
 
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC void MaterialBank::Destroy() {
+STATIC void D3D11MaterialBank::Destroy() {
 
 	ASSERT_OR_DIE(s_materialBank != nullptr, "ERROR: Material bank already destroyed.");
 	delete s_materialBank;
@@ -33,7 +33,7 @@ STATIC void MaterialBank::Destroy() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC bool MaterialBank::AddMaterialsFromMTLFile(const char* filenameAndPath) {
+STATIC bool D3D11MaterialBank::AddMaterialsFromMTLFile(const char* filenameAndPath) {
 
 	std::fstream fin(filenameAndPath, std::ios::in);
 
@@ -53,14 +53,14 @@ STATIC bool MaterialBank::AddMaterialsFromMTLFile(const char* filenameAndPath) {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC bool MaterialBank::AddMaterialsFromXMLFile(const char* dir, const char* filename) {
+STATIC bool D3D11MaterialBank::AddMaterialsFromXMLFile(const char* dir, const char* filename) {
 
 	String filenameAndPath = String(dir) + String(filename);
 	XMLNode root = XMLNode::parseFile(filenameAndPath.c_str());
 	root = root.getChildNode(0);
 
 	for (int childIdx = 0; childIdx < root.nChildNode(); childIdx++) {
-		
+
 		XMLNode matNode = root.getChildNode(childIdx);
 		s_materialBank->ParseMaterialXML(dir, matNode);
 	}
@@ -71,7 +71,7 @@ STATIC bool MaterialBank::AddMaterialsFromXMLFile(const char* dir, const char* f
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC bool MaterialBank::AddGeneratedMaterial(Material* mat) {
+STATIC bool D3D11MaterialBank::AddGeneratedMaterial(D3D11Material* mat) {
 
 	size_t id = std::hash<String>()(mat->GetName());
 	MaterialMapIterator matIt = s_materialBank->m_materials.find(id);
@@ -87,7 +87,7 @@ STATIC bool MaterialBank::AddGeneratedMaterial(Material* mat) {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC Material* MaterialBank::GetMaterial(const String& name) {
+STATIC D3D11Material* D3D11MaterialBank::GetMaterial(const String& name) {
 
 	size_t hash = std::hash<String>()(name);
 	MaterialMapIterator mat = s_materialBank->m_materials.find(hash);
@@ -102,7 +102,7 @@ STATIC Material* MaterialBank::GetMaterial(const String& name) {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC bool MaterialBank::InsertMaterial(Material* mat) {
+STATIC bool D3D11MaterialBank::InsertMaterial(D3D11Material* mat) {
 
 	size_t hash = std::hash<String>()(mat->GetName());
 	MaterialMapIterator matIt = s_materialBank->m_materials.find(hash);
@@ -120,13 +120,8 @@ STATIC bool MaterialBank::InsertMaterial(Material* mat) {
 //STRUCTORS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 //---------------------------------------------------------------------------------------------------------------------------
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-MaterialBank::~MaterialBank() {
+D3D11MaterialBank::~D3D11MaterialBank() {
 
 	for (MaterialMapIterator it = m_materials.begin(); it != m_materials.end(); ++it) {
 		delete it->second;
@@ -141,7 +136,7 @@ MaterialBank::~MaterialBank() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC void MaterialBank::AddMaterial(Material* newMat) {
+STATIC void D3D11MaterialBank::AddMaterial(D3D11Material* newMat) {
 
 	String matName = newMat->GetName();
 	size_t nameHash = std::hash<String>()(matName);
@@ -160,7 +155,7 @@ STATIC void MaterialBank::AddMaterial(Material* newMat) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-void MaterialBank::ParseMTLLine(const String& str) {
+void D3D11MaterialBank::ParseMTLLine(const String& str) {
 
 	//String relDir = "Data/Models/Sponza/";
 
@@ -174,52 +169,48 @@ void MaterialBank::ParseMTLLine(const String& str) {
 	//ADD NEW MATERIAL
 	if (lineToks[0] == "newmtl") {
 		AddCurrWorkingMaterialToBankAndReset();
-		m_currMaterial = new Material("BlinnPhong");
+		m_currMaterial = new D3D11Material("BlinnPhong");
 		m_currMaterial->SetName(lineToks[1]);
 	}
 
 	//SPECULAR EXPONENT
 	else if (lineToks[0] == "\tNs") {
 		float* specExponent = new float((float)atof(lineToks[1].c_str()));
-		m_currMaterial->CreateUniform("gSpecularExponent", UNIFORM_FLOAT, 1, specExponent);
+		m_currMaterial->CreateUniform("gSpecularExponent", UNIFORM_FLOAT, specExponent);
 	}
 
 	//DIFFUSE MAP
 	else if (lineToks[0] == "\tmap_Ka") {
-
-		Texture* texture = Texture::CreateOrGetTexture("Data/Models/Sponza/" + lineToks[1], true);
-		texture->GenerateMipmap();
-		m_currMaterial->CreateUniform("gTexDiffuse", UNIFORM_TEXTURE2D, 1, texture);
+		String texPath = "Data/Models/Sponza/" + lineToks[1];
+		Texture2D* texture = new Texture2D(texPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+		m_currMaterial->AddTextureResource(0, texture, WHICH_SHADER_FRAGMENT);
 	}
 
 	//BUMP MAP
 	else if (lineToks[0] == "\tmap_bump") {
-
-		Texture* texture = Texture::CreateOrGetTexture("Data/Models/Sponza/" + lineToks[1]);
-		texture->GenerateMipmap();
-		m_currMaterial->CreateUniform("gTexBump", UNIFORM_TEXTURE2D, 1, texture);
+		String texPath = "Data/Models/Sponza/" + lineToks[1];
+		Texture2D* texture = new Texture2D(texPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+		m_currMaterial->AddTextureResource(1, texture, WHICH_SHADER_FRAGMENT);
 	}
 
 	//NORMAL MAP
 	else if (lineToks[0] == "\tmap_normal") {
-
-		Texture* texture = Texture::CreateOrGetTexture("Data/Models/Sponza/" + lineToks[1]);
-		texture->GenerateMipmap();
-		m_currMaterial->CreateUniform("gTexNormal", UNIFORM_TEXTURE2D, 1, texture);
+		String texPath = "Data/Models/Sponza/" + lineToks[1];
+		Texture2D* texture = new Texture2D(texPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+		m_currMaterial->AddTextureResource(1, texture, WHICH_SHADER_FRAGMENT);
 	}
 
 	//SPECULAR MAP
 	else if (lineToks[0] == "\tmap_Ns") {
-
-		Texture* texture = Texture::CreateOrGetTexture("Data/Models/Sponza/" + lineToks[1]);
-		texture->GenerateMipmap();
-		m_currMaterial->CreateUniform("gTexSpecular", UNIFORM_TEXTURE2D, 1, texture);
+		String texPath = "Data/Models/Sponza/" + lineToks[1];
+		Texture2D* texture = new Texture2D(texPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+		m_currMaterial->AddTextureResource(2, texture, WHICH_SHADER_FRAGMENT);
 	}
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void MaterialBank::AddCurrWorkingMaterialToBankAndReset() {
+void D3D11MaterialBank::AddCurrWorkingMaterialToBankAndReset() {
 
 	if (!m_currMaterial) {
 		return;
@@ -236,7 +227,7 @@ void MaterialBank::AddCurrWorkingMaterialToBankAndReset() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-static void ParseColorProperties(const char* dir, const XMLNode& colorPropertiesNode, Material* currMat) {
+static void ParseColorProperties(const char* dir, const XMLNode& colorPropertiesNode, D3D11Material* currMat) {
 
 	XMLNode colNode = colorPropertiesNode;
 
@@ -248,7 +239,7 @@ static void ParseColorProperties(const char* dir, const XMLNode& colorProperties
 		if (strcmp(colAttrib.lpszName, "AmbientReflectivity") == 0) {
 
 			Vector4 specExponent = XMLUtils::ParseVector4(colAttrib.lpszValue);
-			currMat->CreateUniform("gAmbientLight", UNIFORM_VECTOR4, 1, new Vector4(specExponent));
+			currMat->CreateUniform("gAmbientLight", UNIFORM_VECTOR4, new Vector4(specExponent));
 		}
 
 		//SPECULAR COLOR
@@ -261,57 +252,46 @@ static void ParseColorProperties(const char* dir, const XMLNode& colorProperties
 		else if (strcmp(colAttrib.lpszName, "SpecularExponent") == 0) {
 
 			float* specExponent = new float(XMLUtils::ParseFloat(colAttrib.lpszValue));
-			currMat->CreateUniform("gSpecularExponent", UNIFORM_FLOAT, 1, specExponent);
+			currMat->CreateUniform("gSpecularExponent", UNIFORM_FLOAT, specExponent);
 		}
 
 		//DIFFUSE TEXTURE
 		else if (strcmp(colAttrib.lpszName, "DiffuseTexture") == 0) {
 
 			String diffuseTexPath = String(dir) + String(colAttrib.lpszValue);
-			Texture* diffuseTex = nullptr;
-			if (IS_HDR_ENABLED) {
-				diffuseTex = Texture::CreateOrGetTexture(diffuseTexPath, true);
-			}
-			else {
-				diffuseTex = Texture::CreateOrGetTexture(diffuseTexPath, false);
-			}
-			diffuseTex->GenerateMipmap();
-			currMat->CreateUniform("gTexDiffuse", UNIFORM_TEXTURE2D, 1, 0, diffuseTex);
+			Texture2D* texture = new Texture2D(diffuseTexPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+			currMat->AddTextureResource(0, texture, WHICH_SHADER_FRAGMENT);
 		}
 
 		//NORMAL MAP
 		else if (strcmp(colAttrib.lpszName, "NormalMap") == 0) {
 
 			String normalTexPath = String(dir) + String(colAttrib.lpszValue);
-			Texture* normalTex = Texture::CreateOrGetTexture(normalTexPath);
-
-			normalTex->GenerateMipmap();
-			currMat->CreateUniform("gTexNormal", UNIFORM_TEXTURE2D, 1, 1, normalTex);
+			Texture2D* texture = new Texture2D(normalTexPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+			currMat->AddTextureResource(1, texture, WHICH_SHADER_FRAGMENT);
 		}
 
 		//MASK TEXTURE
 		else if (strcmp(colAttrib.lpszName, "MaskTexture") == 0) {
 
 			String maskTexPath = String(dir) + String(colAttrib.lpszValue);
-			Texture* maskTex = Texture::CreateOrGetTexture(maskTexPath);
-			maskTex->GenerateMipmap();
-			currMat->CreateUniform("gTexSpecular", UNIFORM_TEXTURE2D, 1, 2, maskTex);
+			Texture2D* texture = new Texture2D(maskTexPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+			currMat->AddTextureResource(2, texture, WHICH_SHADER_FRAGMENT);
 		}
 
 		//MASK TEXTURE
 		else if (strcmp(colAttrib.lpszName, "RoughnessMap") == 0) {
 
 			String maskTexPath = String(dir) + String(colAttrib.lpszValue);
-			Texture* rTex = Texture::CreateOrGetTexture(maskTexPath);
-			rTex->GenerateMipmap();
-			currMat->CreateUniform("gTexRoughness", UNIFORM_TEXTURE2D, 1, 3, rTex);
+			Texture2D* texture = new Texture2D(maskTexPath.c_str(), true, TEXTURE_BIND_SHADER_RESOURCE, (eTextureCPUAccessFlags)0);
+			currMat->AddTextureResource(3, texture, WHICH_SHADER_FRAGMENT);
 		}
 	}
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-static void ParseStateProperties(const XMLNode& statePropertiesNode, Material* currMat) {
+static void ParseStateProperties(const XMLNode& statePropertiesNode, D3D11Material* currMat) {
 
 	XMLNode stateNode = statePropertiesNode;
 
@@ -325,13 +305,13 @@ static void ParseStateProperties(const XMLNode& statePropertiesNode, Material* c
 			const char* depthTestMode = stateAttrib.lpszValue;
 
 			if (strcmp(depthTestMode, DEPTH_TEST_PARAM_ON) == 0) {
-				currMat->m_renderState.m_depthMode = DEPTH_MODE_ON;
+				//currMat->m_renderState.m_depthMode = DEPTH_MODE_ON;
 			}
 			else if (strcmp(depthTestMode, DEPTH_TEST_PARAM_OFF) == 0) {
-				currMat->m_renderState.m_depthMode = DEPTH_MODE_OFF;
+				//currMat->m_renderState.m_depthMode = DEPTH_MODE_OFF;
 			}
 			else if (strcmp(depthTestMode, DEPTH_TEST_PARAM_DUAL) == 0) {
-				currMat->m_renderState.m_depthMode = DEPTH_MODE_DUAL;
+				//currMat->m_renderState.m_depthMode = DEPTH_MODE_DUAL;
 			}
 			else {
 				ERROR_AND_DIE("Invalid depth test mode defined in XML.");
@@ -340,17 +320,17 @@ static void ParseStateProperties(const XMLNode& statePropertiesNode, Material* c
 
 		//BLEND MODE
 		else if (strcmp(stateAttrib.lpszName, "BlendMode") == 0) {
-			
+
 			const char* isOpaque = stateAttrib.lpszValue;
 
 			if (strcmp(isOpaque, BLEND_MODE_PARAM_OPAQUE) == 0) {
-				currMat->m_renderState.m_blendMode = BLEND_MODE_OPAQUE;
+				//currMat->m_renderState.m_blendMode = BLEND_MODE_OPAQUE;
 			}
 			else if (strcmp(isOpaque, BLEND_MODE_PARAM_TRANSLUCENT) == 0) {
-				currMat->m_renderState.m_blendMode = BLEND_MODE_TRANSPARENT_DEFAULT;
+				//currMat->m_renderState.m_blendMode = BLEND_MODE_TRANSPARENT_DEFAULT;
 			}
 			else if (strcmp(isOpaque, BLEND_MODE_PARAM_ADDITIVE) == 0) {
-				currMat->m_renderState.m_blendMode = BLEND_MODE_TRANSPARENT_ADDITIVE;
+				//currMat->m_renderState.m_blendMode = BLEND_MODE_TRANSPARENT_ADDITIVE;
 			}
 			else {
 				ERROR_AND_DIE("Invalid depth test mode defined in XML.");
@@ -363,10 +343,10 @@ static void ParseStateProperties(const XMLNode& statePropertiesNode, Material* c
 			const char* isOpaque = stateAttrib.lpszValue;
 
 			if (strcmp(isOpaque, BACKFACE_NOCULL) == 0) {
-				currMat->m_renderState.m_backfaceCulling = false;
+				//currMat->m_renderState.m_backfaceCulling = false;
 			}
 			else if (strcmp(isOpaque, BACKFACE_CULL) == 0) {
-				currMat->m_renderState.m_backfaceCulling = true;
+				//currMat->m_renderState.m_backfaceCulling = true;
 			}
 			else {
 				ERROR_AND_DIE("Invalid depth test mode defined in XML.");
@@ -396,22 +376,22 @@ static String GetShaderProgramNameFromLightingModelAttrib(const char* lightingMo
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void MaterialBank::ParseMaterialXML(const char* dir, XMLNode& matNode) {
+void D3D11MaterialBank::ParseMaterialXML(const char* dir, XMLNode& matNode) {
 
 	XMLAttribute nameAttrib = matNode.getAttribute(0);
 	XMLAttribute lightingModelAttrib = matNode.getAttribute(1);
 
 	bool isWellFormed =
-		strcmp(nameAttrib.lpszName, "name") == 0					&&
-		strcmp(lightingModelAttrib.lpszName, "lightingModel") == 0	&&
-		matNode.nChildNode() == 2									&&
+		strcmp(nameAttrib.lpszName, "name") == 0 &&
+		strcmp(lightingModelAttrib.lpszName, "lightingModel") == 0 &&
+		matNode.nChildNode() == 2 &&
 		matNode.nAttribute() == 2;
 
 	ASSERT_OR_DIE(isWellFormed, "ERROR: Material data not well formed XML.");
 
 	String matName = nameAttrib.lpszValue;
 	String shaderProg = GetShaderProgramNameFromLightingModelAttrib(lightingModelAttrib.lpszValue);
-	Material* newMat = new Material(shaderProg);
+	D3D11Material* newMat = new D3D11Material(shaderProg);
 	newMat->SetName(matName);
 
 	for (int propertiesIdx = 0; propertiesIdx < matNode.nChildNode(); propertiesIdx++) {

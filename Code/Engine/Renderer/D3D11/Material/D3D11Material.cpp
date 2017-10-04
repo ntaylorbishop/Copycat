@@ -1,4 +1,5 @@
 #include "Engine/Renderer/D3D11/Material/D3D11Material.hpp"
+#include "Engine/Renderer/D3D11/Texture/Texture2D.hpp"
 
 
 //---------------------------------------------------------------------------------------------------------------------------
