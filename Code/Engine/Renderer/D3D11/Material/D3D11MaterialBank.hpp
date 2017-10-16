@@ -39,28 +39,23 @@ const char* const LIGHTING_MODEL_PARAM_UNLIT = "unlit";
 
 class D3D11MaterialBank {
 public:
-	static void Initialize();
-	static void Destroy();
+
+	static D3D11MaterialBank* Get();
 
 	//INTERFACE
-	static bool AddMaterialsFromMTLFile(const char* filenameAndPath);
-	static bool AddMaterialsFromXMLFile(const char* dir, const char* filename);
-	static bool AddGeneratedMaterial(D3D11Material* mat);
-	static D3D11Material* GetMaterial(const String& name);
-	static bool InsertMaterial(D3D11Material* mat);
-	static void AddMaterial(D3D11Material* newMat);
+	bool AddMaterialsFromMTLFile(const char* filenameAndPath);
+	bool AddMaterialsFromXMLFile(const char* dir, const char* filename);
+	bool AddGeneratedMaterial(D3D11Material* mat);
+	D3D11Material* GetMaterial(const String& name);
+	bool InsertMaterial(D3D11Material* mat);
+	void AddMaterial(D3D11Material* newMat);
 
 private:
 	//STRUCTORS
 	D3D11MaterialBank() : m_currMaterial(nullptr) { }
 	~D3D11MaterialBank();
 
-	//INIT MATERIALS AND DEFAULT PROGRAMS
-	void InitializeMultiLightProgramAndMaterial();
-	void InitializeDefault2DProgramAndMaterial();
-	void InitializePreDepthPassProgramAndMaterial();
-	void InitializeShadowCastingShaderProgramAndMaterials();
-	void InitializeUnlitShaderProgram();
+	static void Destroy();
 
 	//MTL PARSING
 	void ParseMTLLine(const String& str);
@@ -68,8 +63,6 @@ private:
 
 	//XML PARSING
 	void ParseMaterialXML(const char* dir, XMLNode& matNode);
-
-
 
 
 	static D3D11MaterialBank* s_materialBank;

@@ -194,6 +194,7 @@
     <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="Math\VectorUtils.cpp" />
     <ClCompile Include="Scene\ClickableObject.cpp" />
+    <ClCompile Include="Scene\D3D11Scene.cpp" />
     <ClCompile Include="Scene\PickRay.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Structures\BeirusCompactArray.cpp" />
@@ -395,6 +396,7 @@
     <ClInclude Include="Math\VectorUtils.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="Scene\ClickableObject.hpp" />
+    <ClInclude Include="Scene\D3D11Scene.hpp" />
     <ClInclude Include="Scene\PickRay.hpp" />
     <ClInclude Include="Scene\Scene.hpp" />
     <ClInclude Include="Structures\BeirusCompactArray.hpp" />

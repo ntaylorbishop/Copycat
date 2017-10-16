@@ -749,6 +749,9 @@
     <ClCompile Include="Renderer\D3D11\Material\D3D11MaterialBank.cpp">
       <Filter>Rendering\D3D11\Material</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\D3D11Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">
@@ -1374,6 +1377,9 @@
     </ClInclude>
     <ClInclude Include="Renderer\D3D11\Material\D3D11MaterialBank.hpp">
       <Filter>Rendering\D3D11\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\D3D11Scene.hpp">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

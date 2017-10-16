@@ -13,16 +13,6 @@ float MATERIAL_SPEC_POWER = 20.f;
 //INIT
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-//---------------------------------------------------------------------------------------------------------------------------
-STATIC void D3D11MaterialBank::Initialize() {
-
-	ASSERT_OR_DIE(s_materialBank == nullptr, "ERROR: Material bank already initialized.");
-	s_materialBank = new D3D11MaterialBank();
-
-}
-
-
 //---------------------------------------------------------------------------------------------------------------------------
 STATIC void D3D11MaterialBank::Destroy() {
 
@@ -30,6 +20,18 @@ STATIC void D3D11MaterialBank::Destroy() {
 	delete s_materialBank;
 	s_materialBank = nullptr;
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+STATIC D3D11MaterialBank* D3D11MaterialBank::Get() {
+
+	if (!s_materialBank) {
+		s_materialBank = new D3D11MaterialBank();
+	}
+
+	return s_materialBank;
+}
+
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -239,7 +241,7 @@ static void ParseColorProperties(const char* dir, const XMLNode& colorProperties
 		if (strcmp(colAttrib.lpszName, "AmbientReflectivity") == 0) {
 
 			Vector4 specExponent = XMLUtils::ParseVector4(colAttrib.lpszValue);
-			currMat->CreateUniform("gAmbientLight", UNIFORM_VECTOR4, new Vector4(specExponent));
+			currMat->CreateUniform("uAmbientLight", UNIFORM_VECTOR4, new Vector4(specExponent));
 		}
 
 		//SPECULAR COLOR
@@ -252,7 +254,7 @@ static void ParseColorProperties(const char* dir, const XMLNode& colorProperties
 		else if (strcmp(colAttrib.lpszName, "SpecularExponent") == 0) {
 
 			float* specExponent = new float(XMLUtils::ParseFloat(colAttrib.lpszValue));
-			currMat->CreateUniform("gSpecularExponent", UNIFORM_FLOAT, specExponent);
+			currMat->CreateUniform("uSpecularExponent", UNIFORM_FLOAT, specExponent);
 		}
 
 		//DIFFUSE TEXTURE
