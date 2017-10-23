@@ -284,6 +284,110 @@ STATIC MeshID MeshBuilder::ReadMeshFromFile(const String& pathAndFilename, Strin
 }
 
 
+STATIC D3D11Mesh* MeshBuilder::ReadD3D11MeshFromFile(const String& pathAndFilename, String* outMatName) {
+
+
+	MeshID meshId = BeirusMeshCollection::Get()->Allocate(&VertexDefinition::TEXTUREDVERTEX_TBNBN);
+	Mesh* mesh = BeirusMeshCollection::Get()->GetMesh(meshId);
+
+	FileBinaryReader fileReader;
+	fileReader.Open(pathAndFilename);
+
+	fileReader.ReadString(outMatName);
+
+	uint numVerts = 0;
+	fileReader.ReadUnsignedInt(&numVerts);
+	D3D11Mesh* mesh = new D3D11Mesh(VERTEX_TYPE_PCTTBN, numVerts);
+
+	std::vector<Vector3> positions;
+	std::vector<RGBA> colors;
+	std::vector<Vector2> texCoords;
+	std::vector<Vector3> tangents;
+	std::vector<Vector3> bitangents;
+	std::vector<Vector3> normals;
+
+	positions.reserve(numVerts + 1);
+	colors.reserve(numVerts + 1);
+	texCoords.reserve(numVerts + 1);
+	tangents.reserve(numVerts + 1);
+	bitangents.reserve(numVerts + 1);
+	normals.reserve(numVerts + 1);
+
+	//Add positions
+	for (uint i = 0; i < numVerts; i++) {
+		fileReader.ReadFloat(&positions[i].x);
+		fileReader.ReadFloat(&positions[i].y);
+		fileReader.ReadFloat(&positions[i].z);
+	}
+	//Add colors
+	for (uint i = 0; i < numVerts; i++) {
+		fileReader.ReadFloat(&colors[i].r);
+		fileReader.ReadFloat(&colors[i].g);
+		fileReader.ReadFloat(&colors[i].b);
+		fileReader.ReadFloat(&colors[i].a);
+	}
+	//Add texcoords
+	for (uint i = 0; i < numVerts; i++) {
+		fileReader.ReadFloat(&texCoords[i].x);
+		fileReader.ReadFloat(&texCoords[i].y);
+	}
+	//Add tangents
+	for (uint i = 0; i < numVerts; i++) {
+		fileReader.ReadFloat(&tangents[i].x);
+		fileReader.ReadFloat(&tangents[i].y);
+		fileReader.ReadFloat(&tangents[i].z);
+	}
+	//Add bitangents
+	for (uint i = 0; i < numVerts; i++) {
+		fileReader.ReadFloat(&bitangents[i].x);
+		fileReader.ReadFloat(&bitangents[i].y);
+		fileReader.ReadFloat(&bitangents[i].z);
+	}
+	//Add normals
+	for (uint i = 0; i < numVerts; i++) {
+		fileReader.ReadFloat(&normals[i].x);
+		fileReader.ReadFloat(&normals[i].y);
+		fileReader.ReadFloat(&normals[i].z);
+	}
+	//Add bone weights
+	for (uint i = 0; i < numVerts; i++) {
+		Vector4 boneWeight;
+		fileReader.ReadFloat(&boneWeight.x);
+		fileReader.ReadFloat(&boneWeight.y);
+		fileReader.ReadFloat(&boneWeight.z);
+		fileReader.ReadFloat(&boneWeight.w);
+	}
+	//Add bone inds
+	for (uint i = 0; i < numVerts; i++) {
+		IntVector4 boneInd;
+		fileReader.ReadFloat(&boneInd.x);
+		fileReader.ReadFloat(&boneInd.y);
+		fileReader.ReadFloat(&boneInd.z);
+		fileReader.ReadFloat(&boneInd.w);
+	}
+
+	for (uint i = 0; i < numVerts; i++) {
+		mesh->AddVertex(positions[i], colors[i], texCoords[i], tangents[i], bitangents[i], normals[i]);
+	}
+
+	std::vector<uint32_t> inds;
+	for (unsigned int i = 0; i < numVerts; i++) {
+		inds.push_back(i);
+	}
+
+	mesh->CreateVertexBufferOnDevice();
+	mesh->BindVertBufferToDeviceWindow();
+
+	// Create index buffer
+	mesh->SetIndexBuffer(inds.data(), numVerts * sizeof(uint32_t), numVerts);
+	mesh->CreateIndexBufferOnDevice();
+	mesh->BindIndBufferToDeviceWindow();
+
+	fileReader.Close();
+	return meshId;
+}
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //GETTERS SETTERS

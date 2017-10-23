@@ -31,6 +31,10 @@ public:
 	static MeshID ReadMeshFromFile(const String& path, const String& filename, String* outMatName);
 	static MeshID ReadMeshFromFile(const String& pathAndFilename, String* outMatName);
 
+	static D3D11Mesh* ReadD3D11MeshFromFile(const String& pathAndFilename, String* outMatName);
+
+	//TEMP D3D11 static 
+
 	//GETTERS SETTERS
 	Mesh*	GetMasterMesh();
 	MeshID	GetMeshAtIndex(uint idx)			{ return m_meshes[idx];				}

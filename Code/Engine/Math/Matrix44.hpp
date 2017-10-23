@@ -12,6 +12,12 @@ public:
 	Matrix44(XMVECTOR r1, XMVECTOR r2, XMVECTOR r3, XMVECTOR r4) 
 		: m_matrix(r1, r2, r3, r4)
 	{ }
+	Matrix44(Vector4 r1, Vector4 r2, Vector4 r3, Vector4 r4)
+		: m_matrix(XMVectorSet(r1.x, r1.y, r1.z, r1.w), 
+					XMVectorSet(r2.x, r2.y, r2.z, r2.w),
+					XMVectorSet(r3.x, r3.y, r3.z, r3.w),
+					XMVectorSet(r4.x, r4.y, r4.z, r4.w))
+	{ }
 	Matrix44(XMMATRIX mat) 
 		: m_matrix(mat)
 	{ }

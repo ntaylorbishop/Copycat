@@ -1,6 +1,6 @@
 #include "Engine/Scene/D3D11Scene.hpp"
-#include "Engine/Renderer/Mesh/Model.hpp"
-#include "Engine/Renderer/Material/Material.hpp"
+#include "Engine/Renderer/D3D11/Mesh/D3D11Model.hpp"
+#include "Engine/Renderer/D3D11/Material/D3D11Material.hpp"
 #include "Engine/Renderer/Mesh/MeshBuilder.hpp"
 #include "Engine/Tools/FBX/SceneImport.hpp"
 #include "Engine/Renderer/Effects/DepthAndNormalsPass.hpp"
@@ -13,35 +13,13 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-Model* D3D11Scene::AddModelFromFile(const char* filename) {
-
-	Model* newMesh = new Model(Vector3::ZERO);
-	String matName;
-	newMesh->m_meshID = MeshBuilder::ReadMeshFromFile(filename, &matName);
-	matName = matName.substr(0, matName.size() - 1);
-	newMesh->m_materialName = matName;
-	newMesh->SetMaterial(matName);
-
-	Vector4 r1 = Vector4(1.f, 0.f, 0.f, 0.f);
-	Vector4 r2 = Vector4(0.f, 0.f, 1.f, 0.f);
-	Vector4 r3 = Vector4(0.f, 1.f, 0.f, 0.f);
-	Vector4 r4 = Vector4(0.f, 0.f, 0.f, 1.f);
-
-	newMesh->m_model = Matrix4(r1, r2, r3, r4);
-
-	AddStaticMesh(newMesh);
-	return newMesh;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
 void D3D11Scene::AddModelsFromDirectory(const char* dir) {
 
 	std::vector<String> filenames = FileUtils::GetAllFilenamesInDirectory(dir);
 
 	for (size_t i = 0; i < filenames.size(); i++) {
 
-		Model* newMesh = new Model(Vector3::ZERO);
+		D3D11Model* newMesh = new D3D11Model(Vector3::ZERO);
 		String matName;
 		newMesh->m_meshID = MeshBuilder::ReadMeshFromFile(filenames[i], &matName);
 		matName = matName.substr(0, matName.size() - 1);
@@ -61,7 +39,7 @@ void D3D11Scene::AddModelsFromDirectory(const char* dir) {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-STATIC Scene* D3D11Scene::LoadSceneFromDirectory(const char* sceneDir) {
+STATIC D3D11Scene* D3D11Scene::LoadSceneFromDirectory(const char* sceneDir) {
 
 	std::vector<String> filenames = FileUtils::GetAllFilenamesInDirectory(sceneDir);
 
@@ -69,24 +47,23 @@ STATIC Scene* D3D11Scene::LoadSceneFromDirectory(const char* sceneDir) {
 		return nullptr;
 	}
 
-	Scene* newScene = new Scene();
+	D3D11Scene* newScene = new D3D11Scene();
 
 	for (size_t i = 0; i < filenames.size(); i++) {
 
-		Model* newMesh = new Model(Vector3::ZERO);
+		D3D11Model* newMesh = new D3D11Model(Vector3::ZERO);
 		String matName;
-		newMesh->m_meshID = MeshBuilder::ReadMeshFromFile(filenames[i], &matName);
+		newMesh->m_mesh = MeshBuilder::ReadD3D11MeshFromFile(filenames[i], &matName);
 		matName = matName.substr(0, matName.size() - 1);
 		newMesh->m_materialName = matName;
 		newMesh->SetMaterial(matName);
-		newMesh->m_renderState = newMesh->m_material->m_renderState;
 
 		Vector4 r1 = Vector4(1.f, 0.f, 0.f, 0.f);
 		Vector4 r2 = Vector4(0.f, 0.f, 1.f, 0.f);
 		Vector4 r3 = Vector4(0.f, 1.f, 0.f, 0.f);
 		Vector4 r4 = Vector4(0.f, 0.f, 0.f, 1.f);
 
-		newMesh->m_model = Matrix4(r1, r2, r3, r4);
+		newMesh->m_model = Matrix44(r1, r2, r3, r4);
 
 		newScene->AddStaticMesh(newMesh);
 	}
@@ -95,74 +72,12 @@ STATIC Scene* D3D11Scene::LoadSceneFromDirectory(const char* sceneDir) {
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------------
-STATIC Scene* D3D11Scene::LoadSceneFromFBXFile(const char* filename) {
-
-	SceneImport* import = new SceneImport(filename, MESH_LOAD_ENGINE_SCALE, ANIMATION_FPS);
-
-	if (!import->m_importSuccessful) {
-		Console::PrintOutput("ERROR: Failed to load file.", CONSOLE_WARNING);
-		return nullptr;
-	}
-	else {
-
-		Scene* newScene = new Scene();
-
-		int meshSize = import->m_meshBuilder.GetNumMeshes(); // import->m_meshes.size();
-		String str = StringUtils::Stringf("Loaded %s. Had %i meshes.", filename, meshSize);
-		Console::PrintOutput(str, CONSOLE_VERIFY);
-
-		for (uint i = 0; i < import->m_meshBuilder.GetNumMeshes(); i++) {
-
-			Model* mesh = new Model(Vector3::ZERO);
-			mesh->m_meshID = import->m_meshBuilder.GetMeshAtIndex(i);
-			mesh->m_materialName = import->m_meshBuilder.GetMaterialNameAtIndex(i);
-			mesh->SetMaterial(mesh->m_materialName);
-
-			Mesh* newMesh = BeirusMeshCollection::Get()->GetMesh(mesh->m_meshID);
-			newMesh->UpdateMesh();
-			newScene->AddStaticMesh(mesh);
-		}
-
-		return newScene;
-	}
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------------
-void D3D11Scene::SaveSceneToFile(const char* filepath) {
-
-	Model* curr = m_opaqueMeshes;
-
-	size_t idx = 0;
-	while (curr) {
-		String filenameFormatted = filepath + std::to_string(idx);
-		MeshBuilder::WriteMeshToFile(curr->m_meshID, curr->m_materialName, "Data/Mesh/Sponza/", filenameFormatted + ".mesh");
-		curr = curr->m_next;
-		idx++;
-	}
-
-	curr = m_translucentMeshesHead;
-
-	idx = 0;
-	while (curr) {
-		String filenameFormatted = filepath + std::to_string(idx);
-		MeshBuilder::WriteMeshToFile(curr->m_meshID, curr->m_materialName, "Data/Mesh/Sponza/", filenameFormatted + ".mesh");
-		curr = curr->m_next;
-		idx++;
-	}
-
-	Console::PrintOutput("Meshes saved successfully.", CONSOLE_VERIFY);
-}
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //RENDER
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11Scene::RenderForShadows(Material* shadowMat) const {
+void D3D11Scene::RenderForShadows(D3D11Material* shadowMat) const {
 
 	Model* curr = m_opaqueMeshes;
 
@@ -178,7 +93,7 @@ void D3D11Scene::RenderForShadows(Material* shadowMat) const {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11Scene::RenderWithMaterial(Material* mat) const {
+void D3D11Scene::RenderWithMaterial(D3D11Material* mat) const {
 
 	Model* curr = m_opaqueMeshes;
 
@@ -201,36 +116,13 @@ bool TransparentModelComparator(Model* i, Model* j) {
 //---------------------------------------------------------------------------------------------------------------------------
 void D3D11Scene::Render(bool isRenderingTransparent, MeshRenderer* customMeshRenderer) const {
 
-	if (!isRenderingTransparent) {
+	Model* curr = m_opaqueMeshes;
 
-		Model* curr = m_opaqueMeshes;
-
-		while (curr != nullptr) {
-			if (curr->IsActive()) {
-				curr->Render(customMeshRenderer);
-			}
-			curr = curr->m_next;
+	while (curr != nullptr) {
+		if (curr->IsActive()) {
+			curr->Render(customMeshRenderer);
 		}
-	}
-	else if (isRenderingTransparent) {
-
-		std::vector<Model*> tModels;
-
-		Model* curr = m_translucentMeshesHead;
-		while (curr != nullptr) {
-			if (curr->IsActive()) {
-				tModels.push_back(curr);
-			}
-			curr = curr->m_next;
-		}
-
-		if (m_debugShouldSort) {
-			std::sort(tModels.begin(), tModels.end(), TransparentModelComparator);
-		}
-
-		for (size_t i = 0; i < tModels.size(); i++) {
-			tModels[i]->Render(customMeshRenderer);
-		}
+		curr = curr->m_next;
 	}
 }
 
@@ -247,7 +139,7 @@ void D3D11Scene::RenderSkybox(MeshRenderer* customMeshRenderer) const {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11Scene::AddStaticMesh(Model* newMesh) {
+void D3D11Scene::AddModel(D3D11Model* newMesh) {
 
 	if (newMesh->m_renderState.m_blendMode == BLEND_MODE_OPAQUE ||
 		newMesh->m_renderState.m_blendMode == BLEND_MODE_DEFAULT) {
@@ -260,7 +152,7 @@ void D3D11Scene::AddStaticMesh(Model* newMesh) {
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void D3D11Scene::RemoveStaticMesh(Model* mesh) {
+void D3D11Scene::RemoveModel(D3D11Model* mesh) {
 
 	if (mesh->m_renderState.m_blendMode == BLEND_MODE_OPAQUE ||
 		mesh->m_renderState.m_blendMode == BLEND_MODE_DEFAULT) {

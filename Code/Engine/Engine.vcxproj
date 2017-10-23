@@ -111,6 +111,7 @@
     <ClCompile Include="Renderer\D3D11\Material\D3D11MaterialBank.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Mesh.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.cpp" />
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11Model.cpp" />
     <ClCompile Include="Renderer\D3D11\Mesh\D3D11Vertex.cpp" />
     <ClCompile Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\D3D11\Resources\D3D11Resource.cpp" />
@@ -303,6 +304,7 @@
     <ClInclude Include="Renderer\D3D11\Material\D3D11MaterialBank.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Mesh.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11MeshRenderer.hpp" />
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11Model.hpp" />
     <ClInclude Include="Renderer\D3D11\Mesh\D3D11Vertex.hpp" />
     <ClInclude Include="Renderer\D3D11\Resources\D3D11ConstantBuffer.hpp" />
     <ClInclude Include="Renderer\D3D11\Resources\D3D11Resource.hpp" />

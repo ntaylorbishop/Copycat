@@ -752,6 +752,9 @@
     <ClCompile Include="Scene\D3D11Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\D3D11\Mesh\D3D11Model.cpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\MathUtils.hpp">
@@ -1380,6 +1383,9 @@
     </ClInclude>
     <ClInclude Include="Scene\D3D11Scene.hpp">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\D3D11\Mesh\D3D11Model.hpp">
+      <Filter>Rendering\D3D11\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
