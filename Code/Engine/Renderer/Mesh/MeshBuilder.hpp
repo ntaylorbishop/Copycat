@@ -12,6 +12,8 @@
 #include "Engine/Renderer/Mesh/Mesh.hpp"
 #include "ThirdParty/MikkT/mikktspace.h"
 
+class D3D11Mesh;
+
 class MeshBuilder {
 public:
 	//STRUCTORS

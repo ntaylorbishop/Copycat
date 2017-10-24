@@ -134,7 +134,7 @@ void D3D11Mesh::CreateVertexBufferOnDevice() {
 void D3D11Mesh::CreateIndexBufferOnDevice() {
 
 	m_bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	m_bufferDesc.ByteWidth = sizeof(size_t) * m_numInds;
+	m_bufferDesc.ByteWidth = sizeof(uint32_t) * m_numInds;
 	m_bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	m_bufferDesc.CPUAccessFlags = 0;
 	m_initData.pSysMem = m_pIndData;

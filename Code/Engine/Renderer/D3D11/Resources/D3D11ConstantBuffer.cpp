@@ -151,3 +151,18 @@ void D3D11ConstantBuffer::UpdateBufferOnDevice(const std::vector<D3D11Uniform*>&
 
 	RHIDeviceWindow::Get()->m_pDeviceContext->UpdateSubresource(m_pDeviceBuffer, 0, nullptr, m_pByteBuffer, 0, 0);
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+D3D11Uniform* D3D11ConstantBuffer::GetUniform(const String& name) {
+
+	for (size_t i = 0; i < m_uniforms.size(); i++) {
+
+		String uniName = m_uniforms[i]->GetName();
+		if (uniName == name) {
+			return m_uniforms[i];
+		}
+	}
+
+	return nullptr;
+}

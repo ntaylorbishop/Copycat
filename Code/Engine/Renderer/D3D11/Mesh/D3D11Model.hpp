@@ -4,9 +4,9 @@
 
 #include "Engine/Renderer/General/RenderCommon.hpp"
 #include "Engine/Math/Matrix44.hpp"
+#include "Engine/Renderer/D3D11/Mesh/D3D11MeshRenderer.hpp"
 
 
-class D3D11MeshRenderer;
 class D3D11Mesh;
 class D3D11Material;
 
@@ -19,10 +19,10 @@ public:
 
 	void SetMaterial(const String& matName);
 
-	void Render(MeshRenderer* customMeshRenderer = nullptr) const;
-	void Render(Material* matToRenderWith) const;
+	void Render(D3D11MeshRenderer* customMeshRenderer = nullptr) const;
+	void Render(D3D11Material* matToRenderWith) const;
 
-	const Matrix4* GetModel() { return &m_model; }
+	const Matrix44* GetModel() { return &m_model; }
 
 public:
 	D3D11MeshRenderer*	m_meshRenderer	= nullptr;
@@ -30,6 +30,9 @@ public:
 	D3D11Material*		m_material		= nullptr;
 	String				m_materialName	= "NULL";
 	Matrix44			m_model			= Matrix44::IDENTITY;
+
+	D3D11Model*			m_prev			= nullptr;
+	D3D11Model*			m_next			= nullptr;
 };
 
 
@@ -38,14 +41,19 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //---------------------------------------------------------------------------------------------------------------------------
-inline void D3D11Model::Render(MeshRenderer* customMeshRenderer) const {
+inline void D3D11Model::Render(D3D11MeshRenderer* customMeshRenderer) const {
 
-	customMeshRenderer->RenderMeshWithMaterial(m_meshID, m_material, m_model);
+	if (customMeshRenderer) {
+		customMeshRenderer->RenderMeshWithMaterial(m_mesh, m_material);
+	}
+	else {
+		m_meshRenderer->RenderMeshWithMaterial(m_mesh, m_material);
+	}
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-inline void D3D11Model::Render(Material* matToRenderWith) const {
+inline void D3D11Model::Render(D3D11Material* matToRenderWith) const {
 
-	m_meshRenderer->RenderMeshWithMaterial(m_meshID, matToRenderWith, m_model);
+	m_meshRenderer->RenderMeshWithMaterial(m_mesh, matToRenderWith);
 }

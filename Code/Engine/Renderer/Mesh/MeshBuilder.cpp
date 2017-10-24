@@ -1,6 +1,7 @@
 #include "Engine/Renderer/Mesh/MeshBuilder.hpp"
 #include "Engine/General/Core/TheMemoryManager.hpp"
 #include "Engine/Renderer/Structures/BeirusMeshCollection.hpp"
+#include "Engine/Renderer/D3D11/Mesh/D3D11Mesh.hpp"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //STRUCTORS
@@ -286,10 +287,6 @@ STATIC MeshID MeshBuilder::ReadMeshFromFile(const String& pathAndFilename, Strin
 
 STATIC D3D11Mesh* MeshBuilder::ReadD3D11MeshFromFile(const String& pathAndFilename, String* outMatName) {
 
-
-	MeshID meshId = BeirusMeshCollection::Get()->Allocate(&VertexDefinition::TEXTUREDVERTEX_TBNBN);
-	Mesh* mesh = BeirusMeshCollection::Get()->GetMesh(meshId);
-
 	FileBinaryReader fileReader;
 	fileReader.Open(pathAndFilename);
 
@@ -302,16 +299,16 @@ STATIC D3D11Mesh* MeshBuilder::ReadD3D11MeshFromFile(const String& pathAndFilena
 	std::vector<Vector3> positions;
 	std::vector<RGBA> colors;
 	std::vector<Vector2> texCoords;
-	std::vector<Vector3> tangents;
-	std::vector<Vector3> bitangents;
-	std::vector<Vector3> normals;
+	std::vector<Vector4> tangents;
+	std::vector<Vector4> bitangents;
+	std::vector<Vector4> normals;
 
-	positions.reserve(numVerts + 1);
-	colors.reserve(numVerts + 1);
-	texCoords.reserve(numVerts + 1);
-	tangents.reserve(numVerts + 1);
-	bitangents.reserve(numVerts + 1);
-	normals.reserve(numVerts + 1);
+	positions.resize(numVerts);
+	colors.resize(numVerts);
+	texCoords.resize(numVerts);
+	tangents.resize(numVerts);
+	bitangents.resize(numVerts);
+	normals.resize(numVerts);
 
 	//Add positions
 	for (uint i = 0; i < numVerts; i++) {
@@ -336,18 +333,21 @@ STATIC D3D11Mesh* MeshBuilder::ReadD3D11MeshFromFile(const String& pathAndFilena
 		fileReader.ReadFloat(&tangents[i].x);
 		fileReader.ReadFloat(&tangents[i].y);
 		fileReader.ReadFloat(&tangents[i].z);
+		tangents[i].w = 0.f;
 	}
 	//Add bitangents
 	for (uint i = 0; i < numVerts; i++) {
 		fileReader.ReadFloat(&bitangents[i].x);
 		fileReader.ReadFloat(&bitangents[i].y);
 		fileReader.ReadFloat(&bitangents[i].z);
+		bitangents[i].w = 0.f;
 	}
 	//Add normals
 	for (uint i = 0; i < numVerts; i++) {
 		fileReader.ReadFloat(&normals[i].x);
 		fileReader.ReadFloat(&normals[i].y);
 		fileReader.ReadFloat(&normals[i].z);
+		normals[i].w = 0.f;
 	}
 	//Add bone weights
 	for (uint i = 0; i < numVerts; i++) {
@@ -360,10 +360,10 @@ STATIC D3D11Mesh* MeshBuilder::ReadD3D11MeshFromFile(const String& pathAndFilena
 	//Add bone inds
 	for (uint i = 0; i < numVerts; i++) {
 		IntVector4 boneInd;
-		fileReader.ReadFloat(&boneInd.x);
-		fileReader.ReadFloat(&boneInd.y);
-		fileReader.ReadFloat(&boneInd.z);
-		fileReader.ReadFloat(&boneInd.w);
+		fileReader.ReadInt(&boneInd.x);
+		fileReader.ReadInt(&boneInd.y);
+		fileReader.ReadInt(&boneInd.z);
+		fileReader.ReadInt(&boneInd.w);
 	}
 
 	for (uint i = 0; i < numVerts; i++) {
@@ -384,7 +384,7 @@ STATIC D3D11Mesh* MeshBuilder::ReadD3D11MeshFromFile(const String& pathAndFilena
 	mesh->BindIndBufferToDeviceWindow();
 
 	fileReader.Close();
-	return meshId;
+	return mesh;
 }
 
 

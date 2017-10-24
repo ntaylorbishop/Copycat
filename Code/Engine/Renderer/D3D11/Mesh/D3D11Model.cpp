@@ -7,20 +7,18 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //STRUCTORS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Model::Model()
-	: m_materialName("NULL")
-{
+D3D11Model::D3D11Model() {
+
 	m_material = D3D11MaterialBank::Get()->GetMaterial("BlinnPhong");
-	m_meshRenderer = new MeshRenderer();
+	m_meshRenderer = new D3D11MeshRenderer();
 
 	m_model.SetPosition(Vector3::ZERO);
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-Model::Model(const Vector3& position)
-	, m_materialName("NULL")
-{
+D3D11Model::D3D11Model(const Vector3& position) {
+
 	m_material = D3D11MaterialBank::Get()->GetMaterial("BlinnPhong");
 	m_meshRenderer = new D3D11MeshRenderer();
 
@@ -29,18 +27,18 @@ Model::Model(const Vector3& position)
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-Model::~Model() {
+D3D11Model::~D3D11Model() {
 	delete m_meshRenderer;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------------
-void Model::SetMaterial(const String& matName) {
+void D3D11Model::SetMaterial(const String& matName) {
 
 	m_materialName = matName;
-	m_material = MaterialBank::GetMaterial(m_materialName);
+	m_material = D3D11MaterialBank::Get()->GetMaterial(m_materialName);
 
 	if (!m_material) {
-		m_material = MaterialBank::GetMaterial("BlinnPhong");
+		m_material = D3D11MaterialBank::Get()->GetMaterial("BlinnPhong");
 	}
 }

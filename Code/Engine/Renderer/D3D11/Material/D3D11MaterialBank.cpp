@@ -409,5 +409,8 @@ void D3D11MaterialBank::ParseMaterialXML(const char* dir, XMLNode& matNode) {
 	}
 
 	size_t id = std::hash<String>()(matName);
+
+
+
 	s_materialBank->m_materials.insert(MaterialMapPair(id, newMat));
 }

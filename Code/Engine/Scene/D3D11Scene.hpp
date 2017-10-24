@@ -4,7 +4,7 @@
 
 class D3D11Model;
 class D3D11Material;
-class MeshRenderer;
+class D3D11MeshRenderer;
 
 const float ANIMATION_FPS = 30.f;
 const float MESH_LOAD_ENGINE_SCALE = 0.4f;
@@ -24,8 +24,8 @@ public:
 	//RENDER
 	void RenderForShadows(D3D11Material* shadowMat) const;
 	void RenderWithMaterial(D3D11Material* mat) const;
-	void Render(bool isRenderingTransparent = false, MeshRenderer* customMeshRenderer = nullptr) const;
-	void RenderSkybox(MeshRenderer* customMeshRenderer = nullptr) const;
+	void Render(bool isRenderingTransparent = false, D3D11MeshRenderer* customMeshRenderer = nullptr) const;
+	void RenderSkybox(D3D11MeshRenderer* customMeshRenderer = nullptr) const;
 
 	//ADDING REMOVING
 	void AddModel(D3D11Model* newMesh);
@@ -42,8 +42,6 @@ private:
 
 
 	D3D11Model*			m_opaqueMeshes			= nullptr;
-	D3D11Model*			m_translucentMeshesHead = nullptr;
-	mutable D3D11Model*	m_translucentMeshesTail = nullptr;
 	size_t				m_numMeshes				= 0;
 	D3D11Model*			m_skybox				= nullptr;
 

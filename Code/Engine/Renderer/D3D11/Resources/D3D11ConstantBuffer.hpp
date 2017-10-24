@@ -23,6 +23,8 @@ public:
 	ID3D11Buffer* GetDeviceBufferHandle()	{ return m_pDeviceBuffer;	}
 	String GetName() const					{ return m_name;			}
 
+	D3D11Uniform* GetUniform(const String& name);
+
 private:
 	D3D11ConstantBuffer() { }
 	D3D11ConstantBuffer(const String& cBufferName, uint byteSizeOfBuffer);

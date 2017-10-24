@@ -176,3 +176,18 @@ void D3D11ShaderProgram::AddConstantBuffer(uint bindPoint, D3D11ConstantBuffer* 
 	boundBuffer.m_whichShaders = whichShadersToBindTo;
 	m_constBuffers.push_back(boundBuffer);
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+D3D11Uniform* D3D11ShaderProgram::GetUniform(const String& name) {
+
+	for (size_t i = 0; i < m_constBuffers.size(); i++) {
+
+		D3D11Uniform* uni = m_constBuffers[i].m_pConstBuffer->GetUniform(name);
+
+		if (uni) {
+			return uni;
+		}
+	}
+	return nullptr;
+}

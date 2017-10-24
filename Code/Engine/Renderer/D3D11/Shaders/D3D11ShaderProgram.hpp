@@ -54,6 +54,8 @@ public:
 	void AddResource(uint bindPoint, D3D11Resource* pResource, eWhichShaderBound whichShadersToBindTo);
 	void AddSampler(uint bindPoint, D3D11SamplerState* pSampler, eWhichShaderBound whichShadersToBindTo);
 
+	D3D11Uniform* GetUniform(const String& name);
+
 	void Use();
 
 private:
